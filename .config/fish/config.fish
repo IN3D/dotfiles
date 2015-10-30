@@ -1,0 +1,8 @@
+set __fish_git_prompt_show_informative_status 1
+set __fish_git_prompt_color_untrackedfiles yellow
+set __fish_git_prompt_color_dirtystate red
+set __fish_git_prompt_color_branch cyan
+set __fish_git_prompt_color_cleanstate green
+set __fish_git_prompt_color_stagedstate white
+set __fish_git_prompt_color_upstream_ahead ffb90f
+set __fish_git_prompt_color_upstream_behind blue
