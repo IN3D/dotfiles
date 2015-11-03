@@ -5,8 +5,6 @@ alias vim=nvim
 alias vi=nvim
 alias ed=nvim
 
-PATH="$BASE_PATH:.:$UTILPATH:$MYSQL:/usr/local/php5/bin"
-
 # Don't store duplicate commands in the history
 export HISTCONTROL=ignoreboth
 
