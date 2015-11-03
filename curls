@@ -1,2 +1,2 @@
-https://bootstrap.pypa.io/get-pip.py -o ~/get-pip.py
-https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+https://bootstrap.pypa.io/get-pip.py
+https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh

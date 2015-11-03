@@ -1,3 +1,3 @@
 for c in `cat curls`; do
-  `curl $c`
+  `curl -O $c`
 done

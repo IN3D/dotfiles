@@ -8,7 +8,7 @@ fortune
 git
 htop
 lynx
-neovim --HEAD
+neovim
 openssl
 pypy3
 python3
