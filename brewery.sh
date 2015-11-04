@@ -1,4 +1,4 @@
-IFS='\n'
+IFS=$'\n'
 if [ `uname` == "Darwin" ]; then
   for tap in `cat brewTaps`; do
     `brew tap $tap`
