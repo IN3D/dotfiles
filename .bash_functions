@@ -1,17 +1,17 @@
 ll () {
-	ls -l
+  ls -l
 }
 
 ret () {
-	cd "$OLDPWD"
+  cd "$OLDPWD"
 }
 
 weblog () {
-	tail -25 /var/log/apache2/error_log
+  tail -25 /var/log/apache2/error_log
 }
 
 syslog () {
-	tail -10 /var/log/system.log
+  tail -10 /var/log/system.log
 }
 
 get_git_branch() {
