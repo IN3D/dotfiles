@@ -1,5 +1,4 @@
-source ~/.bash_functions
-source ~/git-prompt.sh
+for f in ./.bash_functions; do source $f; done
 
 alias vim=nvim
 alias vi=nvim
@@ -19,6 +18,7 @@ export NVM_DIR="/Users/eric/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUNTRACKEDFILES=1
   GIT_PS1_SHOWUPSTREAM="auto"
