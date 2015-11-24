@@ -15,7 +15,9 @@ set autolist = ambiguous
 set autoexpand
 set autorehash
 
-bindkey "^W" backward-delete-word
+if ( $?tcsh ) then
+  bindkey "^W" backward-delete-word
+endif
 
 alias __git_current_branch 'git rev-parse --abbrev-ref HEAD >& /dev/null && echo "(`git rev-parse --abbrev-ref HEAD`)"'
 alias precmd 'set prompt="%{\e[33m%}`whoami`%{\e[0m%} at %{\e[35m%}`hostname | cut -d . -f 1`%{\e[0m%} in %{\e[32m%}%/%{\e[0m%} `__git_current_branch`\n> "'
