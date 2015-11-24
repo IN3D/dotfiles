@@ -1,0 +1,29 @@
+[user]
+	name = Eric Hopkins
+	email = eric.on.tech@gmail.com
+[alias]
+	aliases = config --get-regex alias
+	ci = commit -m
+	co = checkout
+	cob = checkout -b
+	s = status -s
+	b = branch
+	whoami = config user.email
+	beyonce = config user.name
+	hist = log --oneline
+	untrack = rm --cache
+	all = add .
+	uncommit = reset --soft HEAD~1
+	unci = reset --soft HEAD~1
+	unstash = stash apply
+	aci = commit -am
+	p = push
+	toremote = push -u origin
+	deleteremote = push origin --delete
+	tracking = branch -vv
+	m = merge
+	mnff = merge --no-ff
+	u = add -u
+	poh = push origin HEAD
+	graph = log --pretty --graph
+	bvv = branch -vv
