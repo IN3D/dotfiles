@@ -1,5 +1,8 @@
 for f in ./.bash_functions; do source $f; done
 
+alias ll=ls -l
+alias la=ls -a
+alias lrt=ls -lrt
 alias vim=nvim
 alias vi=nvim
 alias ed=nvim
@@ -17,7 +20,9 @@ export LSCOLORS=Exfxcxdxcxegedabagacdx
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-source $(brew --prefix nvm)/nvm.sh
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+  source $(brew --prefix nvm)/nvm.sh
+fi
 
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"

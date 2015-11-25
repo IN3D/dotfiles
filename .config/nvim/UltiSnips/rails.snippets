@@ -1,0 +1,26 @@
+snippet VarC "Create a Variant" b
+Variant.create!(
+	name: '$1',
+	battle_value: $2,
+	production_year: $3,
+	price: $4,
+	tech_level: $5,
+	tech_base: '$6',
+	is_cannon: ${7:true},
+	chassis_id: $8
+)
+endsnippet
+
+snippet (route_block) "create a route block" b
+scope '${1:root}' do
+  ${2:http_verb} '$3', to: '${4:controller}#${5:method}'
+end
+endsnippet
+
+snippet VarT "Create a Trait" b
+Trait.create!(
+	name: '$1',
+	min_tp: $2,
+	max_tp: $3
+)
+endsnippet

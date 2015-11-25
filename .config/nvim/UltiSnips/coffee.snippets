@@ -1,0 +1,11 @@
+snippet (http_func) "Create a function for $http calls" b
+${1:func_name}: $2->
+  $http.${3:get}("#{url}/$4")
+endsnippet
+
+snippet (basic_class) "Stub out a basic class" b
+class ${1:ClassName}
+
+  constructor: ${2:(args)} ->
+  $3
+endsnippet
