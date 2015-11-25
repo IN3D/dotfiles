@@ -1,0 +1,8 @@
+alias brews="brew list -1"
+alias bc="brew cleanup"
+alias bi="brew install"
+alias bl="brew list -1"
+alias bo="brew outdated"
+alias bu="brew update"
+alias bubc="brew update & brew clean"
+alias bubo="brew update & brew outdated"

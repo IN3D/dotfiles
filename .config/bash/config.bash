@@ -14,6 +14,22 @@ export NVM_DIR="~/.nvm"
 if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
   source $(brew --prefix nvm)/nvm.sh
 fi
+if command -v brew >/dev/null 2>&1; then
+  source "$config_dir/managers/brew.bash"
+fi
+if command -v apt-get >/dev/null 2>&1; then
+  source "$config_dir/managers/apt.bash"
+fi
+if command -v pacman >/dev/null 2>&1; then
+  source "$config_dir/managers/pacman.bash"
+fi
+if command -v zypper >/dev/null 2>&1; then
+  source "$config_dir/managers/zypper.bash"
+fi
+if command -v dnf >/dev/null 2>&1; then
+  alias yum=dnf
+  source "$config_dir/managers/yum.bash"
+fi
 # =============================================================================
 
 
