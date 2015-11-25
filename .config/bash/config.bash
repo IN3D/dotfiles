@@ -1,23 +1,28 @@
-for f in ./.bash_functions; do source $f; done
+export config_dir="~/GitHub/dot_files/.config/bash"
+# for f in "$config_dir/functions/*"; do source $f; done
 
-alias ll=ls -l
-alias la=ls -a
-alias lrt=ls -lrt
+if [ -d ~/GitHub/dot_files/.config/bash/functions ]; then
+  for f in ~/GitHub/dot_files/.config/bash/functions/*; do
+    source $f
+  done
+else
+  echo "no bash functions directory"
+fi
+
+alias ls="ls -G"
+alias ll="ls -l"
+alias la="ls -a"
+alias lrt="ls -lrt"
 alias vim=nvim
 alias vi=nvim
 alias ed=nvim
 
-# Don't store duplicate commands in the history
 export HISTCONTROL=ignoreboth
-
-# Grep highlight color
 export GREP_COLOR='[01;32'
-
 export EDITOR=nvim
-
 export LSCOLORS=Exfxcxdxcxegedabagacdx
-
 export NVM_DIR="~/.nvm"
+
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
