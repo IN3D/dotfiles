@@ -27,3 +27,4 @@
 	poh = push origin HEAD
 	graph = log --pretty --graph
 	bvv = branch -vv
+	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%cn%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
