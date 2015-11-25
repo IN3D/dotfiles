@@ -58,10 +58,10 @@ alias ldot 'ls -ld .*'
 alias lS 'ls -1lFSsh'
 alias lart 'ls -1FcArt'
 
-alias grep 'grep --color'
+# alias grep 'grep --color'
 # Super grep
 # Recursive: shows line numbers and headers, with 5 lines of context
-alias sgrep 'grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+alias sugrep 'grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
 alias t 'tail -f'
 
 # for piping
