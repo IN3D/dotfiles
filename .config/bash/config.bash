@@ -1,8 +1,8 @@
-export config_dir="~/GitHub/dot_files/.config/bash"
+export config_dir="$HOME/GitHub/dot_files/.config/bash"
 # for f in "$config_dir/functions/*"; do source $f; done
 
-if [ -d ~/GitHub/dot_files/.config/bash/functions ]; then
-  for f in ~/GitHub/dot_files/.config/bash/functions/*; do
+if [ -d "$config_dir/functions" ]; then
+  for f in "$config_dir/functions/*"; do
     source $f
   done
 else
