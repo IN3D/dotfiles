@@ -8,3 +8,4 @@ ln -s ~/GitHub/dot_files/.config/nvim/init.vim ~/.vimrc
 ln -s ~/GitHub/dot_files/.config/nvim ~/.nvim
 ln -s ~/GitHub/dot_files/.config/nvim/init.vim ~/.nvimrc
 ln -s ~/GitHub/dot_files/.config/emacs/space.el ~/.spacemacs
+ln -s ~/GitHub/dot_files/.inputrc ~/.inputrc
