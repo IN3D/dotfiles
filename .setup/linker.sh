@@ -52,13 +52,13 @@ fi
 ln -s ~/GitHub/dot_files/.config/nvim/init.vim ~/.nvimrc
 
 
-if [ -e ~/.nvimrc ]; then
+if [ -e ~/.spacemacs ]; then
   mv ~/.spacemacs ~/.spacemacs.old
 fi
 ln -s ~/GitHub/dot_files/.config/emacs/space.el ~/.spacemacs
 
 
-if [ -e ~/.nvimrc ]; then
+if [ -e ~/.inputrc ]; then
   mv ~/.inputrc ~/.inputrc.old
 fi
 ln -s ~/GitHub/dot_files/.inputrc ~/.inputrc
