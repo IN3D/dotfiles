@@ -5,17 +5,25 @@ export HISTCONTROL=ignoreboth
 export GREP_COLOR='[01;32'
 export EDITOR=nvim
 export LSCOLORS=Exfxcxdxcxegedabagacdx
-export NVM_DIR="~/.nvm"
+export NVM_DIR=~/.nvm
+
+# junk environmental variables for testing
+export email_address='junk@junk.com'
+export PSQL_DEV='aLocalPassword'
+export gmail_username='junk@junk.com'
+export gmail_password='junkPassword'
+export DEV_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
+export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 # =============================================================================
 
 
 # Source
 # =============================================================================
-if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
-  source $(brew --prefix nvm)/nvm.sh
-fi
 if command -v brew >/dev/null 2>&1; then
   source "$config_dir/managers/brew.bash"
+  if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
+      source $(brew --prefix nvm)/nvm.sh
+  fi
 fi
 if command -v apt-get >/dev/null 2>&1; then
   source "$config_dir/managers/apt.bash"
@@ -107,10 +115,11 @@ fi
 
 # Version Managers
 # =============================================================================
+# Load RVM into a shell session *as a function*
+# Note: RVM needs to load first
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 # This loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 # =============================================================================
 
 PATH=$PATH:~/bin
