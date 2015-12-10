@@ -50,6 +50,8 @@ values."
                                       flycheck-clojure
                                       distinguished-theme
                                       majapahit-theme
+                                      sass-mode
+                                      rainbow-mode
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
