@@ -4,8 +4,8 @@
 
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
+   You should not put any user code in this function besides modifying the
+   variable values."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -62,10 +62,10 @@ values."
 
 (defun dotspacemacs/init ()
   "Initialization function.
-This function is called at the very startup of Spacemacs initialization
-before layers configuration.
-You should not put any user code in there besides modifying the variable
-values."
+   This function is called at the very startup of Spacemacs initialization
+   before layers configuration.
+   You should not put any user code in there besides modifying the variable
+   values."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
@@ -206,22 +206,27 @@ values."
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
-It is called immediately after `dotspacemacs/init'.  You are free to put any
-user code."
+   It is called immediately after `dotspacemacs/init'.  You are free to put any
+   user code."
   )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
- This function is called at the very end of Spacemacs initialization after
-layers configuration. You are free to put any user code."
+   This function is called at the very end of Spacemacs initialization after
+   layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'nil)
-  (setq c-baseic-offset 2)
+  (setq c-basic-offset 2)
+  (setq js-indent-level 2)
 
-  (eval-after-load 'flycheck
-    '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-  (add-hook 'cider-mode-hook
-    (lambda () (setq next-error-function #'flycheck-next-error-function)))
-)
+  (setq glasses-separate-parentheses-p nil)
+  (setq glasses-uncapitalize-p t)
+  (evil-leader/set-key "G" 'glasses-mode)
+
+  (add-hook 'css-mode-hook 'rainbow-mode)
+  (add-hook 'sass-mode-hook 'rainbow-mode)
+
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
