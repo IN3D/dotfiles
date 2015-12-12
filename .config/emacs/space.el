@@ -52,6 +52,7 @@
                                       majapahit-theme
                                       sass-mode
                                       rainbow-mode
+                                      nyan-mode
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -226,6 +227,7 @@
   (add-hook 'sass-mode-hook 'rainbow-mode)
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'prog-mode-hook #'nyan-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

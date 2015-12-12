@@ -74,3 +74,16 @@ nnoremap <silent><leader>ttb :TagbarToggle<CR>
 
 " Undotree
 nnoremap <silent><leader>tut :UndotreeToggle<CR>
+
+
+" T: Toggle
+command Ts set spell!
+command Tl set list!
+command Tgb Gblame
+command Tgs Gstatus
+command Tgd Gdiff
+command Trb RainbowParenthesesToggle
+command Tut UndotreeToggle
+command Tgo Goyo
+command Tnt NERDTreeToggle
+command Tbt TagbarToggle

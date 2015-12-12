@@ -4,7 +4,11 @@ set rnu nu
 set title
 set autoindent
 set copyindent
-set ts=2 sts=2 sw=2 et
+set smarttab
+set ts=2
+set sts=2
+set sw=2
+set et
 set linebreak
 set background=dark
 set lazyredraw
