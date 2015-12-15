@@ -103,6 +103,7 @@
   (setq powerline-default-separator 'nil)
   (setq c-basic-offset 2)
   (setq js-indent-level 2)
+  (setq sgml-basic-offset 2)
 
   (setq glasses-separate-parentheses-p nil)
   (setq glasses-uncapitalize-p t)
