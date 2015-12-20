@@ -1,2 +1,5 @@
 .config/nvim/bundle
 .config/nvim/local.vim
+.config/nvim/plugin
+.config/nvim/shada
+.config/nvim/eclim

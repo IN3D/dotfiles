@@ -29,6 +29,7 @@
                                       majapahit-theme
                                       sass-mode
                                       rainbow-mode
+                                      rainbow-identifiers
                                       nyan-mode)
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -107,7 +108,10 @@
 
   (setq glasses-separate-parentheses-p nil)
   (setq glasses-uncapitalize-p t)
-  (evil-leader/set-key "G" 'glasses-mode)
+  (evil-leader/set-key
+    "tG" 'glasses-mode
+    "tRm" 'rainbow-mode
+    "tRi" 'rainbow-identifiers-mode)
 
   (add-hook 'css-mode-hook 'rainbow-mode)
   (add-hook 'sass-mode-hook 'rainbow-mode)

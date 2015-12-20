@@ -16,25 +16,33 @@ export DEV_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 # =============================================================================
 
+# Detect
+# =============================================================================
+mac=`command -v brew >/dev/null 2>&1`
+debian=`command -v apt-get >/dev/null 2>&1`
+arch=`command -v pacman >/dev/null 2>&1`
+suse=`command -v zypper >/dev/null 2>&1`
+redHat=`command -v dnf >/dev/null 2>&1`
+# =============================================================================
 
 # Source
 # =============================================================================
-if command -v brew >/dev/null 2>&1; then
+if [ "$mac" = true ]; then
   source "$config_dir/managers/brew.bash"
   if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
       source $(brew --prefix nvm)/nvm.sh
   fi
 fi
-if command -v apt-get >/dev/null 2>&1; then
+if [ "$debian" = true ]; then
   source "$config_dir/managers/apt.bash"
 fi
-if command -v pacman >/dev/null 2>&1; then
+if [ "$arch" = true ]; then
   source "$config_dir/managers/pacman.bash"
 fi
-if command -v zypper >/dev/null 2>&1; then
+if [ "$suse" = true ]; then
   source "$config_dir/managers/zypper.bash"
 fi
-if command -v dnf >/dev/null 2>&1; then
+if [ "$redHat" = true ]; then
   alias yum=dnf
   source "$config_dir/managers/yum.bash"
 fi
@@ -56,7 +64,11 @@ fi
 # Aliases
 # =============================================================================
 # listings
-alias ls='ls -G' # ls color mode
+if [ "$mac" = true ]; then
+  alias ls='ls -G' # ls color mode
+else
+  alias ls='ls --color' # ls color mode
+fi
 alias l='ls -lFh' # long list, directories with trailing slash, better sizes
 alias ll='ls -lFh' # long list, trailing / on dirs
 alias la='ls -lAFh' # list all (except ./ and ../)
@@ -89,27 +101,36 @@ alias ff='find . -type f -name'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# npm
+alias ngl='npm list -g --depth=0'
 # =============================================================================
 
 
 # PS1
 # =============================================================================
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
-  GIT_PS1_SHOWSTASHSTATE=1
-  GIT_PS1_SHOWUNTRACKEDFILES=1
-  GIT_PS1_SHOWUPSTREAM="auto"
-  GIT_PS1_SHOWUPSTREAM=1
-  GIT_PS1_SHOWCOLORHITS=1
-  GIT_PS1_STATESEPARATOR="|"
-
-  if [ $USER == 'root' ]; then
-    GIT_PROMPT_START="\e[1;31mASSUMING DIRECT CONTROL\e[0m"
+if [ "$mac" = true ]; then
+  if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
   else
-    GIT_PROMPT_START="\e[0;33m$(whoami)\e[0m at \e[0;35m$(hostname | cut -d . -f 1)\e[0m in \e[0;32m\w\e[0m"
+    source ~/GitHub/bash-git-prompt/gitprompt.sh
   fi
-  GIT_PROMPT_END="\n> "
+else
+  source ~/GitHub/bash-git-prompt/gitprompt.sh
 fi
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWUPSTREAM=1
+GIT_PS1_SHOWCOLORHITS=1
+GIT_PS1_STATESEPARATOR="|"
+
+if [ $USER == 'root' ]; then
+  GIT_PROMPT_START="\e[1;31mASSUMING DIRECT CONTROL\e[0m"
+else
+  GIT_PROMPT_START="\e[0;33m$(whoami)\e[0m at \e[0;35m$(hostname | cut -d . -f 1)\e[0m in \e[0;32m\w\e[0m"
+fi
+GIT_PROMPT_END="\n> "
 # =============================================================================
 
 
