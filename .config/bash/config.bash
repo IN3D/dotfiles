@@ -18,6 +18,8 @@ export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 
 # Detect
 # =============================================================================
+osName=`uname`
+
 mac=`command -v brew >/dev/null 2>&1`
 debian=`command -v apt-get >/dev/null 2>&1`
 arch=`command -v pacman >/dev/null 2>&1`
@@ -64,10 +66,10 @@ fi
 # Aliases
 # =============================================================================
 # listings
-if [ "$mac" = true ]; then
-  alias ls='ls -G' # ls color mode
+if [ "$mac" = true ] || [ $osName = "FreeBSD" ]; then
+  alias ls='ls -G' # ls color mode (Unix)
 else
-  alias ls='ls --color' # ls color mode
+  alias ls='ls --color' # ls color mode (Linux)
 fi
 alias l='ls -lFh' # long list, directories with trailing slash, better sizes
 alias ll='ls -lFh' # long list, trailing / on dirs
