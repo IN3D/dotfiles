@@ -19,32 +19,35 @@ export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 # Detect
 # =============================================================================
 osName=`uname`
-
-mac=`command -v brew >/dev/null 2>&1`
-debian=`command -v apt-get >/dev/null 2>&1`
-arch=`command -v pacman >/dev/null 2>&1`
-suse=`command -v zypper >/dev/null 2>&1`
-redHat=`command -v dnf >/dev/null 2>&1`
 # =============================================================================
 
 # Source
 # =============================================================================
-if [ "$mac" = true ]; then
+
+# Mac
+if command -v brew >/dev/null 2>&1; then
   source "$config_dir/managers/brew.bash"
   if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
       source $(brew --prefix nvm)/nvm.sh
   fi
 fi
-if [ "$debian" = true ]; then
+# Debian & Ubuntu
+if command -v apt-get >/dev/null 2>&1; then
   source "$config_dir/managers/apt.bash"
 fi
-if [ "$arch" = true ]; then
+
+# Arch
+if command -v pacman >/dev/null 2>&1; then
   source "$config_dir/managers/pacman.bash"
 fi
-if [ "$suse" = true ]; then
+
+# Suse
+if command -v zypper >/dev/null 2>&1; then
   source "$config_dir/managers/zypper.bash"
 fi
-if [ "$redHat" = true ]; then
+
+# Red Hats
+if command -v dnf >/dev/null 2>&1; then
   alias yum=dnf
   source "$config_dir/managers/yum.bash"
 fi
@@ -66,7 +69,7 @@ fi
 # Aliases
 # =============================================================================
 # listings
-if [ "$mac" = true ] || [ $osName = "FreeBSD" ]; then
+if [ $osName = "Darwin" ] || [ $osName = "FreeBSD" ]; then
   alias ls='ls -G' # ls color mode (Unix)
 else
   alias ls='ls --color' # ls color mode (Linux)
@@ -113,7 +116,7 @@ alias jl='jobs -l'
 
 # PS1
 # =============================================================================
-if [ "$mac" = true ]; then
+if command -v brew >/dev/null 2>&1; then
   if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
     source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
   else
