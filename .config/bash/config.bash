@@ -100,12 +100,14 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
 # safe versions
-alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
 # npm
 alias ngl='npm list -g --depth=0'
+
+# jobs list
+alias jl='jobs -l'
 # =============================================================================
 
 

@@ -8,6 +8,7 @@
 	cob = checkout -b
 	s = status -s
 	b = branch
+	d = diff
 	whoami = config user.email
 	beyonce = config user.name
 	hist = log --oneline

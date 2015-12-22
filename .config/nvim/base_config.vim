@@ -1,9 +1,8 @@
 syntax on
-set shell=/bin/bash
+set shell=bash
 set rnu nu
 set title
 set autoindent
-set copyindent
 set smarttab
 set ts=2
 set sts=2
@@ -20,6 +19,9 @@ set backspace=indent,eol,start
 set novisualbell
 set noerrorbells
 set vb t_vb=
+
+" always show the tab bar
+set showtabline=2
 
 " Configure to primarily use utf8
 if has("multi_byte")
