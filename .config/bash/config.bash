@@ -6,6 +6,7 @@ export GREP_COLOR='[01;32'
 export EDITOR=nvim
 export LSCOLORS=Exfxcxdxcxegedabagacdx
 export NVM_DIR=~/.nvm
+export TERM="xterm-256color"
 
 # junk environmental variables for testing
 export email_address='junk@junk.com'
