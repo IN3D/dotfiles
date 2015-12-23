@@ -62,3 +62,8 @@ if [ -e ~/.inputrc ]; then
   mv ~/.inputrc ~/.inputrc.old
 fi
 ln -s ~/GitHub/dot_files/.inputrc ~/.inputrc
+
+if [ -e ~/.tmux.conf ]; then
+  mv ~/.tmux.conf ~/.tmux.conf.old
+fi
+ln -s ~/GitHub/dot_files/.tmux.conf ~/.tmux.conf
