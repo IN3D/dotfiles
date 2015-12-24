@@ -112,6 +112,9 @@ alias ngl='npm list -g --depth=0'
 
 # jobs list
 alias jl='jobs -l'
+
+# tmux 256 mode
+alias tmux='tmux -2'
 # =============================================================================
 
 

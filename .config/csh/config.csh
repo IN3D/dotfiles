@@ -7,6 +7,7 @@ alias ll ls -lAF
 alias vi nvim
 alias vim nvim
 alias ed nvim
+alias tmux tmux -2
 
 set EDITOR nvim
 
