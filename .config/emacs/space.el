@@ -30,7 +30,8 @@
                                       sass-mode
                                       rainbow-mode
                                       rainbow-identifiers
-                                      nyan-mode)
+                                      nyan-mode
+                                      emmet-mode)
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
 
@@ -110,6 +111,7 @@
   (setq glasses-uncapitalize-p t)
   (evil-leader/set-key
     "tG" 'glasses-mode
+    "te" 'emmet-mode
     "tRm" 'rainbow-mode
     "tRi" 'rainbow-identifiers-mode)
 
