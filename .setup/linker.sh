@@ -22,6 +22,12 @@ fi
 ln -s ~/GitHub/dot_files/.config/csh/config.csh ~/.tcshrc
 
 
+if [ -e ~/.zshrc ]; then
+  mv ~/.zshrc ~/.zshrc.old
+fi
+ln -s ~/GitHub/dot_files/.config/zsh/config.zsh ~/.zshrc
+
+
 if [ -e ~/.gitconfig ]; then
   mv ~/.gitconfig ~/.gitconfig.old
 fi
