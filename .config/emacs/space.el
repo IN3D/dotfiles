@@ -103,6 +103,7 @@
    This function is called at the very end of Spacemacs initialization after
    layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'nil)
+  (setq dotspacemacs-mode-line-unicode-symbols 'nil)
   (setq c-basic-offset 2)
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
