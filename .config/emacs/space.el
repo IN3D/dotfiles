@@ -33,8 +33,7 @@
                                       rainbow-mode
                                       rainbow-identifiers
                                       nyan-mode
-                                      emmet-mode
-                                      git) ;; no idea why this is missing
+                                      emmet-mode)
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
 
