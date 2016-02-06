@@ -39,7 +39,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'duythinht/vim-coffee'
   Plugin 'tomasr/molokai'
   Plugin 'MichaelMalick/vim-colors-bluedrake'
-  Plugin 'abra/vim-abra'
   Plugin 'vim-scripts/C64.vim'
   Plugin 'zefei/cake16'
   Plugin 'daddye/soda.vim'

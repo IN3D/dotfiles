@@ -15,9 +15,11 @@
                                        git
                                        spell-checking
                                        syntax-checking
+                                       themes-megapack
                                        version-control
                                        ruby-on-rails
-                                       django)
+                                       django
+                                       )
 
    dotspacemacs-additional-packages '(
                                       coffee-mode
@@ -31,7 +33,8 @@
                                       rainbow-mode
                                       rainbow-identifiers
                                       nyan-mode
-                                      emmet-mode)
+                                      emmet-mode
+                                      git) ;; no idea why this is missing
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
 

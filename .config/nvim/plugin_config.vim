@@ -24,6 +24,7 @@ let g:indentLine_leadingSpaceChar = '·'
 
 " syntastic
 let g:syntastic_ruby_checkers=['rubocop']
+let g:syntastic_scala_checkers=['scalac', 'scalastyle']
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='☠'

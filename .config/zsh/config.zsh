@@ -125,10 +125,10 @@ alias tmux='tmux -2' # 256 mode
 if [ -f ~/GitHub/zsh-git-prompt/zshrc.sh ]; then
   source ~/GitHub/zsh-git-prompt/zshrc.sh
 PROMPT='%F{yellow}$(whoami)%f at %F{magenta}$(hostname | cut -d . -f 1)%f in %F{green}%~%f $(git_super_status)
-> '
+$fg_bold[red]λ$reset_color '
 else
 PROMPT='%F{yellow}$(whoami)%f at %F{magenta}$(hostname | cut -d . -f 1)%f in %F{green}%~%f
-> '
+λ '
 fi
 # =============================================================================
 
