@@ -3,3 +3,6 @@
 .config/nvim/plugin
 .config/nvim/shada
 .config/nvim/eclim
+.setup/get-pip.py
+.setup/git-prompt.sh
+.setup/javarepl.jar

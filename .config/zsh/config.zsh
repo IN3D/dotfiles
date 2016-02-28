@@ -89,8 +89,8 @@ alias ldot='ls -ld .*' # list dot files
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
 # editor
-alias vim=nvim
-alias vi=nvim
+#alias vim=nvim
+#alias vi=nvim
 alias ed=nvim
 
 alias grep='grep --color'
@@ -137,6 +137,6 @@ fi
 # Load RVM
 # Note: this must come first
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
