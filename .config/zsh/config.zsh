@@ -89,8 +89,8 @@ alias ldot='ls -ld .*' # list dot files
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
 # editor
-#alias vim=nvim
-#alias vi=nvim
+alias vim=nvim
+alias vi=nvim
 alias ed=nvim
 
 alias grep='grep --color'
