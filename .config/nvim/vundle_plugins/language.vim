@@ -31,5 +31,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'othree/yajs.vim'
   Plugin 'mustache/vim-mustache-handlebars'
   Plugin 'derekwyatt/vim-scala'
+  Plugin 'rust-lang/rust.vim'
   finish
 endif

@@ -10,6 +10,7 @@ compinit
 export config_dir="$HOME/GitHub/dot_files/.config/zsh"
 export EDITOR=nvim
 export TERM="xterm-256color"
+export GOPATH=$HOME
 
 # junk environmental variables
 export email_address='junk@junk.com'
