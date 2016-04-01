@@ -17,8 +17,6 @@
                                        syntax-checking
                                        themes-megapack
                                        version-control
-                                       ruby-on-rails
-                                       django
                                        )
 
    dotspacemacs-additional-packages '(
