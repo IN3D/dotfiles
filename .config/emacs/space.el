@@ -20,18 +20,20 @@
                                        )
 
    dotspacemacs-additional-packages '(
-                                      coffee-mode
-                                      livescript-mode
-                                      clojure-mode
                                       cider
-                                      flycheck-clojure
+                                      clojure-mode
+                                      coffee-mode
                                       distinguished-theme
-                                      majapahit-theme
-                                      sass-mode
-                                      rainbow-mode
-                                      rainbow-identifiers
+                                      editorconfig
+                                      emmet-mode
+                                      flycheck-clojure
+                                      livescript-mode
                                       nyan-mode
-                                      emmet-mode)
+                                      majapahit-theme
+                                      rainbow-identifiers
+                                      rainbow-mode
+                                      sass-mode
+                                      )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
 
