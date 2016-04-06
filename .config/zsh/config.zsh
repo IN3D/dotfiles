@@ -19,6 +19,7 @@ export gmail_username='junk@junk.com'
 export gmail_password='junkPassword'
 export DEV_KEY='abc123abc123abc123abc123abc123abc123abc123abc123122333333'
 export PRD_KEY='abc123abc123abc123abc123abc123abc123abc123abc123122333333'
+export JWT_KEY='superSecretKey'
 # =============================================================================
 
 # Variables
@@ -138,6 +139,8 @@ fi
 # Load RVM
 # Note: this must come first
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
