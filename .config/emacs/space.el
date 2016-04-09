@@ -33,6 +33,7 @@
                                       rainbow-identifiers
                                       rainbow-mode
                                       sass-mode
+                                      scala-mode2
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
