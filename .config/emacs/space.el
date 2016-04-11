@@ -27,9 +27,11 @@
                                       editorconfig
                                       emmet-mode
                                       flycheck-clojure
+                                      js2-mode
                                       livescript-mode
                                       nyan-mode
                                       majapahit-theme
+                                      multiple-cursors
                                       rainbow-identifiers
                                       rainbow-mode
                                       sass-mode
