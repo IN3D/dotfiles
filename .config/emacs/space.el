@@ -35,7 +35,7 @@
                                       rainbow-identifiers
                                       rainbow-mode
                                       sass-mode
-                                      scala-mode2
+                                      scala-mode
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -51,7 +51,8 @@
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '(recents projects)
-   dotspacemacs-themes '(darktooth
+   dotspacemacs-themes '(niflheim
+                         darktooth
                          gruvbox
                          majapahit-dark
                          spacemacs-dark
