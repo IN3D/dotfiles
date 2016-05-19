@@ -1,2 +1,2 @@
 *.csh linguist-language=shell
-*.snippet linguist-language=vim
+*.snippets linguist-language=vim
