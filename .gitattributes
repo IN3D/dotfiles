@@ -1,2 +1,3 @@
 *.csh linguist-language=shell
+.config/nvim/Ultisnips/* linguist-language=Vim
 *.snippets linguist-language=Vim
