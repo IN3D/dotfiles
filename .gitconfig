@@ -21,13 +21,13 @@
 	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%cn%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
 	poh = push origin HEAD
 	s = status -s
-  stage = add
+	stage = add
 	toremote = push -u origin
 	tracking = branch -vv
 	u = add -u
 	unci = reset --soft HEAD~1
 	uncommit = reset --soft HEAD~1
-  unstage = reset
+	unstage = reset
 	unstash = stash apply
 	untrack = rm --cache
 	whoami = config user.email

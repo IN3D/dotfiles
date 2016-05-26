@@ -27,6 +27,7 @@
                                       editorconfig
                                       emmet-mode
                                       flycheck-clojure
+                                      go-mode
                                       js2-mode
                                       livescript-mode
                                       nyan-mode
@@ -110,7 +111,7 @@
    layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'nil)
   (setq dotspacemacs-mode-line-unicode-symbols 'nil)
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 8)
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
 
@@ -127,6 +128,7 @@
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'prog-mode-hook #'nyan-mode)
+  (add-hook 'prog-mode-hook #'editorconfig-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
