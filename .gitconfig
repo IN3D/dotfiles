@@ -9,6 +9,7 @@
 	beyonce = config user.name
 	bvv = branch -vv
 	ci = commit -m
+  cis = commit -S -m
 	co = checkout
 	cob = checkout -b
 	d = diff

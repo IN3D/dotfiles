@@ -122,6 +122,7 @@
 
   (setq glasses-separate-parentheses-p nil)
   (setq glasses-uncapitalize-p t)
+  (setq sp-highlight-pair-overlay nil)
   (evil-leader/set-key
     "tG" 'glasses-mode
     "te" 'emmet-mode
