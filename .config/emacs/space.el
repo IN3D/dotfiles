@@ -33,10 +33,12 @@
                                       nyan-mode
                                       majapahit-theme
                                       multiple-cursors
+                                      markdown-mode+
                                       rainbow-identifiers
                                       rainbow-mode
                                       sass-mode
-                                      scala-mode
+                                      scala-mode2
+                                      yaml-mode
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -103,6 +105,9 @@
   "Initialization function for user code.
    It is called immediately after `dotspacemacs/init'.  You are free to put any
    user code."
+  (defun js-setup ()
+    (flycheck-mode t)
+    (flycheck-set-checker-executable 'javascript-standard "/home/eric/.nvm/versions/node/v6.2.0/bin/standard"))
   )
 
 (defun dotspacemacs/user-config ()
@@ -129,6 +134,11 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'prog-mode-hook #'nyan-mode)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
+  (add-hook 'js-mode-hook 'js-setup)
+  (add-hook 'js2-mode-hook
+            (defun js2-setup()
+              'js-setup
+              (setq js2-strict-missing-semi-warning nil)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
