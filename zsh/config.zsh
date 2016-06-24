@@ -7,7 +7,7 @@ compinit
 
 # Exports
 # =============================================================================
-export config_dir="$HOME/GitHub/dot_files/.config/zsh"
+export config_dir="$HOME/.config/zsh"
 export EDITOR=nvim
 export TERM="xterm-256color"
 export GOPATH="$HOME/Code"
@@ -68,7 +68,7 @@ fi
 # Functions
 # =============================================================================
 if [ -d "$config_dir/functions" ]; then
-  for f in ~/GitHub/dot_files/.config/zsh/functions/*; do
+  for f in ~/.config/zsh/functions/*; do
     source $f
   done
 else
