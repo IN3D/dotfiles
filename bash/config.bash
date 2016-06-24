@@ -1,6 +1,6 @@
 # Exports
 # =============================================================================
-export config_dir="$HOME/GitHub/dot_files/.config/bash"
+export config_dir="$HOME/.config/bash"
 export HISTCONTROL=ignoreboth
 export GREP_COLOR='[01;32'
 export EDITOR=nvim
@@ -58,7 +58,7 @@ fi
 # Functions
 # =============================================================================
 if [ -d "$config_dir/functions" ]; then
-  for f in ~/GitHub/dot_files/.config/bash/functions/*; do
+  for f in ~/.config/bash/functions/*; do
     source $f
   done
 else
@@ -85,9 +85,9 @@ alias lS='ls -1lFSsh' # list with files sizes in 512 bytes, with total
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
 # editor
-alias vim=nvim
-alias vi=nvim
-alias ed=nvim
+# alias vim=nvim
+# alias vi=nvim
+# alias ed=nvim
 
 alias grep='grep --color'
 # Super grep

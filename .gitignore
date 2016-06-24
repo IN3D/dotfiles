@@ -6,3 +6,9 @@
 .setup/get-pip.py
 .setup/git-prompt.sh
 .setup/javarepl.jar
+
+# Things I'm not tracking
+Thunar/
+pulse/
+xfce4/
+user-dirs.*
