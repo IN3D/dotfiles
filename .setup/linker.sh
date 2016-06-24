@@ -53,7 +53,7 @@ if [ -e ~/.gitconfig ]; then
   mv ~/.gitconfig ~/.old/.gitconfig
   echo "Moved .gitconfig into ~/.old/"
 fi
-ln -s ~/GitHub/dot_files/.gitconfig ~/.gitconfig
+ln -s ~/.config/.gitconfig ~/.gitconfig
 echo "Linked up new .gitconfig"
 
 
