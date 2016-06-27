@@ -1,2 +1,2 @@
 *.csh linguist-language=Shell
-nvim/UltiSnips/*.snippets linguist-language=Vim
+nvim/UltiSnips/*.snippets linguist-language=Java
