@@ -1,8 +1,8 @@
-.config/nvim/bundle
-.config/nvim/local.vim
-.config/nvim/plugin
-.config/nvim/shada
-.config/nvim/eclim
+nvim/bundle
+nvim/local.vim
+nvim/plugin
+nvim/shada
+nvim/eclim
 .setup/get-pip.py
 .setup/git-prompt.sh
 .setup/javarepl.jar
