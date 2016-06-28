@@ -1,3 +1,4 @@
+bash/local.bash
 nvim/bundle
 nvim/local.vim
 nvim/plugin
