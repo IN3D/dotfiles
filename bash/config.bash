@@ -84,11 +84,6 @@ alias ldot='ls -ld .*' # list dot files
 alias lS='ls -1lFSsh' # list with files sizes in 512 bytes, with total
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
-# editor
-# alias vim=nvim
-# alias vi=nvim
-# alias ed=nvim
-
 alias grep='grep --color'
 # Super grep
 # Recursive: shows line numbers and headers, with 5 lines of context
@@ -120,28 +115,11 @@ alias tmux='tmux -2'
 
 # PS1
 # =============================================================================
-if command -v brew >/dev/null 2>&1; then
-  if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
-  else
-    source ~/GitHub/bash-git-prompt/gitprompt.sh
-  fi
+if [ -f ~/.config/liquidpromptrc ]; then
+  [[ $- = *i* ]] && source ~/GitHub/liquidprompt/liquidprompt
 else
-  source ~/GitHub/bash-git-prompt/gitprompt.sh
+  source ~/.config/bash/git-prompt.bash
 fi
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_SHOWUPSTREAM=1
-GIT_PS1_SHOWCOLORHITS=1
-GIT_PS1_STATESEPARATOR="|"
-
-if [ $USER == 'root' ]; then
-  GIT_PROMPT_START="\e[1;31mASSUMING DIRECT CONTROL\e[0m"
-else
-  GIT_PROMPT_START="\e[0;33m$(whoami)\e[0m at \e[0;35m$(hostname | cut -d . -f 1)\e[0m in \e[0;32m\w\e[0m"
-fi
-GIT_PROMPT_END="\n> "
 # =============================================================================
 
 
@@ -154,5 +132,6 @@ GIT_PROMPT_END="\n> "
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
 
-PATH=$PATH:~/bin
-PATH=~/.linuxbrew/bin:$PATH
+if [ -f ~/.config/bash/local.bash ]; then
+  source ~/.config/bash/local.bash
+fi
