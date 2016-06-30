@@ -42,7 +42,7 @@ if exists('g:vundle_installing_plugins')
   Plugin 'tyru/open-browser.vim'
   Plugin 'kballenegger/vim-autoreadwatch'
   Plugin 'Yggdroot/indentLine'
-  Plugin 'roman/golden-ratio'
   Plugin 'kien/rainbow_parentheses.vim'
+  Plugin 'mtth/scratch.vim'
   finish
 endif

@@ -9,7 +9,7 @@
 	beyonce = config user.name
 	bvv = branch -vv
 	ci = commit -m
-  cis = commit -S -m
+	ccis = commit -S -m
 	co = checkout
 	cob = checkout -b
 	d = diff
@@ -32,3 +32,14 @@
 	unstash = stash apply
 	untrack = rm --cache
 	whoami = config user.email
+
+[hub]
+	dprotocol = https
+
+[credential]
+	dhelper = /opt/boxen/bin/boxen-git-credential
+
+[core]
+	dexcludesfile = /opt/boxen/config/git/gitignore
+[push]
+	default = simple

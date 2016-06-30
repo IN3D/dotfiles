@@ -8,8 +8,8 @@ compinit
 # Exports
 # =============================================================================
 export config_dir="$HOME/.config/zsh"
-export EDITOR=nvim
-export TERM="xterm-256color"
+export EDITOR=vim
+export TERM="screen-256color"
 export GOPATH="$HOME/Code"
 export GOBIN="$GOPATH/bin"
 export PATH=$GOPATH:$GOBIN:$PATH
@@ -92,15 +92,13 @@ alias lrt='ls -lrtFh' # list by time, reversed
 alias ldot='ls -ld .*' # list dot files
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
-# editor
-alias vim=nvim
-alias vi=nvim
-alias ed=nvim
-
 alias grep='grep --color'
 # Super grep
 # Recursive: shows line numbers and headers, with 5 lines of context
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+# Small Super grep
+alias ssgrep='grep -R -n -H -C 1 --exclude-dir={.git,.svn,CVS}'
+alias files_with='grep -Rnw --exclude-dir={.git,.svn,CVS} -E'
 
 # head/tail shortcuts
 alias -g H='| head'
@@ -157,3 +155,5 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
+
+source ~/.config/zsh/local.zsh

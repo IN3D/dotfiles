@@ -135,3 +135,7 @@ fi
 if [ -f ~/.config/bash/local.bash ]; then
   source ~/.config/bash/local.bash
 fi
+# PATH=$PATH:~/bin
+# PATH=~/.linuxbrew/bin:$PATH
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"

@@ -1,0 +1,14 @@
+snippet desc "A describe block" b
+describe '$1' do
+  ${0:# TODO: write me}
+end
+endsnippet
+
+snippet it "A spec" b
+it '$1' do
+  ${0:# TODO: write me}
+endsnippet
+
+snippet expect "An expectation" b
+expect(${1:subject}).${2:to} ${3:eq}($0)
+endsnippet
