@@ -16,6 +16,7 @@ if exists('g:vundle_installing_plugins')
   Plugin 'tpope/vim-endwise'
   Plugin 'tpope/vim-eunuch'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-vinegar'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'tpope/vim-repeat'
   Plugin 'tpope/vim-speeddating'

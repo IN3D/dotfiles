@@ -72,6 +72,12 @@ nnoremap <silent><leader>trb :RainbowToggle<CR>
 " Tagbar
 nnoremap <silent><leader>ttb :TagbarToggle<CR>
 
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
 " Undotree
 nnoremap <silent><leader>tut :UndotreeToggle<CR>
 
