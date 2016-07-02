@@ -1,11 +1,17 @@
-snippet (http_func) "Create a function for $http calls" b
-${1:func_name}: $2->
-  $http.${3:get}("#{url}/$4")
+snippet func "Create a basic function" b
+${1:name}: ${2:(args)} ${3:-}>
+  ${0:#TODO: write code}
 endsnippet
 
-snippet (basic_class) "Stub out a basic class" b
+snippet ng_http "Angular http call" b
+$http.${1:get}(${2:url}).then(${3:(args)} ${4:-}>
+  ${0:#TODO: write code}
+)
+endsnippet
+
+snippet class "Stub out a basic class" b
 class ${1:ClassName}
 
   constructor: ${2:(args)} ->
-  $3
+    ${0:#TODO: write code}
 endsnippet

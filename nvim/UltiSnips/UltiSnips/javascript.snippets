@@ -1,0 +1,21 @@
+snippet require "basic require" b
+${1:let} ${2:var} = require('${0:package}')
+endsnippet
+
+snippet desc "describe block" b
+describe('${1:description}', function() {
+	$0
+})
+endsnippet
+
+snippet it "it block" b
+it('should $1', function() {
+	$0
+})
+endsnippet
+
+snippet bef "a before each" b
+beforeEach(funciton() {
+  $0
+})
+endsnippet
