@@ -4,6 +4,13 @@ nvim/local.vim
 nvim/plugin
 nvim/shada
 nvim/eclim
+
+# Allow for private, local functions
+# sometimes a function would be very helpful, but should stay
+# local to a work machine
+bash/functions/_*.bash
+zsh/functions/_*.zsh
+
 .setup/get-pip.py
 .setup/git-prompt.sh
 .setup/javarepl.jar
