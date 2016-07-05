@@ -17,7 +17,7 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
 " indent line
-let g:indentLine_enabled = 1
+let g:indentLine_enabled = 0
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_char = '┆'
 let g:indentLine_leadingSpaceChar = '·'
