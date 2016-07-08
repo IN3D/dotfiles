@@ -2,7 +2,7 @@
 " Plugins that add new, or expand upon existing functionality in vim.
 " -----------------------------------------------------------------------------
 if exists('g:vundle_installing_plugins')
-  Plugin 'kien/ctrlp.vim'
+  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'mattn/gist-vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
@@ -45,5 +45,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'Yggdroot/indentLine'
   Plugin 'kien/rainbow_parentheses.vim'
   Plugin 'mtth/scratch.vim'
+  Plugin 'ryanoasis/vim-devicons'
   finish
 endif
