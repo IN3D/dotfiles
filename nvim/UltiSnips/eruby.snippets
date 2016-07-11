@@ -1,0 +1,9 @@
+snippet unless "Unless block" b
+<% unless ${1:condition} %>
+	$0
+<% end %>
+endsnippet
+
+snippet formtastic_print "Print a formtastic element" b
+<%= f.${1:type} :$2, ${3:related_to}, class: "$0" %>
+endsnippet
