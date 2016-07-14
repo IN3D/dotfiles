@@ -1,3 +1,4 @@
+# vim: ts=2:sts=2:sw=2:noet
 [user]
 	name = Eric Hopkins
 	email = eric.on.tech@gmail.com
@@ -16,6 +17,7 @@
 	deleteremote = push origin --delete
 	graph = log --pretty --graph
 	hist = log --oneline
+	live-dangerously = push --force
 	m = merge
 	mnff = merge --no-ff
 	oops = commit --amend -C HEAD

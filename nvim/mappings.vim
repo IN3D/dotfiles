@@ -34,6 +34,11 @@ nnoremap <C-k> 15gkzz
 vnoremap <C-j> 15gjzz
 vnoremap <C-k> 15gkzz
 
+" neovim mappings
+" sane terminal escape
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-[> <C-\><C-n>
+
 " --------------------
 "  Leader Mappings
 " --------------------
