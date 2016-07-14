@@ -1,4 +1,4 @@
-bash/local.bash
+**/local.*
 nvim/bundle
 nvim/local.vim
 nvim/plugin
