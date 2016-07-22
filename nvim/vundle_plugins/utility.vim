@@ -35,7 +35,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'mattn/emmet-vim'
   Plugin 'vim-scripts/TaskList.vim'
   Plugin 'jiangmiao/auto-pairs'
-  Plugin 'sgharms/GIFL'
   Plugin 'sk1418/Join'
   Plugin 'Valloric/MatchTagAlways'
   Plugin 'vim-scripts/ZoomWin'
@@ -45,6 +44,5 @@ if exists('g:vundle_installing_plugins')
   Plugin 'Yggdroot/indentLine'
   Plugin 'kien/rainbow_parentheses.vim'
   Plugin 'mtth/scratch.vim'
-  Plugin 'ryanoasis/vim-devicons'
   finish
 endif
