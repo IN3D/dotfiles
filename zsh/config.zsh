@@ -9,10 +9,11 @@ compinit
 # =============================================================================
 export config_dir="$HOME/.config/zsh"
 export EDITOR=vim
-export TERM="screen-256color"
+export TERM="xterm-256color"
 export GOPATH="$HOME/Code"
 export GOBIN="$GOPATH/bin"
 export PATH=$GOPATH:$GOBIN:$PATH
+export ZSH=/home/eric/.oh-my-zsh
 
 # junk environmental variables
 export email_address='junk@junk.com'
@@ -22,6 +23,12 @@ export gmail_password='junkPassword'
 export DEV_KEY='abc123abc123abc123abc123abc123abc123abc123abc123122333333'
 export PRD_KEY='abc123abc123abc123abc123abc123abc123abc123abc123122333333'
 export JWT_KEY='superSecretKey'
+# =============================================================================
+
+# oh-my-zsh
+# =============================================================================
+plugins=(zsh-wakatime)
+source $ZSH/oh-my-zsh.sh
 # =============================================================================
 
 # Variables
