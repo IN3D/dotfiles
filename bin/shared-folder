@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+die "Usage: 2 Arguments required. Name of the shared folder, and the directory to mount it to." unless (@ARGV == 2);
+
+my $return = system("sudo mount -t vboxsf -o rw,uid=1000,gid=1000 $ARGV[0] $ARGV[1]");
+
+if ($return == 0) {
+    print "Script executed successfully.\n\n";
+    print "Shared folder name: $ARGV[0]\nLocation in file system: $ARGV[1]\n\n";
+
+} else {
+    die "ERROR: Script failed to execute correctly.\n";
+}

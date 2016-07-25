@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+die "Usage: 1 Argument required. Provide the root directory holding the Git " .
+    "repositories you wish to have updated." .
+    "\nFor help, please type -h.\n" unless (@ARGV >= 1);
+
+die "Usage:\nARG 1: root directory of git repositories.\nARG 2 (optional): " .
+    "Name of the branch you would like the repositories set to.\n"
+
+if ($ARGV[0] eq '-h');
+
+my $root;
+
+# check to see if a trailing / was given or not
+if ((substr $ARGV[0], -1) eq '/') {
+    $root = $ARGV[0] . '*';
+} else {
+    $root = $ARGV[0] . '/*';
+}
+
+my @projects = grep { -d } glob $root;
+
+foreach my $p (@projects) {
+
+    print "\n\ncurrently in: $p\n";
+    chdir($p);
+    system("git checkout $ARGV[1]") if @ARGV == 2;
+    system("git pull");
+}
