@@ -39,39 +39,6 @@ SAVEHIST=1000
 osname=`uname`
 # =============================================================================
 
-
-# Variables
-# =============================================================================
-# OS X
-if command -v brew >/dev/null 2>&1; then
-  source "$config_dir/managers/brew.zsh"
-  if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
-    source $(brew --prefix nvm)/nvm.sh
-  fi
-fi
-
-# Debian & Ubuntu
-if command -v apt-get >/dev/null 2>&1; then
-  source "$config_dir/managers/apt.zsh"
-fi
-
-# Arch
-if command -v pacman >/dev/null 2>&1; then
-  source "$config_dir/managers/pacman.zsh"
-fi
-
-# Suse
-if command -v zypper >/dev/null 2>&1; then
-  source "$config_dir/managers/zypper.zsh"
-fi
-
-# Red Hats
-if command -v dnf >/dev/null 2>&1; then
-  alias yum=dnf
-  source "$config_dir/managers/yum.zsh"
-fi
-# =============================================================================
-
 # Functions
 # =============================================================================
 if [ -d "$config_dir/functions" ]; then
