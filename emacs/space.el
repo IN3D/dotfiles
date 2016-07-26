@@ -30,15 +30,14 @@
                                       go-mode
                                       js2-mode
                                       livescript-mode
-                                      nyan-mode
                                       majapahit-theme
                                       multiple-cursors
                                       markdown-mode+
                                       rainbow-identifiers
                                       rainbow-mode
                                       sass-mode
-                                      scala-mode2
                                       yaml-mode
+                                      wakatime-mode
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -133,9 +132,9 @@
   (add-hook 'sass-mode-hook 'rainbow-mode)
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (add-hook 'prog-mode-hook #'nyan-mode)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
   (add-hook 'js-mode-hook 'js-setup)
+  (global-wakatime-mode)
   (add-hook 'js2-mode-hook
             (defun js2-setup()
               'js-setup
