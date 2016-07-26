@@ -104,9 +104,6 @@
   "Initialization function for user code.
    It is called immediately after `dotspacemacs/init'.  You are free to put any
    user code."
-  (defun js-setup ()
-    (flycheck-mode t)
-    (flycheck-set-checker-executable 'javascript-standard "/home/eric/.nvm/versions/node/v6.2.0/bin/standard"))
   )
 
 (defun dotspacemacs/user-config ()
@@ -137,7 +134,6 @@
   (global-wakatime-mode)
   (add-hook 'js2-mode-hook
             (defun js2-setup()
-              'js-setup
               (setq js2-strict-missing-semi-warning nil)))
 )
 
