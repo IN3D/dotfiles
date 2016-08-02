@@ -36,13 +36,8 @@ if exists('g:vundle_installing_plugins')
   Plugin 'vim-scripts/TaskList.vim'
   Plugin 'jiangmiao/auto-pairs'
   Plugin 'sk1418/Join'
-  Plugin 'Valloric/MatchTagAlways'
-  Plugin 'vim-scripts/ZoomWin'
   Plugin 'chrisbra/csv.vim'
-  Plugin 'tyru/open-browser.vim'
   Plugin 'kballenegger/vim-autoreadwatch'
-  Plugin 'Yggdroot/indentLine'
-  Plugin 'kien/rainbow_parentheses.vim'
   Plugin 'mtth/scratch.vim'
   Plugin 'wakatime/vim-wakatime'
   finish

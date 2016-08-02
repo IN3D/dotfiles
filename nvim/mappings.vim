@@ -60,6 +60,9 @@ nnoremap <silent><leader>tl :set list!<CR>
 " Plugins
 " --------
 
+" Easymotion
+nmap t <Plug>(easymotion-t2)
+
 " Fugitive
 nnoremap <silent><leader>tgb :Gblame<CR>
 nnoremap <silent><leader>tgs :Gstatus<CR>

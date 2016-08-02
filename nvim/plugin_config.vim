@@ -35,6 +35,9 @@ let g:syntastic_warning_symbol='☣'
 let g:syntastic_style_error_symbol='✗'
 let g:syntastic_style_warning_symbol='⚠'
 
+" tasklist
+let g:tlTokenList = ['FIXME', 'TODO', 'XXX', 'HACK', 'BUG']
+
 " ultisnips
 let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-l>'

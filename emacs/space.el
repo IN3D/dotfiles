@@ -17,6 +17,7 @@
                                        syntax-checking
                                        themes-megapack
                                        version-control
+                                       ruby-on-rails
                                        )
 
    dotspacemacs-additional-packages '(
@@ -49,6 +50,7 @@
    You should not put any user code in there besides modifying the variable
    values."
   (setq-default
+   ;; dotspacemacs-editing-style 'hybrid
    dotspacemacs-editing-style 'vim
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
@@ -66,11 +68,16 @@
                          monokai
                          zenburn)
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Fira Code"
                                :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.2)
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;;                             :size 13
+   ;;                             :weight normal
+   ;;                             :width normal
+   ;;                             :powerline-scale 1.1)
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-leader-key "M-m"
    dotspacemacs-major-mode-leader-key ","
@@ -110,8 +117,7 @@
   "Configuration function for user code.
    This function is called at the very end of Spacemacs initialization after
    layers configuration. You are free to put any user code."
-  (setq powerline-default-separator 'nil)
-  (setq dotspacemacs-mode-line-unicode-symbols 'nil)
+  (setq powerline-default-separator 'bar)
   (setq c-basic-offset 8)
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
@@ -129,6 +135,7 @@
   (add-hook 'sass-mode-hook 'rainbow-mode)
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  ;; (add-hook 'prog-mode-hook #'nyan-mode)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
   (add-hook 'js-mode-hook 'js-setup)
   (global-wakatime-mode)
@@ -139,3 +146,11 @@
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
