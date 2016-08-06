@@ -16,10 +16,17 @@ zsh/functions/_*.zsh
 .setup/javarepl.jar
 
 # Things I'm not tracking
+Atom/
 Thunar/
+butterfly/
+dconf/
+fontconfig/
+gtk-2.0/
 pulse/
+terminator/
 xfce4/
 htop/
 heroku/
 configstore/
 user-dirs.*
+Trolltech.conf
