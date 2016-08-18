@@ -16,6 +16,23 @@ endsnippet
 
 snippet bef "a before each" b
 beforeEach(funciton() {
-  $0
+	$0
 })
+endsnippet
+
+snippet switch "a switch statement" b
+switch (${1:subject}) {
+	$0
+}
+endsnippet
+
+snippet case "a case statement" b
+case ${1:value}:
+	${2:// TODO: body}
+	break;
+endsnippet
+
+snippet canb "a case with no break" b
+case ${1:value}:
+	${0:// TODO: body}
 endsnippet

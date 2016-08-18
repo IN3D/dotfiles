@@ -37,8 +37,11 @@
                                       nyan-mode
                                       rainbow-identifiers
                                       rainbow-mode
+                                      scss-mode
                                       sass-mode
+                                      typescript-mode
                                       yaml-mode
+                                      web-mode
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -50,12 +53,14 @@
    You should not put any user code in there besides modifying the variable
    values."
   (setq-default
+   ;; still experimenting with this
    ;; dotspacemacs-editing-style 'hybrid
    dotspacemacs-editing-style 'vim
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '(recents projects)
-   dotspacemacs-themes '(niflheim
+   dotspacemacs-themes '(grandshell
+                         niflheim
                          darktooth
                          gruvbox
                          majapahit-dark
@@ -68,8 +73,8 @@
                          monokai
                          zenburn)
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("Fira Code"
-                               :size 13
+   dotspacemacs-default-font '("PragmataPro"
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
