@@ -22,39 +22,6 @@ export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 osName=`uname`
 # =============================================================================
 
-# Source
-# =============================================================================
-
-# Mac
-if command -v brew >/dev/null 2>&1; then
-  source "$config_dir/managers/brew.bash"
-  if [ -f "$(brew --prefix nvm)/nvm.sh" ]; then
-      source $(brew --prefix nvm)/nvm.sh
-  fi
-fi
-# Debian & Ubuntu
-if command -v apt-get >/dev/null 2>&1; then
-  source "$config_dir/managers/apt.bash"
-fi
-
-# Arch
-if command -v pacman >/dev/null 2>&1; then
-  source "$config_dir/managers/pacman.bash"
-fi
-
-# Suse
-if command -v zypper >/dev/null 2>&1; then
-  source "$config_dir/managers/zypper.bash"
-fi
-
-# Red Hats
-if command -v dnf >/dev/null 2>&1; then
-  alias yum=dnf
-  source "$config_dir/managers/yum.bash"
-fi
-# =============================================================================
-
-
 # Aliases
 # =============================================================================
 # listings
@@ -99,17 +66,6 @@ alias jl='jobs -l'
 # tmux 256 mode
 alias tmux='tmux -2'
 # =============================================================================
-
-
-# PS1
-# =============================================================================
-if [ -f ~/.config/liquidpromptrc ]; then
-  [[ $- = *i* ]] && source ~/GitHub/liquidprompt/liquidprompt
-else
-  source ~/.config/bash/git-prompt.bash
-fi
-# =============================================================================
-
 
 # Version Managers
 # =============================================================================
