@@ -34,5 +34,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'rust-lang/rust.vim'
   Plugin 'raichoo/purescript-vim'
   Plugin 'elixir-lang/vim-elixir'
+  Plugin 'mxw/vim-jsx'
   finish
 endif

@@ -20,6 +20,11 @@ set novisualbell
 set noerrorbells
 set vb t_vb=
 
+" NeoVim true color mode
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 " always show the tab bar
 set showtabline=2
 

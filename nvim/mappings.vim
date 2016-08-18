@@ -36,8 +36,10 @@ vnoremap <C-k> 15gkzz
 
 " neovim mappings
 " sane terminal escape
-tnoremap <Esc> <C-\><C-n>
-tnoremap <C-[> <C-\><C-n>
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-[> <C-\><C-n>
+endif
 
 " --------------------
 "  Leader Mappings
@@ -96,7 +98,6 @@ command Tl set list!
 command Tgb Gblame
 command Tgs Gstatus
 command Tgd Gdiff
-command Trb RainbowParenthesesToggle
 command Tut UndotreeToggle
 command Tgo Goyo
 command Tnt NERDTreeToggle
