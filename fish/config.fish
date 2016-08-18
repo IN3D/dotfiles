@@ -12,27 +12,6 @@ set -x PRD_KEY = 'abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 # =============================================================================
 
 
-# Exports
-# =============================================================================
-if command -v brew > /dev/null 2>&1
-  source "$config_dir/managers/brew.fish"
-end
-if command -v apt-get > /dev/null 2>&1
-  source "$config_dir/managers/apt.fish"
-end
-if command -v zypper > /dev/null 2>&1
-  source "$config_dir/managers/zypper.fish"
-end
-if command -v pacman > /dev/null 2>&1
-  source "$config_dir/managers/pacman.fish"
-end
-if command -v dnf > /dev/null 2>&1
-  alias yum dnf
-  source "$config_dir/managers/yum.fish"
-end
-# =============================================================================
-
-
 # PS1
 # =============================================================================
 set __fish_git_prompt_show_informative_status 1
