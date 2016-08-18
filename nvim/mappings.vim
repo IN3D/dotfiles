@@ -41,64 +41,6 @@ if has('nvim')
   tnoremap <C-[> <C-\><C-n>
 endif
 
-" --------------------
-"  Leader Mappings
-" --------------------
-
-" Clear search
-noremap <silent><leader>/ :nohls<CR>
-
-" -----------
-" Toggles
-" -----------
-
-" --------
-" General
-" --------
-nnoremap <silent><leader>ts :set spell!<CR>
-nnoremap <silent><leader>tl :set list!<CR>
-
-" --------
-" Plugins
-" --------
-
-" Easymotion
-nmap t <Plug>(easymotion-t2)
-
-" Fugitive
-nnoremap <silent><leader>tgb :Gblame<CR>
-nnoremap <silent><leader>tgs :Gstatus<CR>
-nnoremap <silent><leader>tgd :Gdiff<CR>
-
-" Goyo
-nnoremap <silent><leader>tzen :Goyo<CR>
-
-" NERDTree
-nnoremap <silent><leader>tnt :NERDTreeToggle<CR>
-
-" Rainbow
-nnoremap <silent><leader>trb :RainbowToggle<CR>
-
-" Tagbar
-nnoremap <silent><leader>ttb :TagbarToggle<CR>
-
-" Tabular
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-
-" Undotree
-nnoremap <silent><leader>tut :UndotreeToggle<CR>
-
-
-" T: Toggle
-command Ts set spell!
-command Tl set list!
-command Tgb Gblame
-command Tgs Gstatus
-command Tgd Gdiff
-command Tut UndotreeToggle
-command Tgo Goyo
-command Tnt NERDTreeToggle
-command Tbt TagbarToggle
+" NOTE: check ./after/plugin/ for mappings. They were moved here so that my
+" mappings didn't have to compete with mappings from other plugins that I'm
+" using.

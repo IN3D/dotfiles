@@ -40,5 +40,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'kballenegger/vim-autoreadwatch'
   Plugin 'mtth/scratch.vim'
   Plugin 'wakatime/vim-wakatime'
+  Plugin 'hecal3/vim-leader-guide'
   finish
 endif

@@ -1,6 +1,7 @@
 " airline
 set laststatus=2
-set ttimeoutlen=50
+set ttimeoutlen=0
+set timeoutlen=300 " make sure that leader map pops up fast
 let g:airline_powerline_fonts=1
 " Keep these here incase I want to go back quickly
 " let g:airline_right_sep=''
