@@ -53,9 +53,7 @@
    You should not put any user code in there besides modifying the variable
    values."
   (setq-default
-   ;; still experimenting with this
-   ;; dotspacemacs-editing-style 'hybrid
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '(recents projects)

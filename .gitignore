@@ -16,6 +16,7 @@ zsh/functions/_*.zsh
 .setup/javarepl.jar
 
 # Things I'm not tracking
+.DS_STORE
 Atom/
 Thunar/
 butterfly/

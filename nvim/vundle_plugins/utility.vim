@@ -25,6 +25,7 @@ if exists('g:vundle_installing_plugins')
   Plugin 'Valloric/YouCompleteMe' " full of performance problems, I'd like to replace it if possible
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'junegunn/goyo.vim' " really cool, sort of useless?
+  Plugin 'junegunn/rainbow_parentheses.vim'
   Plugin 'mbbill/undotree'
   Plugin 'itchyny/calendar.vim' " not using this
   Plugin 'easymotion/vim-easymotion'
