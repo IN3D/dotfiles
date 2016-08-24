@@ -21,6 +21,7 @@
                                        )
 
    dotspacemacs-additional-packages '(
+                                      ;; extensions
                                       cider
                                       clojure-mode
                                       coffee-mode
@@ -28,20 +29,25 @@
                                       editorconfig
                                       emmet-mode
                                       flycheck-clojure
-                                      go-mode
-                                      js2-mode
-                                      livescript-mode
-                                      majapahit-theme
-                                      multiple-cursors
-                                      markdown-mode+
                                       nyan-mode
                                       rainbow-identifiers
                                       rainbow-mode
+                                      wakatime-mode
+                                      ;; languages
+                                      clojure-mode
+                                      coffee-mode
+                                      go-mode
+                                      js2-mode
+                                      livescript-mode
+                                      markdown-mode+
                                       scss-mode
                                       sass-mode
                                       typescript-mode
                                       yaml-mode
                                       web-mode
+                                      ;; themes
+                                      distinguished-theme
+                                      majapahit-theme
                                       )
    dotspacemacs-excluded-packages '()
    dotspacemacs-delete-orphan-packages t))
@@ -57,9 +63,9 @@
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '(recents projects)
-   dotspacemacs-themes '(grandshell
+   dotspacemacs-themes '(darktooth
                          niflheim
-                         darktooth
+                         dracula
                          gruvbox
                          majapahit-dark
                          spacemacs-dark
@@ -146,7 +152,7 @@
   (add-hook 'js2-mode-hook
             (defun js2-setup()
               (setq js2-strict-missing-semi-warning nil)))
-  ;; (global-wakatime-mode)
+  (global-wakatime-mode)
   (spaceline-compile)
   (mac-auto-operator-composition-mode)
 )
