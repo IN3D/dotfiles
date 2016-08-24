@@ -77,7 +77,7 @@
                          monokai
                          zenburn)
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("PragmataPro"
+   dotspacemacs-default-font '("Fira Code"
                                :size 15
                                :weight normal
                                :width normal
@@ -140,7 +140,8 @@
     "tG" 'glasses-mode
     "te" 'emmet-mode
     "tRm" 'rainbow-mode
-    "tRi" 'rainbow-identifiers-mode)
+    "tRi" 'rainbow-identifiers-mode
+    "xax" 'align-regexp)
 
   (add-hook 'css-mode-hook 'rainbow-mode)
   (add-hook 'sass-mode-hook 'rainbow-mode)
@@ -153,6 +154,22 @@
             (defun js2-setup()
               (setq js2-strict-missing-semi-warning nil)))
   (global-wakatime-mode)
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "|" "DONE(d)")
+          (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+          (sequence "|" "CANCELED(c)")))
   (spaceline-compile)
   (mac-auto-operator-composition-mode)
+)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
 )
