@@ -1,2 +1,3 @@
 *.csh linguist-language=Shell
 nvim/UltiSnips/*.snippets linguist-language=Vim
+emacs/snippets/* linguist-language=emacs

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: it
+# key: it
+# --
+it 'should $1' do
+  ${2: # TODO: write me}
+end
+$0
