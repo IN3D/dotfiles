@@ -21,11 +21,16 @@ if exists('g:vundle_installing_plugins')
   Plugin 'airblade/vim-gitgutter'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'junegunn/rainbow_parentheses.vim'
+  Plugin 'mbbill/undotree'
   Plugin 'easymotion/vim-easymotion'
   Plugin 'mhinz/vim-startify'
+  Plugin 'troydm/easybuffer.vim'
   Plugin 'mattn/emmet-vim'
   Plugin 'vim-scripts/TaskList.vim'
   Plugin 'jiangmiao/auto-pairs'
+  Plugin 'sk1418/Join'
   Plugin 'kballenegger/vim-autoreadwatch'
+  Plugin 'mtth/scratch.vim'
+  Plugin 'wakatime/vim-wakatime'
   finish
 endif
