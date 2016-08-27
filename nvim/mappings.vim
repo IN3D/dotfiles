@@ -46,6 +46,10 @@ if has('nvim')
   tnoremap <C-[> <C-\><C-n>
 endif
 
+" deoplete
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+
 " NOTE: check ./after/plugin/ for mappings. They were moved here so that my
 " mappings didn't have to compete with mappings from other plugins that I'm
 " using.

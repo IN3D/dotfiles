@@ -4,6 +4,7 @@ nvim/local.vim
 nvim/plugin
 nvim/shada
 nvim/eclim
+nvim/.init.vim-rplugin~
 
 # Allow for private, local functions
 # sometimes a function would be very helpful, but should stay

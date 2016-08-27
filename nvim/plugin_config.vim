@@ -12,6 +12,9 @@ let g:airline_powerline_fonts=1
 " ctrl-p
 let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
 
+" deoplete
+let g:deoplete#enable_at_startup=1
+
 " git gutter
 let g:gitgutter_max_signs=9001
 
