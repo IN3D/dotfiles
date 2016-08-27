@@ -44,3 +44,15 @@ let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-l>'
 let g:UltiSnipsJumpBackwardTrigger='<c-h>'
 let g:UltiSnipsEnableSnipMate = 0
+
+" FZF
+set rtp+=~/.fzf
+let g:fzf_histor_dir = '~/.fzf-history'
+autocmd VimEnter * command! Colors
+  \ call fzf#vim#colors({'right': '15%', 'options': '--reverse --margin 30%,0'})
+autocmd VimEnter * command! Buffers
+  \ call fzf#vim#buffers({'left': '15%', 'options': '--margin 30%,0'})
+autocmd VimEnter * command! Windows
+  \ call fzf#vim#windows({'right': '30%', 'options': '--margin 30%,0'})
+autocmd VimEnter * command! Buffers
+  \ call fzf#vim#buffers({'right': '30%', 'options': '--margin 30%,0'})

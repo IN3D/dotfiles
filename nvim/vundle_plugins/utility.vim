@@ -21,6 +21,7 @@ if exists('g:vundle_installing_plugins')
   Plugin 'airblade/vim-gitgutter'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'junegunn/rainbow_parentheses.vim'
+  Plugin 'junegunn/fzf.vim'
   Plugin 'mbbill/undotree'
   Plugin 'easymotion/vim-easymotion'
   Plugin 'mhinz/vim-startify'

@@ -34,6 +34,11 @@ nnoremap <C-k> 15gkzz
 vnoremap <C-j> 15gjzz
 vnoremap <C-k> 15gkzz
 
+"nnoremap <C-f> :Files<CR>
+"vnoremap <C-f> :Files<CR>
+nnoremap <C-f> :GFiles<CR>
+vnoremap <C-f> :GFiles<CR>
+
 " neovim mappings
 " sane terminal escape
 if has('nvim')
