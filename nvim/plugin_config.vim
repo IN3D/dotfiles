@@ -59,3 +59,6 @@ autocmd VimEnter * command! Windows
   \ call fzf#vim#windows({'right': '30%', 'options': '--margin 30%,0'})
 autocmd VimEnter * command! Buffers
   \ call fzf#vim#buffers({'right': '30%', 'options': '--margin 30%,0'})
+
+" RainbowParenthesis
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]

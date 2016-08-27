@@ -35,4 +35,12 @@ nnoremap <silent><leader>gp :Gpush<CR>
 nnoremap <silent><leader>gs :Gstatus<CR>
 
 " Easymotion
-nmap <silent><leader><leader>t <Plug>(easymotion-s2)
+nmap <silent><leader><leader>t <Plug>(easymotion-s1)
+
+" rainbow parenthesis
+" This doesn't work either, but it doesn't throw an error at least
+autocmd VimEnter * command! RainbowParenthesis
+" augroup rainbow_lisp
+"   autocmd!
+"   autocmd FileType lisp,clojure,scheme RainbowParenthesis
+" augroup END
