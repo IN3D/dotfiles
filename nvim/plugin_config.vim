@@ -3,7 +3,7 @@ set laststatus=2
 set ttimeoutlen=0
 set timeoutlen=300 " make sure that leader map pops up fast
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#tabline#enabled=1
 " Keep these here incase I want to go back quickly
 " let g:airline_right_sep=''
 " let g:airline_right_alt_sep=''
@@ -54,8 +54,6 @@ set rtp+=~/.fzf
 let g:fzf_histor_dir='~/.fzf-history'
 autocmd VimEnter * command! Colors
   \ call fzf#vim#colors({'right': '15%', 'options': '--reverse --margin 30%,0'})
-autocmd VimEnter * command! Buffers
-  \ call fzf#vim#buffers({'left': '15%', 'options': '--margin 30%,0'})
 autocmd VimEnter * command! Windows
   \ call fzf#vim#windows({'right': '30%', 'options': '--margin 30%,0'})
 autocmd VimEnter * command! Buffers

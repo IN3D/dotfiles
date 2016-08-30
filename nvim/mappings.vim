@@ -38,6 +38,8 @@ vnoremap <C-k> 15gkzz
 "vnoremap <C-f> :Files<CR>
 nnoremap <C-f> :GFiles<CR>
 vnoremap <C-f> :GFiles<CR>
+nnoremap <C-b> :Buffers<CR>
+vnoremap <C-b> :Buffers<CR>
 
 " neovim mappings
 " sane terminal escape

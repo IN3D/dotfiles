@@ -7,5 +7,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'morhetz/gruvbox'
   Plugin 'junegunn/seoul256.vim'
   Plugin 'nanotech/jellybeans.vim'
+  Plugin 'scwood/vim-hybrid'
   finish
 endif
