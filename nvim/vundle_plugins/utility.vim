@@ -34,5 +34,6 @@ if exists('g:vundle_installing_plugins')
   Plugin 'mtth/scratch.vim'
   Plugin 'wakatime/vim-wakatime'
   Plugin 'Shougo/deoplete.nvim'
+  Plugin 'junegunn/vim-journal'
   finish
 endif

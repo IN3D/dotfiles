@@ -13,6 +13,7 @@ export TERM="xterm-256color"
 export GOPATH="$HOME/Code"
 export GOBIN="$GOPATH/bin"
 export PATH=$GOPATH:$GOBIN:$PATH
+export NVM_DIR="$HOME/.nvm"
 
 # junk environmental variables
 export email_address='junk@junk.com'
