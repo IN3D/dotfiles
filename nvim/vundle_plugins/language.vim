@@ -35,5 +35,7 @@ if exists('g:vundle_installing_plugins')
   Plugin 'elixir-lang/vim-elixir'
   Plugin 'mxw/vim-jsx'
   Plugin 'dart-lang/dart-vim-plugin'
+  Plugin 'darthmall/vim-vue'
+  Plugin 'ElmCast/elm-vim'
   finish
 endif

@@ -36,6 +36,8 @@
                                       ;; languages
                                       clojure-mode
                                       coffee-mode
+                                      haskell-mode
+                                      elm-mode
                                       go-mode
                                       js2-mode
                                       livescript-mode
@@ -45,6 +47,9 @@
                                       typescript-mode
                                       yaml-mode
                                       web-mode
+                                      (vue-mode :location (recipe
+                                                           :fetcher github
+                                                           :repo "codefalling/vue-mode"))
                                       ;; themes
                                       distinguished-theme
                                       majapahit-theme
@@ -77,11 +82,11 @@
                          monokai
                          zenburn)
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("Fira Code"
+   dotspacemacs-default-font '("Fantasque Sans Mono"
                                :size 15
                                :weight normal
                                :width normal
-                               :powerline-scale 1.2)
+                               :powerline-scale 1.5)
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-leader-key "M-m"
    dotspacemacs-major-mode-leader-key ","
@@ -121,23 +126,27 @@
         (progn f)))
 
   (run-if-gui (setq ns-use-srgb-colorspace nil))
-  )
+  (run-if-gui (add-hook 'prog-mode-hook #'nyan-mode))
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
    This function is called at the very end of Spacemacs initialization after
    layers configuration. You are free to put any user code."
-  (setq powerline-default-separator 'arrow-fade)
+  ;; Spaceline stuff
+  (setq powerline-default-separator 'arrow)
+  (spaceline-compile)
+
+  ;; Default Indentation
   (setq c-basic-offset 2)
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
 
-  (setq glasses-separate-parentheses-p nil)
-  (setq glasses-uncapitalize-p t)
-  (setq sp-highlight-pair-overlay nil)
+  ;; Rebindings
+  (global-set-key (kbd "C-z") 'company-yasnippet) ;; much more useful tahn minimizing to tray
+  (global-set-key (kbd "C-a") 'back-to-indentation) ;; more useful than the beginning of the line
 
-  ;; much more useful than minimizing to tray
-  (global-set-key (kbd "C-z") 'company-yasnippet)
+  ;; Custom leader character sequences
   (evil-leader/set-key
     "tG" 'glasses-mode
     "te" 'emmet-mode
@@ -145,21 +154,29 @@
     "tRi" 'rainbow-identifiers-mode
     "xax" 'align-regexp)
 
+  ;; Hooks
   (add-hook 'css-mode-hook 'rainbow-mode)
   (add-hook 'sass-mode-hook 'rainbow-mode)
-
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
   (add-hook 'js-mode-hook 'js-setup)
-  (run-if-gui (add-hook 'prog-mode-hook #'nyan-mode))
   (add-hook 'js2-mode-hook
             (defun js2-setup()
               (setq js2-strict-missing-semi-warning nil)))
+  (add-hook 'vue-mode-hook
+            (defun vue-setup()
+              (use-package vue-mode)))
+
+  ;; Globals settings
   (global-wakatime-mode)
-  (setq org-todo-keywords
+  (mac-auto-operator-composition-mode)
+
+  ;; Global variable/config settings
+  (setq glasses-separate-parentheses-p nil) ;; glasses
+  (setq glasses-uncapitalize-p t) ;; glasses
+  (setq sp-highlight-pair-overlay nil) ;; ?? (forgot)
+  (setq org-todo-keywords ;; org-mode
         '((sequence "TODO(t)" "|" "DONE(d)")
           (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
           (sequence "|" "CANCELED(c)")))
-  (spaceline-compile)
-  (mac-auto-operator-composition-mode)
 )
