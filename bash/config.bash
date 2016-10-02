@@ -83,3 +83,5 @@ fi
 # PATH=~/.linuxbrew/bin:$PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

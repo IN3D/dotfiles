@@ -1,4 +1,3 @@
-;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -55,7 +54,8 @@
                                       majapahit-theme
                                       )
    dotspacemacs-excluded-packages '()
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages t
+   dotspacemacs-elpa-https nil))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -86,7 +86,7 @@
                                :size 15
                                :weight normal
                                :width normal
-                               :powerline-scale 1.5)
+                               :powerline-scale 1.3)
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-leader-key "M-m"
    dotspacemacs-major-mode-leader-key ","
@@ -126,7 +126,7 @@
         (progn f)))
 
   (run-if-gui (setq ns-use-srgb-colorspace nil))
-  (run-if-gui (add-hook 'prog-mode-hook #'nyan-mode))
+  ;;(run-if-gui (add-hook 'prog-mode-hook #'nyan-mode))
 )
 
 (defun dotspacemacs/user-config ()
@@ -134,7 +134,7 @@
    This function is called at the very end of Spacemacs initialization after
    layers configuration. You are free to put any user code."
   ;; Spaceline stuff
-  (setq powerline-default-separator 'arrow)
+  ;; (setq powerline-default-separator 'arrow)
   (spaceline-compile)
 
   ;; Default Indentation
@@ -142,9 +142,19 @@
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
 
-  ;; Rebindings
-  (global-set-key (kbd "C-z") 'company-yasnippet) ;; much more useful tahn minimizing to tray
-  (global-set-key (kbd "C-a") 'back-to-indentation) ;; more useful than the beginning of the line
+  ;; === Rebindings ===
+  ;; hybrid-mode
+  (global-set-key (kbd "C-z") 'company-yasnippet) ;; much more useful than minimizing to tray
+  (global-set-key (kbd "C-a") 'back-to-indentation)
+  ;; normal-mode
+  (define-key evil-normal-state-map (kbd "H") (kbd "^"))
+  (define-key evil-normal-state-map (kbd "L") (kbd "$"))
+  (define-key evil-normal-state-map (kbd "J") (kbd "G"))
+  (define-key evil-normal-state-map (kbd "K") (kbd "gg"))
+  (define-key evil-normal-state-map (kbd "U") (kbd "C-r"))
+  ;; fast scrolling
+  (define-key evil-normal-state-map (kbd "C-j") (kbd "15jzz"))
+  (define-key evil-normal-state-map (kbd "C-k") (kbd "15kzz"))
 
   ;; Custom leader character sequences
   (evil-leader/set-key
@@ -169,7 +179,7 @@
 
   ;; Globals settings
   (global-wakatime-mode)
-  (mac-auto-operator-composition-mode)
+  ;;(mac-auto-operator-composition-mode)
 
   ;; Global variable/config settings
   (setq glasses-separate-parentheses-p nil) ;; glasses

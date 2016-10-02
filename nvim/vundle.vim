@@ -1,7 +1,8 @@
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+" set rtp+=~/.vim/bundle/Vundle.vim/
+" call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'VundleVim/Vundle.vim'
 
 let g:vundle_installing_plugins=1
 
@@ -11,4 +12,4 @@ endfor
 
 unlet g:vundle_installing_plugins
 
-call vundle#end()
+call plug#end()

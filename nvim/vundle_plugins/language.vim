@@ -2,40 +2,40 @@
 " Plugins relating to language syntax, highlighting, etc
 " -----------------------------------------------------------------------------
 if exists('g:vundle_installing_plugins')
-  Plugin 'chochos/ceylon-vim'
-  Plugin 'claco/jasmine.vim'
-  Plugin 'vim-scripts/nginx.vim'
-  Plugin 'cakebaker/scss-syntax.vim'
-  Plugin 'leafgarland/typescript-vim'
-  Plugin 'burnettk/vim-angular'
-  Plugin 'xsbeats/vim-blade'
-  Plugin 'kchmck/vim-coffee-script'
-  Plugin 'ap/vim-css-color'
-  Plugin 'tpope/vim-cucumber'
-  Plugin 'nvie/vim-flake8'
-  Plugin 'fatih/vim-go'
-  Plugin 'tpope/vim-haml'
-  Plugin 'digitaltoad/vim-jade'
-  Plugin 'elzr/vim-json'
-  Plugin 'groenewege/vim-less'
-  Plugin 'tpope/vim-markdown'
-  Plugin 'tpope/vim-rails'
-  Plugin 'vim-ruby/vim-ruby'
-  Plugin 'dag/vim-fish'
-  Plugin 'gkz/vim-ls'
-  Plugin 'IN3D/vim-raml'
-  Plugin 'othree/html5.vim'
-  Plugin 'othree/javascript-libraries-syntax.vim'
-  Plugin 'hail2u/vim-css3-syntax'
-  Plugin 'othree/yajs.vim'
-  Plugin 'mustache/vim-mustache-handlebars'
-  Plugin 'derekwyatt/vim-scala'
-  Plugin 'rust-lang/rust.vim'
-  Plugin 'raichoo/purescript-vim'
-  Plugin 'elixir-lang/vim-elixir'
-  Plugin 'mxw/vim-jsx'
-  Plugin 'dart-lang/dart-vim-plugin'
-  Plugin 'darthmall/vim-vue'
-  Plugin 'ElmCast/elm-vim'
+  Plug 'chochos/ceylon-vim', { 'for': 'ceylon' }
+  Plug 'claco/jasmine.vim'
+  Plug 'vim-scripts/nginx.vim'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'burnettk/vim-angular'
+  Plug 'xsbeats/vim-blade', { 'for': 'php' }
+  Plug 'kchmck/vim-coffee-script'
+  Plug 'ap/vim-css-color'
+  Plug 'tpope/vim-cucumber'
+  Plug 'nvie/vim-flake8', { 'for': 'python' }
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  Plug 'tpope/vim-haml', { 'for': 'haml' }
+  Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+  Plug 'elzr/vim-json'
+  Plug 'groenewege/vim-less', { 'for': 'less' }
+  Plug 'tpope/vim-markdown'
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'dag/vim-fish', { 'for': 'fish' }
+  Plug 'gkz/vim-ls'
+  Plug 'IN3D/vim-raml', { 'for': 'raml' }
+  Plug 'othree/html5.vim'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'othree/yajs.vim'
+  Plug 'mustache/vim-mustache-handlebars', { 'for': 'handlebars' }
+  Plug 'derekwyatt/vim-scala'
+  Plug 'rust-lang/rust.vim'
+  Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'mxw/vim-jsx'
+  Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+  Plug 'darthmall/vim-vue', { 'for': 'vue' }
+  Plug 'ElmCast/elm-vim'
   finish
 endif

@@ -1,3 +1,5 @@
 *.csh linguist-language=Shell
 nvim/UltiSnips/*.snippets linguist-language=Vim
 emacs/snippets/* linguist-language=Emacs
+
+nvim/autoload/plug.vim linguist-vendored

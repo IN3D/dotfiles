@@ -22,7 +22,10 @@ set vb t_vb=
 
 " NeoVim true color mode
 if has('nvim')
+  " this is depreciated now in some versions?
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " set termguicolors
 endif
 
 " always show the tab bar
