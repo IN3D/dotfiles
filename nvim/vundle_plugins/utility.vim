@@ -18,11 +18,12 @@ if exists('g:vundle_installing_plugins')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-speeddating'
   Plug 'tpope/vim-surround'
-  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'airblade/vim-gitgutter'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['clojure', 'scheme', 'lisp'] }
-  Plug 'junegunn/fzf.vim', { 'do': g:fzf_install }
+  Plug 'junegunn/fzf.vim' ", { 'do': g:fzf_install }
   Plug 'mbbill/undotree'
   Plug 'easymotion/vim-easymotion'
   Plug 'mhinz/vim-startify'
@@ -35,6 +36,7 @@ if exists('g:vundle_installing_plugins')
   Plug 'mtth/scratch.vim'
   Plug 'wakatime/vim-wakatime'
   Plug 'Shougo/deoplete.nvim'
+  Plug 'fishbullet/deoplete-ruby'
   Plug 'junegunn/vim-journal'
   finish
 endif
