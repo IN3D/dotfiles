@@ -53,13 +53,16 @@ session/
 GIMP/
 ristretto/
 qterminal.org/
+Black Screen/
 
 # Files I'm not tracking
 Trolltech.conf
 kactivitymanagerdrc
 kickoffrc
 ksplashrc
+konsolerc
 plasma*
 qtcurve.gtk*
 glade.conf
 mimeapps.list
+QtProject.conf
