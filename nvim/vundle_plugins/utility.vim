@@ -37,6 +37,7 @@ if exists('g:vundle_installing_plugins')
   Plug 'wakatime/vim-wakatime'
   Plug 'Shougo/deoplete.nvim'
   Plug 'fishbullet/deoplete-ruby'
+  Plug 'carlitux/deoplete-ternjs'
   Plug 'junegunn/vim-journal'
   finish
 endif
