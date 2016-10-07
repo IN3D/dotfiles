@@ -30,6 +30,7 @@ let g:indentLine_char='┆'
 let g:indentLine_leadingSpaceChar='·'
 
 " syntastic
+" NOTE: Legacy, I'm leaving this incase I ever come back to syntastic
 let g:syntastic_ruby_checkers=['rubocop']
 let g:syntastic_scala_checkers=['scalac', 'scalastyle']
 let g:syntastic_javascript_checkers=['standard']

@@ -5,7 +5,6 @@ if exists('g:vundle_installing_plugins')
   let g:fzf_install = 'yes | ./install'
   " Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
-  Plug 'scrooloose/syntastic'
   Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
   Plug 'tpope/vim-abolish'
@@ -38,6 +37,8 @@ if exists('g:vundle_installing_plugins')
   Plug 'Shougo/deoplete.nvim'
   Plug 'fishbullet/deoplete-ruby'
   Plug 'carlitux/deoplete-ternjs'
+  Plug 'mhartington/deoplete-typescript'
   Plug 'junegunn/vim-journal'
+  Plug 'neomake/neomake'
   finish
 endif
