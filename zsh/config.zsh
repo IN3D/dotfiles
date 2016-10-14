@@ -63,9 +63,9 @@ alias lart='ls -1FcArt' # short, files from most to least recently modified
 alias grep='grep --color=always'
 # Super grep
 # Recursive: shows line numbers and headers, with 5 lines of context
-alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS,log}'
 # Small Super grep
-alias ssgrep='grep -R -n -H -C 1 --exclude-dir={.git,.svn,CVS}'
+alias ssgrep='grep -R -n -H -C 1 --exclude-dir={.git,.svn,CVS,log}'
 alias files_with='grep -Rnw --exclude-dir={.git,.svn,CVS} -E'
 
 # head/tail shortcuts

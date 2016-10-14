@@ -9,7 +9,9 @@
    dotspacemacs-distribution 'spacemacs
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers '(
-                                       auto-completion
+                                       (auto-completion :variables auto-completion-enable-snippets-in-popup t)
+                                       javascript
+                                       html
                                        emacs-lisp
                                        git
                                        spell-checking
