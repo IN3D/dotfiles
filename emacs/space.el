@@ -84,7 +84,7 @@
                          monokai
                          zenburn)
    dotspacemacs-colorize-cursor-according-to-state t
-   dotspacemacs-default-font '("Fantasque Sans Mono"
+   dotspacemacs-default-font '("PragmataPro"
                                :size 15
                                :weight normal
                                :width normal
@@ -136,7 +136,7 @@
    This function is called at the very end of Spacemacs initialization after
    layers configuration. You are free to put any user code."
   ;; Spaceline stuff
-  ;; (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator 'slant)
   (spaceline-compile)
 
   ;; Default Indentation
@@ -187,6 +187,9 @@
   (setq glasses-separate-parentheses-p nil) ;; glasses
   (setq glasses-uncapitalize-p t) ;; glasses
   (setq sp-highlight-pair-overlay nil) ;; ?? (forgot)
+  ;; A. This is flychecks job
+  ;; B. I use standard 99% of the time anyway
+  (setq js2-strict-missing-semi-warning nil)
   (setq org-todo-keywords ;; org-mode
         '((sequence "TODO(t)" "|" "DONE(d)")
           (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
