@@ -2,6 +2,7 @@
 [user]
 	name = Eric Hopkins
 	email = eric.on.tech@gmail.com
+	signingkey = 158D744E
 
 [alias]
 	aci = commit -am

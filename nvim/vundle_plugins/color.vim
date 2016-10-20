@@ -40,5 +40,7 @@ if exists('g:vundle_installing_plugins')
   Plug 'vim-scripts/Gentooish'
   Plug 'croaker/mustang-vim'
   Plug 'sjl/badwolf'
+  Plug 'vivkin/flatland.vim'
+  Plug 'junegunn/seoul256.vim'
   finish
 endif

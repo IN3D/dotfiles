@@ -1,5 +1,6 @@
 **/local.*
 nvim/bundle
+nvim/autoload/plug.vim.old
 nvim/local.vim
 nvim/plugin
 nvim/plugged

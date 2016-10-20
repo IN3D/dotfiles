@@ -146,6 +146,9 @@
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
 
+  (setq git-gutter+-modified-sign "=")
+  ;; (setq git-gutter+-modified-sign "●") ;; maybe use this if I'm feeling fancy
+
   ;; === Rebindings ===
   ;; hybrid-mode
   (global-set-key (kbd "C-z") 'company-yasnippet) ;; much more useful than minimizing to tray
