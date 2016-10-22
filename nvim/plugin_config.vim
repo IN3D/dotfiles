@@ -16,6 +16,9 @@ let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
 " deoplete
 let g:deoplete#enable_at_startup=1
 
+" editorconfig
+let g:EditorConfig_exclude_patterns=['fugitive://.*']
+
 " git gutter
 let g:gitgutter_max_signs=9001
 
@@ -28,6 +31,10 @@ let g:indentLine_enabled=0
 let g:indentLine_leadingSpaceEnabled=0
 let g:indentLine_char='┆'
 let g:indentLine_leadingSpaceChar='·'
+
+" neomake
+let g:neomake_javascript_enable_makers=['standard']
+autocmd! BufWrite *.js Neomake standard
 
 " syntastic
 " NOTE: Legacy, I'm leaving this incase I ever come back to syntastic
