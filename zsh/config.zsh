@@ -60,6 +60,8 @@ alias lrt='ls -lrtFh' # list by time, reversed
 alias ldot='ls -ld .*' # list dot files
 alias lart='ls -1FcArt' # short, files from most to least recently modified
 
+alias v=nvim
+
 alias grep='grep --color=always'
 # Super grep
 # Recursive: shows line numbers and headers, with 5 lines of context

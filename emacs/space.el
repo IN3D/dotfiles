@@ -9,9 +9,11 @@
    dotspacemacs-distribution 'spacemacs
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers '(
+                                       markdown
                                        (auto-completion :variables auto-completion-enable-snippets-in-popup t)
                                        javascript
                                        html
+                                       elm
                                        emacs-lisp
                                        git
                                        spell-checking
@@ -24,9 +26,6 @@
    dotspacemacs-additional-packages '(
                                       ;; extensions
                                       cider
-                                      clojure-mode
-                                      coffee-mode
-                                      distinguished-theme
                                       editorconfig
                                       emmet-mode
                                       flycheck-clojure
@@ -38,7 +37,6 @@
                                       clojure-mode
                                       coffee-mode
                                       haskell-mode
-                                      elm-mode
                                       go-mode
                                       js2-mode
                                       livescript-mode
@@ -146,7 +144,7 @@
   (setq js-indent-level 2)
   (setq sgml-basic-offset 2)
 
-  (setq git-gutter+-modified-sign "=")
+  ;; (setq git-gutter+-modified-sign "=")
   ;; (setq git-gutter+-modified-sign "●") ;; maybe use this if I'm feeling fancy
 
   ;; === Rebindings ===

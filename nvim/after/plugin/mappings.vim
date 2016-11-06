@@ -10,6 +10,7 @@ unmap <silent><leader>hs
 unmap <silent><leader>hu
 
 
+nnoremap ; :
 " Mappings
 " Top level mappings
 noremap <silent><leader>/ :nohls<CR>

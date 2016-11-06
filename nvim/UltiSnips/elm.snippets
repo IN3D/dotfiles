@@ -1,0 +1,36 @@
+snippet afn "Anonymous function" b
+\\${1} -> $0
+endsnippet
+
+snippet mod "Module definition" b
+module $1 exposing (${2:..})$0
+endsnippet
+
+snippet imp "Import statement" b
+import $1
+endsnippet
+
+snippet impa "Import as statement" b
+import $1 as $0
+endsnippet
+
+snippet impe "Import exposing statement" b
+import $1 exposing (${2:..})$0
+endsnippet
+
+snippet ta "Type alias" b
+type alias $1 =
+	$0
+endsnippet
+
+snippet cas "Case expression" b
+case $1 of
+	$2 -> $0
+endsnippet
+
+snippet let "Let values" b
+let
+	${1} = ${2}
+in
+	${0}
+endsnippet

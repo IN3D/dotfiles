@@ -46,14 +46,5 @@
 	untrack = rm --cache
 	whoami = config user.email
 
-[hub]
-	dprotocol = https
-
-[credential]
-	dhelper = /opt/boxen/bin/boxen-git-credential
-
-[core]
-	dexcludesfile = /opt/boxen/config/git/gitignore
-
 [push]
 	default = simple
