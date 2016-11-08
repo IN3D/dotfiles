@@ -60,6 +60,10 @@ let g:UltiSnipsEnableSnipMate=0
 " FZF
 set rtp+=~/.fzf
 let g:fzf_histor_dir='~/.fzf-history'
+
+" Use ripgrep with fzf
+command! -bang -nargs=* Rip call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --hidden --follow --glob "!.git/*" --glob "!plugged" '.shellescape(<q-args>), 1, <bang>0)
+
 autocmd VimEnter * command! Colors
   \ call fzf#vim#colors({'right': '15%', 'options': '--reverse --margin 30%,0'})
 autocmd VimEnter * command! Windows

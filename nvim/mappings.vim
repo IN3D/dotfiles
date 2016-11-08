@@ -41,6 +41,9 @@ vnoremap <C-f> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 vnoremap <C-b> :Buffers<CR>
 
+unmap <C-r>
+nnoremap <C-r> :Rip<CR>
+
 " neovim mappings
 " sane terminal escape
 if has('nvim')

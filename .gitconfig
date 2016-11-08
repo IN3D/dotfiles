@@ -26,7 +26,7 @@
 	mnff = merge --no-ff
 	oops = commit --amend -C HEAD
 	p = push
-	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%cn%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
+	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
 	poh = push origin HEAD
 	s = status -s
 	sq = !sh -c \"git rebase -i HEAD~$@\"

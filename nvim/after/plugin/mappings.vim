@@ -1,16 +1,29 @@
 " Un-map a shit ton of plugins
 " your mappings are bad and you should feel bad
-" ========================================
-unmap <silent><leader>t
+" ==========================================
+" unmap <silent><leader>t
 " unmap <silent><leader>u " thought I needed this at some point?
 " unmap <silent><leader>gc
-unmap <silent><leader>hp
-unmap <silent><leader>hr
-unmap <silent><leader>hs
-unmap <silent><leader>hu
+" unmap <silent><leader>hp
+" unmap <silent><leader>hr
+" unmap <silent><leader>hs
+" unmap <silent><leader>hu
 
+" ######### Kill Your Leaders ##########
+" Redirects the output of the 'map <leader>' call to a string variable called
+" mappings.
+:redir => mappings
+:silent map <leader>
+:redir END
+
+for m in split(mappings, "\n")
+  let filtered = substitute(m, '^n\s*\|\s*\(.\{-}\)\s*$', '\1', '')
+  execute "unmap <silent>" . split(filtered, ' ')[0]
+endfor
+" ######### Kill Your Leaders ##########
 
 nnoremap ; :
+
 " Mappings
 " Top level mappings
 noremap <silent><leader>/ :nohls<CR>
@@ -36,10 +49,11 @@ nnoremap <silent><leader>gp :Gpush<CR>
 nnoremap <silent><leader>gs :Gstatus<CR>
 
 " Easymotion
-nmap <silent><leader><leader>t <Plug>(easymotion-s1)
+map <leader><leader> <Plug>(easymotion-prefix)
+nmap <leader><leader>t <Plug>(easymotion-s2)
 
 " rainbow parenthesis
-" This doesn't work either, but it doesn't throw an error at least
+" this doesn't work either, but it doesn't throw an error at least
 autocmd VimEnter * command! RainbowParenthesis
 " augroup rainbow_lisp
 "   autocmd!
