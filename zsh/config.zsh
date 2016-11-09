@@ -10,9 +10,12 @@ compinit
 export config_dir="$HOME/.config/zsh"
 export EDITOR=vim
 export TERM="xterm-256color"
-export GOPATH="$HOME/Code"
-export GOBIN="$GOPATH/bin"
-export PATH=$GOPATH:$GOBIN:$PATH
+# export GOPATH="$HOME/Code"
+# export GOBIN="$GOPATH/bin"
+# export PATH=$GOPATH:$GOBIN:$PATH
+if [ -d /usr/local/go ]; then
+  PATH=$PATH:/usr/local/go/bin
+fi
 export NVM_DIR="$HOME/.nvm"
 
 # junk environmental variables
@@ -123,6 +126,7 @@ fi
 
 if [ -d "$HOME/.linuxbrew" ]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
@@ -130,5 +134,4 @@ fi
 # =============================================================================
 
 source ~/.config/zsh/local.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
