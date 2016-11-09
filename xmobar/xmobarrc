@@ -1,4 +1,4 @@
--- vim: ft=haskell
+-- vim: set ft=haskell:
 
 Config { font = "-misc-fixed-*-*-*-*-30-*-*-*-*-*-*-*"
        , additionalFonts = []
