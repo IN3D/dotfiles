@@ -22,8 +22,6 @@ for m in split(mappings, "\n")
 endfor
 " ######### Kill Your Leaders ##########
 
-nnoremap ; :
-
 " Mappings
 " Top level mappings
 noremap <silent><leader>/ :nohls<CR>
