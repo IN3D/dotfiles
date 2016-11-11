@@ -11,14 +11,17 @@
 
 " ######### Kill Your Leaders ##########
 " Redirects the output of the 'map <leader>' call to a string variable called
+" This is still very much in progress, need to do a lot more work.
 " mappings.
 :redir => mappings
 :silent map <leader>
 :redir END
 
 for m in split(mappings, "\n")
-  let filtered = substitute(m, '^n\s*\|\s*\(.\{-}\)\s*$', '\1', '')
-  execute "unmap <silent>" . split(filtered, ' ')[0]
+  if !(m ==? "No mapping found")
+    let filtered = substitute(m, '^n\s*\|\s*\(.\{-}\)\s*$', '\1', '')
+    execute "unmap <silent>" . split(filtered, ' ')[0]
+  endif
 endfor
 " ######### Kill Your Leaders ##########
 

@@ -72,6 +72,13 @@ fi
 ln -s ~/.config/nvim/init.vim ~/.vimrc
 echo "Linked up new .vimrc"
 
+if [ -e ~/.xmonad ]; then
+  mv ~/.xmonad ~/.old/.xmonad
+  echo "Moved .xmonad/ into ~/.old/"
+fi
+ln -s ~/.config/xmonad ~/.xmonad
+echo "Linked up new .xmonad/"
+
 # For nvim < 0.1.x
 if [ -e ~/.nvim ]; then
   mv ~/.nvim ~/.old/.nvim

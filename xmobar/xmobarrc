@@ -1,40 +1,69 @@
 -- vim: set ft=haskell:
 
+-- Defaults?
+-- alpha = 255
+-- position = TopW L 90
+-- textOffset = -1
+-- iconOffset = -1
+-- lowerOnStart = True
+-- pickBroadest = False
+-- persistent = False
+-- hideOnStart = False
+-- iconRoot = "."
+-- allDesktops = True
+-- , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
+--              \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+
+-- Ethernet settings (if I ever find myself needing it)
+-- , Run Network "eth0" ["-L","0","-H","32",
+--                       "--normal","green","--high","red"] 10
+-- , Run Network "eth1" ["-L","0","-H","32",
+--                       "--normal","green","--high","red"] 10
+
 Config { font = "-misc-fixed-*-*-*-*-30-*-*-*-*-*-*-*"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
        , bgColor = "black"
        , fgColor = "grey"
-       , alpha = 255
-       , position = Top
-       , textOffset = -1
-       , iconOffset = -1
-       , lowerOnStart = True
-       , pickBroadest = False
-       , persistent = False
-       , hideOnStart = False
-       , iconRoot = "."
-       , allDesktops = True
-       , overrideRedirect = True
-       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-                    , Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+       , overrideRedirect = False
+       , commands = [ Run Weather "EGPF" [ "-t"
+                                         , "<tempF>F"
+                                         , "-L"
+                                         , "64"
+                                         , "-H"
+                                         , "77"
+                                         , "--normal", "green"
+                                         , "--high", "red"
+                                         , "--low", "lightblue"
+                                         ] 36000
+                    , Run Cpu [ "-L", "3"
+                              , "-H", "50"
+                              , "--normal", "green"
+                              , "--high", "red"
+                              ] 10
+                    , Run Memory ["-t", "Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Com "uname" ["-s", "-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run BatteryP ["BAT0"]
+                                   ["-t"
+                                   ,"<acstatus><watts> (<left>%)"
+                                   ,"-L", "10"
+                                   ,"-H", "80"
+                                   ,"-p", "3"
+                                   ,"--", "-O", "<fc=green>On</fc> - "
+                                   ,"-i", ""
+                                   ,"-L", "-15"
+                                   ,"-H", "-5"
+                                   ,"-l", "red"
+                                   ,"-m", "blue"
+                                   ,"-h", "green"
+                                   ] 600
+                    , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+       , template = "%StdinReader% }{ %cpu% | %memory% * %swap%    \
+                    \<fc=#ee9a00>%date%</fc> | %battery%"
        }
