@@ -19,8 +19,8 @@
 --                       "--normal","green","--high","red"] 10
 -- , Run Network "eth1" ["-L","0","-H","32",
 --                       "--normal","green","--high","red"] 10
-
-Config { font = "-misc-fixed-*-*-*-*-30-*-*-*-*-*-*-*"
+-- font = "-misc-fixed-*-*-*-*-30-*-*-*-*-*-*-*"
+Config { font = "xft:PragmataPro:size=10:regular:antialias=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
