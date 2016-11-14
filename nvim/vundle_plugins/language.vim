@@ -37,5 +37,6 @@ if exists('g:vundle_installing_plugins')
   Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
   Plug 'darthmall/vim-vue', { 'for': 'vue' }
   Plug 'ElmCast/elm-vim'
+  Plug 'neovimhaskell/haskell-vim'
   finish
 endif

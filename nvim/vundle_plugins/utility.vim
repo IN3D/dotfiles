@@ -38,6 +38,7 @@ if exists('g:vundle_installing_plugins')
   Plug 'fishbullet/deoplete-ruby'
   Plug 'carlitux/deoplete-ternjs'
   Plug 'mhartington/deoplete-typescript'
+  Plug 'vhakulinen/neovim-intellij-complete-deoplete'
   Plug 'junegunn/vim-journal'
   Plug 'neomake/neomake'
   finish
