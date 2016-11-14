@@ -4,10 +4,11 @@
 " Version: 2.0
 " =============================================================================
 
-" run vundle installations
-source ~/.vim/vundle.vim
+" run plugin installations
+source ~/.vim/plugins.vim
 
-" Autodetect file types (need to turn back on after vundle run)
+" Autodetect file types:
+" (need to turn back on after vundle run, maybe unecessary now?)
 filetype plugin indent on
 
 source ~/.vim/base_config.vim   " Base, user level configuration

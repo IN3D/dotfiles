@@ -1,7 +1,7 @@
 " -----------------------------------------------------------------------------
 " Plugins that add new, or expand upon existing functionality in vim.
 " -----------------------------------------------------------------------------
-if exists('g:vundle_installing_plugins')
+if exists('g:installing_plugins')
   let g:fzf_install = 'yes | ./install'
   " Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'

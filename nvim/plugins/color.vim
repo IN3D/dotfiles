@@ -1,7 +1,7 @@
 " -----------------------------------------------------------------------------
 " Plugins that add core colorschemes I use
 " -----------------------------------------------------------------------------
-if exists('g:vundle_installing_plugins')
+if exists('g:installing_plugins')
   " terminal
   " UPDATE: True color makes everything better!
   Plug 'morhetz/gruvbox'

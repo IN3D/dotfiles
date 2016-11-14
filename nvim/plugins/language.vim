@@ -1,7 +1,7 @@
 " -----------------------------------------------------------------------------
 " Plugins relating to language syntax, highlighting, etc
 " -----------------------------------------------------------------------------
-if exists('g:vundle_installing_plugins')
+if exists('g:installing_plugins')
   Plug 'chochos/ceylon-vim', { 'for': 'ceylon' }
   Plug 'claco/jasmine.vim'
   Plug 'vim-scripts/nginx.vim'

@@ -7,7 +7,7 @@ nvim/plugged
 nvim/shada
 nvim/eclim
 nvim/.init.vim-rplugin~
-nvim/vundle_plugins/mega_colors.vim
+nvim/plugins/mega_colors.vim
 
 # Allow for private, local functions
 # sometimes a function would be very helpful, but should stay
