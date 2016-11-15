@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: expect
-# key: expect
-# --
-expect(${1:subject}).${2:to} ${3:eq}($0)

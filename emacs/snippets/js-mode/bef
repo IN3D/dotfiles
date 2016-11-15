@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: bef
-# key: bef
-# --
-beforeEach(function () {
-  ${1: // TODO: write me}
-})$0
