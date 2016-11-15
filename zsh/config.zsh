@@ -16,6 +16,10 @@ export TERM="xterm-256color"
 if [ -d /usr/local/go ]; then
   PATH=$PATH:/usr/local/go/bin
 fi
+
+if [ -d $HOME/.cargo/bin ]; then
+  PATH=$PATH:$HOME/.cargo/bin
+fi
 export NVM_DIR="$HOME/.nvm"
 
 # junk environmental variables

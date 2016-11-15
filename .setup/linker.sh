@@ -97,12 +97,13 @@ ln -s ~/.config/nvim/init.vim ~/.nvimrc
 echo "Linked up new .nvimrc"
 
 
-if [ -e ~/.spacemacs ]; then
-  mv ~/.spacemacs ~/.old/.spacemacs
-  echo "Moved .spacemacs into ~/.old/"
-fi
-ln -s ~/.config/emacs/space.el ~/.spacemacs
-echo "Linked up new .spacemacs"
+# My emacs config will make a return at some point
+# if [ -e ~/.spacemacs ]; then
+#   mv ~/.spacemacs ~/.old/.spacemacs
+#   echo "Moved .spacemacs into ~/.old/"
+# fi
+# ln -s ~/.config/emacs/space.el ~/.spacemacs
+# echo "Linked up new .spacemacs"
 
 
 if [ -e ~/.inputrc ]; then
