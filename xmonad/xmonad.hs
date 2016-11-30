@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.WorkspaceNames
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
@@ -18,6 +19,7 @@ main = do
       , modMask = mod4Mask -- Rebind Mod to Super key
       } `additionalKeys`
       [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+      , ((mod4Mask .|. shiftMask, xK_r), renameWorkspace defaultXPConfig)
       , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
       , ((0, xK_Print), spawn "scrot")
       ]
