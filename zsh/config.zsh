@@ -137,5 +137,8 @@ fi
 [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
 # =============================================================================
 
-source ~/.config/zsh/local.zsh
+if [ -f ~/.config/zsh/local.zsh ]; then
+  source ~/.config/zsh/local.zsh
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
