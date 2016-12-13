@@ -16,6 +16,13 @@ let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
 " deoplete
 let g:deoplete#enable_at_startup=1
 
+let g:deoplete#omni_patterns={}
+
+" no idea what this is supposed to do
+" let g:deoplete#omni_patterns.elm = '[^ \t]+'
+let g:deoplete#omni_patterns.elm = '\.'
+"let g:elm_detailed_complete = 1
+
 " editorconfig
 let g:EditorConfig_exclude_patterns=['fugitive://.*']
 
@@ -33,8 +40,30 @@ let g:indentLine_char='┆'
 let g:indentLine_leadingSpaceChar='·'
 
 " neomake
+let g:neomake_warning_sign = {
+  \ 'text': '⚠',
+  \ 'texthl': 'WarningMsg'
+  \}
+
+let g:neomake_error_sign = {
+  \ 'text': '✗',
+  \ 'texthl': 'ErrorMsg'
+  \}
+
 let g:neomake_javascript_enable_makers=['standard']
-autocmd! BufWrite *.js Neomake standard
+autocmd! BufWritePost *.js Neomake standard
+
+ " \ 'buffer_output': 1, " not sure what this would be needed for
+ let g:neomake_elm_elmmake_maker = {
+   \ 'exe': 'elm-make',
+   \ 'errorformat':
+     \ '%E%.%#--\ %m\ -%# %f' . ',' .
+     \ '%C%l\\|' . ',' .
+     \ '%C%.%#'
+ \}
+ let g:neomake_elm_enabled_makers=['elmmake']
+
+autocmd! BufReadPost,BufWritePost *.elm Neomake elmmake
 
 " syntastic
 " NOTE: Legacy, I'm leaving this incase I ever come back to syntastic
