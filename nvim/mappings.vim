@@ -55,6 +55,38 @@ endif
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 
+" ====== Emacs bindings ======
+
+" insert mode
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-a> <C-o>^
+imap <C-e> <C-o>$
+imap <C-n> <Down>
+imap <C-p> <Up>
+
+" add a newline above the current line
+imap <C-m> <C-o>O
+
+imap <C-x><C-s> <C-o>:w<CR>
+" not stricty the same thing, but equivilent to my workflow
+" Rather than opening up a file find, open up the vinegar menu
+imap <C-x><C-f> <C-o>-<ESC>
+
+" delete a word forward
+imap <M-d> <C-o>e<C-o>diw
+imap <M--><M-d> <C-w>
+
+imap <M-BS> <C-w>
+
+imap <M-f> <C-o>e<Right>
+" this doesn't work??? (TODO: figure out why)
+imap <M-b> <C-o>b
+" isn't actually emacs but feels natural-ish
+imap <M-z> <C-o>b
+
+" ====== End Emacs bindings ======
+
 " NOTE: check ./after/plugin/ for mappings. They were moved here so that my
 " mappings didn't have to compete with mappings from other plugins that I'm
 " using.
