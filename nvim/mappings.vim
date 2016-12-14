@@ -65,6 +65,8 @@ imap <C-e> <C-o>$
 imap <C-n> <Down>
 imap <C-p> <Up>
 
+imap <C-g> <ESC>
+
 " add a newline above the current line
 imap <C-m> <C-o>O
 

@@ -15,6 +15,10 @@ let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
 
 " deoplete
 let g:deoplete#enable_at_startup=1
+let deoplete#tag#cache_limit_size = 100000000
+
+let g:deoplete#sources={}
+let g:deoplete#sources._ = ['buffer', 'tag']
 
 let g:deoplete#omni_patterns={}
 

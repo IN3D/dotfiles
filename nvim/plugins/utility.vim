@@ -21,7 +21,7 @@ if exists('g:installing_plugins')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'airblade/vim-gitgutter'
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['clojure', 'scheme', 'lisp'] }
+  Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['clojure', 'scheme', 'lisp', 'ruby'] }
   Plug 'junegunn/fzf.vim' ", { 'do': g:fzf_install }
   Plug 'mbbill/undotree'
   Plug 'easymotion/vim-easymotion'
@@ -41,5 +41,7 @@ if exists('g:installing_plugins')
   Plug 'vhakulinen/neovim-intellij-complete-deoplete'
   Plug 'junegunn/vim-journal'
   Plug 'neomake/neomake'
+  Plug 'majutsushi/tagbar'
+  Plug 'MattesGroeger/vim-bookmarks'
   finish
 endif
