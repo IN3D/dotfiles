@@ -7,7 +7,8 @@ compinit
 
 # Exports
 # =============================================================================
-export config_dir="$HOME/.config/zsh"
+export CONFIG="$HOME/.config"
+export config_dir="$CONFIG/zsh"
 export EDITOR=vim
 export TERM="xterm-256color"
 # export GOPATH="$HOME/Code"
