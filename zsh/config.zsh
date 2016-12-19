@@ -11,6 +11,7 @@ export CONFIG="$HOME/.config"
 export config_dir="$CONFIG/zsh"
 export EDITOR=vim
 export TERM="xterm-256color"
+export LANGUAGE="en_US.UTF-8"
 # export GOPATH="$HOME/Code"
 # export GOBIN="$GOPATH/bin"
 # export PATH=$GOPATH:$GOBIN:$PATH
