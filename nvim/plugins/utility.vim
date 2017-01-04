@@ -43,5 +43,11 @@ if exists('g:installing_plugins')
   Plug 'neomake/neomake'
   Plug 'majutsushi/tagbar'
   Plug 'MattesGroeger/vim-bookmarks'
+  Plug 'Shougo/Denite.nvim'
+  Plug 'Shougo/Unite.vim'
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  " NOTE: devicons must come last
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'prendradjaja/vim-vertigo'
   finish
 endif
