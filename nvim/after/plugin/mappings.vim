@@ -20,7 +20,8 @@
 for m in split(mappings, "\n")
   if !(m ==? "No mapping found")
     let filtered = substitute(m, '^n\s*\|\s*\(.\{-}\)\s*$', '\1', '')
-    execute "unmap <silent>" . split(filtered, ' ')[0]
+    let leader_binding = split(filtered, ' ')[0]
+    execute "unmap <silent>" . leader_binding
   endif
 endfor
 " ######### Kill Your Leaders ##########
