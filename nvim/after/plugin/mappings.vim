@@ -19,9 +19,23 @@
 
 for m in split(mappings, "\n")
   if !(m ==? "No mapping found")
-    let filtered = substitute(m, '^n\s*\|\s*\(.\{-}\)\s*$', '\1', '')
+    let filtered = substitute(m, '^n\|v\s*\|\s*\(.\{-}\)\s*$', '\1', '')
     let leader_binding = split(filtered, ' ')[0]
-    execute "unmap <silent>" . leader_binding
+    " NOTE: unmap is a bit dangerous here. It will wipe out *all* mappings
+    " for any mode, so if there is:
+    " n <leader>l
+    " v <leader>l
+    " it will unmap both, on the first call, and the subsequent call will
+    " fail.
+    :redir => raw_still_mapped
+    :silent map leader_binding
+    :redir END
+    " remove leading newline, trailing whitespace
+    let still_mapped = substitute(raw_still_mapped, '^\n*\(.\{-}\)\s*$', '\1', '')
+    " This feels sub-optimal, kind of just a quick fix for the moment.
+    if !(still_mapped ==? "No mapping found")
+      execute "unmap <silent>" . leader_binding
+    endif
   endif
 endfor
 " ######### Kill Your Leaders ##########
@@ -31,8 +45,8 @@ endfor
 noremap <silent><leader>/ :nohls<CR>
 
 " Align
-vmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a= :Tabularize/=<CR>
+vmap <Leader>a: :Tabularize/\w\+: \zs<CR>
 vmap <Leader>a> :Tabularize/=><CR>
 
 " Toggles
@@ -49,6 +63,8 @@ nnoremap <silent><leader>gc :Gcommit<CR>
 nnoremap <silent><leader>gd :Gdiff<CR>
 nnoremap <silent><leader>gp :Gpush<CR>
 nnoremap <silent><leader>gs :Gstatus<CR>
+
+nnoremap <silent><leader>ss :Swoop<CR>
 
 " Easymotion
 map <leader><leader> <Plug>(easymotion-prefix)

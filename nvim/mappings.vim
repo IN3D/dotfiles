@@ -8,6 +8,7 @@
 
 " set leader key to space, Spacemacs has the right idea
 let mapleader=' '
+let maplocalleader=','
 
 " select everything
 nnoremap vy ggVG

@@ -37,17 +37,19 @@ if exists('g:installing_plugins')
   Plug 'Shougo/deoplete.nvim'
   Plug 'fishbullet/deoplete-ruby'
   Plug 'carlitux/deoplete-ternjs'
-  Plug 'mhartington/deoplete-typescript'
+  Plug 'mhartington/nvim-typescript'
   Plug 'vhakulinen/neovim-intellij-complete-deoplete'
   Plug 'junegunn/vim-journal'
-  Plug 'neomake/neomake'
+  " Plug 'neomake/neomake'
   Plug 'majutsushi/tagbar'
   Plug 'MattesGroeger/vim-bookmarks'
   Plug 'Shougo/Denite.nvim'
   Plug 'Shougo/Unite.vim'
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  Plug 'vim-syntastic/syntastic'
+  Plug 'pelodelfuego/vim-swoop'
   " NOTE: devicons must come last
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'prendradjaja/vim-vertigo'
+  " Plug 'ryanoasis/vim-devicons'
+  " Plug 'prendradjaja/vim-vertigo'
   finish
 endif

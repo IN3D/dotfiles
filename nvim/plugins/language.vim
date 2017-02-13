@@ -8,7 +8,7 @@ if exists('g:installing_plugins')
   Plug 'claco/jasmine.vim',                       { 'for': js_and_friends }
   Plug 'vim-scripts/nginx.vim',                   { 'for': 'nginx' }
   Plug 'cakebaker/scss-syntax.vim',               { 'for': ['scss', 'sass'] }
-  Plug 'leafgarland/typescript-vim',              { 'for': 'typescript'}
+  Plug 'HerringtonDarkholme/yats.vim',            { 'for': 'typescript' }
   Plug 'burnettk/vim-angular',                    { 'for': 'javascript' }
   Plug 'xsbeats/vim-blade',                       { 'for': 'php' }
   Plug 'kchmck/vim-coffee-script',                { 'for': 'coffee' }
@@ -40,5 +40,6 @@ if exists('g:installing_plugins')
   Plug 'darthmall/vim-vue',                       { 'for': 'vue' }
   Plug 'ElmCast/elm-vim'
   Plug 'neovimhaskell/haskell-vim',               { 'for': 'haskell' }
+  Plug 'chrisbra/csv.vim'
   finish
 endif
