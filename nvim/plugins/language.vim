@@ -10,7 +10,7 @@ if exists('g:installing_plugins')
   Plug 'cakebaker/scss-syntax.vim',               { 'for': ['scss', 'sass'] }
   Plug 'HerringtonDarkholme/yats.vim',            { 'for': 'typescript' }
   Plug 'burnettk/vim-angular',                    { 'for': 'javascript' }
-  Plug 'xsbeats/vim-blade',                       { 'for': 'php' }
+  Plug 'jwalton512/vim-blade',
   Plug 'kchmck/vim-coffee-script',                { 'for': 'coffee' }
   Plug 'ap/vim-css-color'
   Plug 'tpope/vim-cucumber',                      { 'for': 'cucumber' }
