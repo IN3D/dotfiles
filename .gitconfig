@@ -8,6 +8,7 @@
 	aliases = config --get-regex alias
 	all = add .
 	b = branch
+	back = !sh -c \"git checkout master && git pull\"
 	beyonce = config user.name
 	bvv = branch -vv
 	ccis = commit -S -m
@@ -19,6 +20,7 @@
 	deleteremote = push origin --delete
 	down = push origin --delete
 	graph = log --pretty --graph
+	greenfield = !sh -c \"git back && git upnup $@\"
 	hist = log --oneline
 	histv = log --oneline --pretty=format:'%C(yellow)%h%Creset %Cred%cn%Creset %s'
 	live-dangerously = push --force
@@ -33,6 +35,7 @@
 	s = status -s
 	sq = !sh -c \"git rebase -i HEAD~$@\"
 	squash = !sh -c \"git rebase -i HEAD~$@\"
+	shame = blame
 	st = status
 	stage = add
 	toremote = push -u origin
