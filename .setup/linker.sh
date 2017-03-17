@@ -24,7 +24,6 @@ else
   echo "Linked up new .bashrc"
 fi
 
-
 if [ -e ~/.cshrc ]; then
   mv ~/.cshrc ~/.old/.cshrc
   echo "Moved .cshrc into ~/.old/"
@@ -71,6 +70,13 @@ if [ -e ~/.vimrc ]; then
 fi
 ln -s ~/.config/nvim/init.vim ~/.vimrc
 echo "Linked up new .vimrc"
+
+if [ -e ~/.emacs.d ]; then
+  mv ~/.emacs.d ~/.old/.emacs.d
+  echo "Moved .emacs.d/ into ~/.old/"
+fi
+ln -s ~/.config/emacs ~/.emacs.d
+echo "Linked up new .emacs.d/"
 
 if [ -e ~/.xmonad ]; then
   mv ~/.xmonad ~/.old/.xmonad
