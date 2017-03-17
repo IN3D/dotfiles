@@ -116,7 +116,7 @@ if [ -e ~/.inputrc ]; then
   mv ~/.inputrc ~/.old/.inputrc
   echo "Moved .inputrc into ~/.old/"
 fi
-ln -s ~/.config/smallConfigs/inputrc ~/.inputrc
+ln -s ~/.config/inputrc ~/.inputrc
 echo "Linked up new .inputrc"
 
 
@@ -124,5 +124,5 @@ if [ -e ~/.tmux.conf ]; then
   mv ~/.tmux.conf ~/.tmux.conf.old
   echo "Moved .tmux.conf into ~/.old/"
 fi
-ln -s ~/.config/smallConfigs/tmux.conf ~/.tmux.conf
+ln -s ~/.config/tmux.conf ~/.tmux.conf
 echo "Linked up new .tmux.conf"
