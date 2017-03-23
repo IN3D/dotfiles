@@ -64,7 +64,15 @@ nnoremap <silent><leader>gd :Gdiff<CR>
 nnoremap <silent><leader>gp :Gpush<CR>
 nnoremap <silent><leader>gs :Gstatus<CR>
 
+" Projects
+nnoremap <silent><leader>pf :GFiles<CR>
+
+" buffers
+nnoremap <silent><leader>bb :Buffers<CR>
+
+" Searching
 nnoremap <silent><leader>ss :Swoop<CR>
+nnoremap <silent><leader>sgr :Rip<CR>
 
 " Easymotion
 map <leader><leader> <Plug>(easymotion-prefix)
