@@ -1,14 +1,18 @@
 " airline
 set laststatus=2
 set ttimeoutlen=0
-set timeoutlen=300 " make sure that leader map pops up fast
-let g:airline_powerline_fonts=1
+set timeoutlen=3000 " make sure that leader map pops up fast
 " let g:airline#extensions#tabline#enabled=1
-" Keep these here incase I want to go back quickly
-" let g:airline_right_sep=''
-" let g:airline_right_alt_sep=''
-" let g:airline_left_sep=''
-" let g:airline_left_alt_sep=''
+
+if (!exists("g:limited_font") || (g:limited_font==1))
+  let g:airline_powerline_fonts=0
+  let g:airline_right_sep=''
+  let g:airline_right_alt_sep=''
+  let g:airline_left_sep=''
+  let g:airline_left_alt_sep=''
+else
+  let g:airline_powerline_fonts=1
+endif
 
 let g:airline_mode_map = {
       \ '__' : '-',

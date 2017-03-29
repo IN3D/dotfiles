@@ -11,6 +11,10 @@ source ~/.vim/plugins.vim
 " (need to turn back on after vundle run, maybe unecessary now?)
 filetype plugin indent on
 
+if !empty(glob('~/.vim/prehook.vim'))
+  source ~/.vim/prehook.vim
+endif
+
 source ~/.vim/base_config.vim   " Base, user level configuration
 source ~/.vim/mappings.vim      " remapping of vim functionalities
 source ~/.vim/plugin_config.vim " Configuration specific to plugins

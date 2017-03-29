@@ -25,7 +25,7 @@ if exists('g:installing_plugins')
   Plug 'junegunn/fzf.vim' ", { 'do': g:fzf_install }
   Plug 'mbbill/undotree'
   Plug 'easymotion/vim-easymotion'
-  Plug 'mhinz/vim-startify'
+  " Plug 'mhinz/vim-startify'
   Plug 'troydm/easybuffer.vim'
   Plug 'mattn/emmet-vim'
   Plug 'vim-scripts/TaskList.vim'
