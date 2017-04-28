@@ -19,6 +19,7 @@
 	d = diff
 	deleteremote = push origin --delete
 	down = push origin --delete
+	emails = log --oneline --pretty=format:'%ae'
 	graph = log --pretty --graph
 	greenfield = !sh -c \"git back && git upnup $@\"
 	hist = log --oneline
@@ -49,6 +50,7 @@
 	up = push --set-upstream origin
 	upnup = !sh -c \"git cob $1 && git up $1\"
 	whoami = config user.email
+	who-wrote-this = log --oneline --pretty=format:'%an %ae'
 
 [push]
 	default = simple

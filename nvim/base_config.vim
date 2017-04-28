@@ -9,7 +9,7 @@ set sts=2
 set sw=2
 set et
 set linebreak
-set background=dark
+set bg=dark
 set lazyredraw
 " make absolutely, positively sure I have 'sane backspace'
 set backspace=2
