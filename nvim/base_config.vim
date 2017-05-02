@@ -1,6 +1,7 @@
 syntax on
 set shell=bash
-set rnu nu
+" disabled to avoid redrawing all the damn time
+" set rnu nu
 set title
 set autoindent
 set smarttab
@@ -14,6 +15,9 @@ set lazyredraw
 " make absolutely, positively sure I have 'sane backspace'
 set backspace=2
 set backspace=indent,eol,start
+
+" avoid performance issues when trying to color long lines
+set synmaxcol=200
 
 " remove 'beep repeatedly' mode
 set novisualbell
