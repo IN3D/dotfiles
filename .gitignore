@@ -10,6 +10,12 @@ nvim/eclim
 nvim/.init.vim-rplugin~
 nvim/plugins/mega_colors.vim
 
+# Ignore results of compiling XMonad
+xmonad/xmonad-x86_64-linux
+xmonad/xmonad.errors
+xmonad/xmonad.hi
+xmonad/xmonad.o
+
 # Allow for private, local functions
 # sometimes a function would be very helpful, but should stay
 # local to a work machine
