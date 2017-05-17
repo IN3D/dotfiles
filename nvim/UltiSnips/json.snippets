@@ -1,24 +1,24 @@
 snippet chassisObj "create a new chassis object" b
 {
-  "id": $1,
-  "name": "$2",
-  "weight": $3,
-  "crew_number": $4,
-  "unit_type": "$5",
-  "variants": []
+	"id": $1,
+	"name": "$2",
+	"weight": $3,
+	"crew_number": $4,
+	"unit_type": "$5",
+	"variants": []
 }
 endsnippet
 
 snippet variantObj "create a new variant object" b
 {
-  "id": $1,
-  "name": "$2",
-  "clan_name": "${3:null}",
-  "battle_value": $4,
-  "production_year": $5,
-  "price": $6,
-  "tech_level": $7,
-  "is_cannon": ${8:true},
-  "tech_base": "$9"
+	"id": $1,
+	"name": "$2",
+	"clan_name": "${3:null}",
+	"battle_value": $4,
+	"production_year": $5,
+	"price": $6,
+	"tech_level": $7,
+	"is_cannon": ${8:true},
+	"tech_base": "$9"
 }
 endsnippet
