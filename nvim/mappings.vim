@@ -1,10 +1,10 @@
+" vim: fdm=marker:
+"
 " --------------------------------------------------------------------------------
 " Mappings
 " --------------------------------------------------------------------------------
 
-" --------------------
-"  General Mappings
-" --------------------
+" ===== General Mappings ===== {{{
 
 " set leader key to space, Spacemacs has the right idea
 let mapleader=' '
@@ -55,8 +55,9 @@ endif
 " deoplete
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+" }}}
 
-" ====== Emacs bindings ======
+" ====== Emacs bindings ====== {{{
 
 " insert mode
 imap <C-b> <Left>
@@ -88,7 +89,7 @@ imap <M-b> <C-o>b
 " isn't actually emacs but feels natural-ish
 imap <M-z> <C-o>b
 
-" ====== End Emacs bindings ======
+" }}}
 
 " NOTE: check ./after/plugin/ for mappings. They were moved here so that my
 " mappings didn't have to compete with mappings from other plugins that I'm

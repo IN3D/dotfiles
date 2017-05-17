@@ -1,3 +1,5 @@
+" vim: fdm=marker:
+"
 " Un-map a shit ton of plugins
 " your mappings are bad and you should feel bad
 " ==========================================
@@ -9,7 +11,7 @@
 " unmap <silent><leader>hs
 " unmap <silent><leader>hu
 
-" ######### Kill Your Leaders ##########
+" ######### Kill Your Leaders ########## {{{
 " Redirects the output of the 'map <leader>' call to a string variable called
 " This is still very much in progress, need to do a lot more work.
 " mappings.
@@ -38,50 +40,60 @@ for m in split(mappings, "\n")
     endif
   endif
 endfor
-" ######### Kill Your Leaders ##########
+" }}}
 
 " Mappings
-" Top level mappings
+" Top level mappings {{{
 noremap <silent><leader>/ :nohls<CR>
+" }}}
 
-" Align
+" Align {{{
 vmap <Leader>a= :Tabularize/=<CR>
 vmap <Leader>a: :Tabularize/\w\+: \zs<CR>
 vmap <Leader>a> :Tabularize/=><CR>
+" }}}
 
-" Toggles
+" Toggles {{{
 nnoremap <silent><leader>tb :EasyBuffer<CR>
 nnoremap <silent><leader>tl :set list!<CR>
 nnoremap <silent><leader>tn :NERDTreeToggle<CR>
 nnoremap <silent><leader>ts :set spell!<CR>
 nnoremap <silent><leader>tu :UndotreeToggle<CR>
+" }}}
 
-" Fugitive (i.e. Git)
+" Fugitive (i.e. Git) {{{
 nnoremap <silent><leader>ga :Gwrite<CR>
 nnoremap <silent><leader>gb :Gblame<CR>
 nnoremap <silent><leader>gc :Gcommit<CR>
 nnoremap <silent><leader>gd :Gdiff<CR>
 nnoremap <silent><leader>gp :Gpush<CR>
 nnoremap <silent><leader>gs :Gstatus<CR>
+" }}}
 
-" Projects
+" Projects {{{
 nnoremap <silent><leader>pf :GFiles<CR>
+" }}}
 
-" buffers
+" buffers {{{
 nnoremap <silent><leader>bb :Buffers<CR>
+" }}}
 
-" Searching
-nnoremap <silent><leader>ss :Swoop<CR>
+" Searching {{{
+" Basically swoop in Emacs
+nnoremap <silent><leader>ss :BLines<CR>
 nnoremap <silent><leader>sgr :Rip<CR>
+" }}}
 
-" Easymotion
+" Easymotion {{{
 map <leader><leader> <Plug>(easymotion-prefix)
 nmap <leader><leader>t <Plug>(easymotion-s2)
+" }}}
 
-" rainbow parenthesis
+" rainbow parenthesis {{{
 " this doesn't work either, but it doesn't throw an error at least
 autocmd VimEnter * command! RainbowParenthesis
 " augroup rainbow_lisp
 "   autocmd!
 "   autocmd FileType lisp,clojure,scheme RainbowParenthesis
 " augroup END
+" }}}

@@ -1,4 +1,6 @@
-" airline
+" vim: fdm=marker:
+
+" airline {{{
 set laststatus=2
 set ttimeoutlen=0
 set timeoutlen=3000 " make sure that leader map pops up fast
@@ -27,16 +29,19 @@ let g:airline_mode_map = {
       \ 'S' : 'S',
       \ '' : 'S',
       \ }
+" }}}
 
-" vim-ruby
+" vim-ruby {{{
 let g:rubycomplete_buffer_loading=1
 let g:rubycomplete_rails=1
 let g:rubycomplete_classes_in_global=1
+" }}}
 
-" ctrl-p
+" ctrl-p {{{
 let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
+" }}}
 
-" deoplete
+" deoplete {{{
 let g:deoplete#enable_at_startup=1
 let deoplete#tag#cache_limit_size = 100000000 " Day job is huge Rails app
 
@@ -44,29 +49,33 @@ let g:deoplete#sources={}
 let g:deoplete#sources._ = ['buffer', 'tag']
 
 let g:deoplete#omni_patterns={}
-
 " no idea what this is supposed to do
 " let g:deoplete#omni_patterns.elm = '[^ \t]+'
 let g:deoplete#omni_patterns.elm = '\.'
 "let g:elm_detailed_complete = 1
+" }}}
 
-" editorconfig
+" editorconfig {{{
 let g:EditorConfig_exclude_patterns=['fugitive://.*']
+" }}}
 
-" git gutter
+" git gutter {{{
 let g:gitgutter_max_signs=9001
+" }}}
 
-" indent guides
+" indent guides {{{
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
+" }}}
 
-" indent line
+" indent line {{{
 let g:indentLine_enabled=0
 let g:indentLine_leadingSpaceEnabled=0
 let g:indentLine_char='┆'
 let g:indentLine_leadingSpaceChar='·'
+" }}}
 
-" neomake
+" neomake {{{
 " let g:neomake_warning_sign = {
 "   \ 'text': '⚠',
 "   \ 'texthl': 'WarningMsg'
@@ -91,8 +100,9 @@ let g:indentLine_leadingSpaceChar='·'
 "  let g:neomake_elm_enabled_makers=['elmmake']
 
 " autocmd! BufReadPost,BufWritePost *.elm Neomake elmmake
+" }}}
 
-" syntastic
+" syntastic {{{
 " NOTE: Legacy, I'm leaving this incase I ever come back to syntastic
 let g:syntastic_ruby_checkers=['mri', 'rubocop']
 let g:syntastic_always_populate_loc_list=1
@@ -100,6 +110,11 @@ let g:syntastic_always_populate_loc_list=1
 " let g:syntastic_auto_loc_list=1
 let g:syntastic_scala_checkers=['scalac', 'scalastyle']
 let g:syntastic_javascript_checkers=['standard']
+let g:syntastic_typescript_checkers=[]
+let g:syntastic_typescript_checkers = ['tslint']
+if executable('./node_modules/.bin/tslint')
+  let g:syntastic_typescript_tslint_exec = './node_modules/.bin/tslint'
+endif
 let g:syntastic_elm_checkers=['elm_make']
 let g:syntastic_enable_balloons=1
 let g:syntastic_enable_signs=1
@@ -108,17 +123,20 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol='✗'
 let g:syntastic_style_warning_symbol='⚠'
 let g:elm_syntastic_show_warnings=1
+" }}}
 
-" tasklist
+" tasklist {{{
 let g:tlTokenList=['FIXME', 'TODO', 'XXX', 'HACK', 'BUG']
+" }}} 
 
-" ultisnips
+" ultisnips {{{
 let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-l>'
 let g:UltiSnipsJumpBackwardTrigger='<c-h>'
 let g:UltiSnipsEnableSnipMate=0
+" }}}
 
-" FZF
+" FZF {{{
 set rtp+=~/.fzf
 let g:fzf_histor_dir='~/.fzf-history'
 
@@ -128,9 +146,11 @@ command! -bang -nargs=* Rip call fzf#vim#grep('rg --column --line-number --no-he
 autocmd VimEnter * command! Colors
   \ call fzf#vim#colors({'right': '15%', 'options': '--reverse --margin 30%,0'})
 autocmd VimEnter * command! Windows
-  \ call fzf#vim#windows({'right': '30%', 'options': '--margin 30%,0'})
+  \ call fzf#vim#windows({'bottom': '30%', 'options': '--margin 30%,0'})
 autocmd VimEnter * command! Buffers
-  \ call fzf#vim#buffers({'right': '30%', 'options': '--margin 30%,0'})
+  \ call fzf#vim#buffers({'bottom': '30%', 'options': '--margin 30%,0'})
+" }}}
 
-" RainbowParenthesis
+" RainbowParenthesis {{{
 let g:rainbow#pairs=[['(', ')'], ['[', ']'], ['{', '}']]
+" }}}
