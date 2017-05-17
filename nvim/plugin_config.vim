@@ -127,7 +127,7 @@ let g:elm_syntastic_show_warnings=1
 
 " tasklist {{{
 let g:tlTokenList=['FIXME', 'TODO', 'XXX', 'HACK', 'BUG']
-" }}} 
+" }}}
 
 " ultisnips {{{
 let g:UltiSnipsExpandTrigger='<c-j>'
