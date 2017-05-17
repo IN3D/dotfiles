@@ -15,11 +15,12 @@ if !empty(glob('~/.vim/prehook.vim'))
   source ~/.vim/prehook.vim
 endif
 
-source ~/.vim/base_config.vim   " Base, user level configuration
-source ~/.vim/mappings.vim      " remapping of vim functionalities
-source ~/.vim/plugin_config.vim " Configuration specific to plugins
-
 " load settings specific to an environment, if there are any
 if !empty(glob('~/.vim/local.vim'))
   source ~/.vim/local.vim
 endif
+
+source ~/.vim/base_config.vim   " Base, user level configuration
+source ~/.vim/mappings.vim      " remapping of vim functionalities
+source ~/.vim/plugin_config.vim " Configuration specific to plugins
+
