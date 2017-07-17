@@ -56,7 +56,8 @@ vmap <Leader>a> :Tabularize/=><CR>
 " Toggles {{{
 nnoremap <silent><leader>tb :EasyBuffer<CR>
 nnoremap <silent><leader>tl :set list!<CR>
-nnoremap <silent><leader>tn :NERDTreeToggle<CR>
+nnoremap <silent><leader>tt :NERDTreeToggle<CR>
+nnoremap <silent><leader>tn :set nu!<CR>
 nnoremap <silent><leader>ts :set spell!<CR>
 nnoremap <silent><leader>tu :UndotreeToggle<CR>
 " }}}

@@ -72,7 +72,7 @@ imap <C-g> <ESC>
 " add a newline above the current line
 imap <C-m> <C-o>O
 
-imap <C-x><C-s> <C-o>:w<CR>
+" imap <C-x><C-s> <C-o>:w<CR>
 " not stricty the same thing, but equivilent to my workflow
 " Rather than opening up a file find, open up the vinegar menu
 imap <C-x><C-f> <C-o>-<ESC>
