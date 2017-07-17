@@ -53,10 +53,11 @@ let deoplete#tag#cache_limit_size = 100000000 " Day job is huge Rails app
 let g:deoplete#sources={}
 let g:deoplete#sources._ = ['buffer', 'tag']
 
-let g:deoplete#omni_patterns={}
+" interferes with snippets
+" let g:deoplete#omni#input_patterns={}
 " no idea what this is supposed to do
 " let g:deoplete#omni_patterns.elm = '[^ \t]+'
-let g:deoplete#omni_patterns.elm = '\.'
+" let g:deoplete#omni#input_patterns.elm = '\.'
 "let g:elm_detailed_complete = 1
 " }}}
 
