@@ -8,16 +8,14 @@ set timeoutlen=3000 " make sure that leader map pops up fast
 
 if (!exists("g:limited_font") || (g:limited_font==1))
   let g:airline_powerline_fonts=0
-  let g:airline_right_sep=''
-  let g:airline_right_alt_sep=''
   let g:airline_left_sep=''
   let g:airline_left_alt_sep=''
+  let g:airline_right_sep=''
+  let g:airline_right_alt_sep=''
 else
   let g:airline_powerline_fonts=1
   let g:airline_right_sep=''
   let g:airline_right_alt_sep=''
-  let g:airline_left_sep=''
-  let g:airline_left_alt_sep=''
 endif
 
 let g:airline_mode_map = {

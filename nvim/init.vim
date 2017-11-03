@@ -24,3 +24,6 @@ source ~/.vim/base_config.vim   " Base, user level configuration
 source ~/.vim/mappings.vim      " remapping of vim functionalities
 source ~/.vim/plugin_config.vim " Configuration specific to plugins
 
+if !empty(glob('~/.vim/color.vim'))
+  source ~/.vim/color.vim
+endif

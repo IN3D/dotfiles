@@ -34,7 +34,7 @@ if exists('g:installing_plugins')
   Plug 'derekwyatt/vim-scala',                   { 'for': 'scala' }
   Plug 'rust-lang/rust.vim',                     { 'for': 'rust' }
   Plug 'raichoo/purescript-vim',                 { 'for': 'purescript' }
-  Plug 'elixir-lang/vim-elixir',                 { 'for': 'elixir' }
+  Plug 'elixir-lang/vim-elixir',                 { 'for': ['elixir', 'eelixir'] }
   Plug 'mxw/vim-jsx',                            { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'dart-lang/dart-vim-plugin',              { 'for': 'dart' }
   Plug 'darthmall/vim-vue',                      { 'for': 'vue' }
@@ -43,6 +43,7 @@ if exists('g:installing_plugins')
   " Plug 'chrisbra/csv.vim'
   Plug 'keith/swift.vim',                        { 'for': 'swift' }
   Plug 'jez/vim-better-sml',                     { 'for': 'sml' }
+  Plug 'typedclojure/vim-typedclojure'
   Plug 'zah/nim.vim',                            { 'for': 'nim' }
   Plug 'fsharp/vim-fsharp',                      { 'for': 'fsharp'}
   finish

@@ -15,13 +15,6 @@ export LANGUAGE="en_US.UTF-8"
 # export GOPATH="$HOME/Code"
 # export GOBIN="$GOPATH/bin"
 # export PATH=$GOPATH:$GOBIN:$PATH
-if [ -d /usr/local/go ]; then
-  PATH=$PATH:/usr/local/go/bin
-fi
-
-if [ -d $HOME/.cargo/bin ]; then
-  PATH=$PATH:$HOME/.cargo/bin
-fi
 export NVM_DIR="$HOME/.nvm"
 
 # junk environmental variables
@@ -125,6 +118,14 @@ if [ -d "$HOME/.rvm" ]; then
   export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 fi
 
+if [ -d /usr/local/go ]; then
+  PATH=$PATH:/usr/local/go/bin
+fi
+
+if [ -d $HOME/.cargo/bin ]; then
+  PATH=$PATH:$HOME/.cargo/bin
+fi
+
 if [ -d "$HOME/.plenv" ]; then
   export PATH="$HOME/.plenv/bin:$PATH"
   eval "$(plenv init -)"
@@ -135,8 +136,8 @@ if [ -d "$HOME/.linuxbrew" ]; then
   export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 # =============================================================================
 
 if [ -f ~/.config/zsh/local.zsh ]; then
