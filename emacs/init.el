@@ -234,20 +234,3 @@ so I'm leaving it in for now."
 ;; ========== diminish ==========
 (provide 'init)
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(global-linum-mode nil)
- '(package-selected-packages
-   (quote
-    (git-gutter swift-mode gruvbox-theme darktooth-theme spaceline spaceline-all-the-icons yaml-mode which-key web-mode wakatime-mode use-package typed-clojure-mode tide stupid-indent-mode scala-mode rust-mode ruby-end rainbow-delimiters projectile-ripgrep powerline paredit nim-mode neotree multiple-cursors magit js2-mode hungry-delete hl-todo highlight-numbers haskell-mode general fill-column-indicator evil ess enh-ruby-mode elm-mode elixir-mode dockerfile-mode counsel-projectile company coffee-mode avy all-the-icons-ivy all-the-icons-dired))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :family "Source Code Pro")))))
