@@ -12,7 +12,10 @@
      ("\\(\s\\|\\.\\)\\([Ab-Z][a-zA-Z]*\\)" 2 font-lock-type-face)))
   (font-lock-add-keywords
    'coffee-mode
-   '(("\\(\s\\|\\.\\)\\([A-Z][a-zA-Z]*\\)" 2 dired-marked-face))))
+   '(("\\(\s\\|\\.\\)\\([A-Z][a-zA-Z]*\\)" 2 dired-marked-face)))
+  (font-lock-add-keywords
+   'enh-ruby-mode
+   '(("\s\\(sidekiq_options\\)" 1 font-lock-builtin-face))))
 
 (provide 'font-lock-enhancements)
 ;;; font-lock-enhancements.el ends here
