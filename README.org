@@ -1,0 +1,17 @@
+* Hops' dot files
+
+Here be dragons!
+
+A fine assortment of my yak shaved files
+
+[[https://en.wiktionary.org/wiki/yak_shaving][http://www.globalnerdy.com/wordpress/wp-content/uploads/2012/09/yak-shaving.jpg]]
+
+** About
+   From about 2010 to 2016 I used Vim, getting deeper into it as the years went
+   on. In 2015 I was formally introduced to Emacs; which started a long
+   back-and-forth between the two. I eventually decided on Emacs and began the
+   process of learning more and more about it.
+   Originally my workflow was based around Vim and Tmux, heavily focused on the
+   CLI. Increasingly, my workflow is centering around Emacs (though there's
+   still at least one terminal running in Emacs at all times). This is all still
+   very much a work in progress. My Emacs config is still coming together!
