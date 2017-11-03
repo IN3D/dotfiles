@@ -1,259 +1,253 @@
-(package-initialize)
+;;; init.el -- Summary
+;;; Commentary:
+;;; Main Emacs file.
+;;; Code:
 
-;; ==================== basics ====================
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(toggle-scroll-bar -1)
-'(fill-column 80)
-(setq-default indent-tabs-mode nil) ;; never use tabs by default
+;; Define where my config files live.
+(defvar ejh/config-dir "~/.emacs.d")
+(defvar ejh/package-dir (format "%s/packages" ejh/config-dir))
+(defvar ejh/basics (format "%s/basics.el" ejh/config-dir))
+(defvar ejh/functions (format "%s/functions.el" ejh/config-dir))
+(defvar ejh/font-lock-enhancements (format "%s/font-lock-enhancements.el" ejh/config-dir))
+(defvar ejh/packages-should-be-built-in
+  (format "%s/should-be-built-in.el" ejh/package-dir))
+(defvar ejh/packages-core (format "%s/core.el" ejh/package-dir))
 
-(setq package-archives
-'(("gnu"          . "http://elpa.gnu.org/packages/")
-  ("melpa"        . "http://melpa.org/packages/")
-  ("melpa-stable" . "http://stable.melpa.org/packages/")
-  ("marmalade"    . "http://marmalade-repo.org/packages/")))
-;; ==================== basics ====================
+;; Load config files
+(load ejh/basics)
+(load ejh/functions)
+(load ejh/font-lock-enhancements)
 
+;; Load packages
+(load ejh/packages-should-be-built-in)
+(load ejh/packages-core)
 
-;; ==================== functions ====================
-(defun ejh/globalize (mode)
-  "Jankey function to make a global function for minor modes that
-don't provide one by default."
-  (add-hook 'prog-mode-hook mode))
+;;; A way I'd done this before, define a list of file names and load them in
+;;; a loop, maybe do this instead?
+;; (setq config-dir "~/.emacs.d/")
+;; (setq files '("basics" "custom"))
+;; (dolist (f files)
+;;   (load-file (format "%s/%s.el" config-dir f)))
 
-;; For Rails
-(defun ejh/wtf-are-the-routes ()
-    "Create a temporary buffer with the output of the current Rails
-projects routes."
-  (interactive)
-  (when (and (buffer-modified-p)
-             (y-or-n-p (format "Save file %s?" (buffer-file-name))))
-    (save-buffer))
-  (with-output-to-temp-buffer "*wtf-are-the-routes*"
-    (shell-command "rake routes")
-    (pop-to-buffer "*wtf-are-the-routes*")))
-
-(defun ejh/align-repeat (start end regexp &optional justify-right after)
-  "Repeat alignment with respect to the given regular expression.
-If JUSTIFY-RIGHT is not-nil justify to the right instead of the left.
-If AFTER is non-nil, add whitespace to the left instead of the right."
-  (interactive "r\nsAlign regexp: ")
-  (let* ((ws-regexp (if (string-empty-p regexp)
-      "\\(\\s-+\\)"
-          "\\(\\s-*\\)"))
-   (complete-regexp (if after
-            (concat regexp ws-regexp)
-          (concat ws-regexp regexp)))
-   (group (if justify-right -1 1)))
-    (message "%S" complete-regexp)
-    (align-regexp start end complete-regexp group 1 t)))
-
-(defmacro ejh/create-align-x (name regexp &optional justify-right default-after)
-  (let ((new-func (intern (concat "ejh/align-repeat-" name))))
-    `(defun ,new-func (start end switch)
-       (interactive "r\nP")
-       (let ((after (not (eq (if switch t nil) (if ,default-after t nil)))))
-   (ejh/align-repeat start end ,regexp ,justify-right after)))))
-
-(ejh/create-align-x "colon" ":" nil t)
-(ejh/create-align-x "equal" "=")
-(ejh/create-align-x "arrow" "->")
-(ejh/create-align-x "fat-arrow" "=>")
-
-(defun ejh/counsel-projectile-rg  (&optional options)
-  "Ivy version of `projectile-ripgrep'.
-That I've hacked based off of `counsel-projectile-ag'."
-  (interactive)
-  (if (projectile-project-p)
-      (let* ((options
-        (if current-prefix-ag
-      (read-string "options: ")
-    options))
-       (ignored
-        (unless (eq (projectile-projects-vcs) 'git)
-    ;; rg supports git ignored files
-    (append
-     (cl-union (projectile-ignored-files-rel)
-         grep-find-ignored-files)
-     (cl-union (projectile-ignored-directories-rel)
-         grep-find-ignored-directories))))
-       (options
-        (concat options " "
-          (mapconcat (lambda (i)
-           (concat "--ignore " i))
-         ignored
-         " "))))
-  (counsel-rg nil
-        (projectile-project-root)
-        options
-        (projectile-prepend-project-name "rg")))
-    (user-error "You're not in a project")))
-
-;; TODO: finish writing this.
-(defun ejh/counsel-projectile-git-grep (&optional options)
-  "Projectile version of `counsel-git-grep'."
-  (interactive)
-  (if (projectile-project-p)
-      (message "You're in a project")
-    (user-error "You're not in a project")))
-
-(defun ejh/setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-h1-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company
-  (company-mode +1))
-
-;; ==================== functions ====================
-
-;; ==================== packages ====================
-
-;; ++ themes ++
-(use-package blackboard-theme :ensure t :pin melpa)
-(use-package grandshell-theme :ensure t :pin melpa)
-(use-package badwolf-theme    :ensure t :pin melpa)
-(use-package gruvbox-theme    :ensure t :pin melpa)
-(use-package darktooth-theme  :ensure t :pin melpa)
-(use-package moe-theme        :ensure t :pin melpa)
-
-;; ++ themes ++
+;; This is necessary for Macs, they get the colors wrong in powerline
+(when (string-equal system-type "darwin")
+    (setq ns-use-srgb-colorspace nil))
+;; ========== packages ==========
 
 ;; ++ languages ++
-(use-package clojure-mode    :ensure t :pin melpa)
-(use-package js2-mode        :ensure t :pin melpa)
-(use-package typescript-mode :ensure t :pin melpa)
-(use-package elm-mode        :ensure t :pin melpa)
-(use-package web-mode        :ensure t :pin melpa)
-(use-package rust-mode       :ensure t :pin melpa)
-(use-package scala-mode      :ensure t :pin melpa)
-(use-package typescript-mode :ensure t :pin melpa)
-(use-package tide            :ensure t :pin melpa)
-(use-package nim-mode        :ensure t :pin melpa)
+(use-package clojure-mode
+  :ensure t)
+(use-package js2-mode
+  :ensure t)
+(use-package rjsx-mode
+  :ensure t)
+(use-package elixir-mode
+  :ensure t)
+(use-package typescript-mode
+  :ensure t)
+(use-package elm-mode
+  :ensure t)
+(use-package web-mode
+  :ensure t)
+(use-package rust-mode
+  :ensure t)
+(use-package scala-mode
+  :ensure t)
+(use-package nim-mode
+  :ensure t)
+(use-package ess ; This contains 'R-mode' among others
+  :ensure t)
+(use-package enh-ruby-mode
+  :ensure t)
+(use-package coffee-mode
+  :ensure t
+  :config
+  (setq coffee-tab-width 2))
+(use-package haskell-mode
+  :ensure t)
 ;; ++ languages ++
-
 
 ;; ++ for languages ++
-;; Packages, mostly minor modes that compliment various major modes.
-(use-package paredit    :ensure t :pin melpa :diminish " 内")
-(use-package emmet-mode :ensure t :pin melpa)
-;; ++ for langauges ++
-
-
-;; ++ should be built in ++
-;; These are packages that feel so basic I would expect that maybe by
-;; the time Emacs 26 rolls around they would be part of the standard
-;; distribution. Basically, these are things I can't imagine Emacs
-;; without. These tend to be smaller packages.
-(use-package fill-column-indicator :ensure t :pin melpa)
-(use-package hungry-delete         :ensure t :pin melpa)
-
-(use-package highlight-numbers
+(use-package paredit
   :ensure t
-  :config (ejh/globalize #'highlight-numbers-mode))
+  :diminish "[內]") ; "inside"
+(use-package tide
+  :ensure t)
+;; ========== Ruby Stuff ==========
+(use-package robe
+  :ensure t)
+(use-package rspec-mode
+  :ensure t)
+(use-package rinari
+  :diminish "[リ]" ; "Ri"
+  :ensure t)
+;; ========== /Ruby Stuff ==========
+;; ++ for languages ++
 
-(use-package which-key
+;; ++ other stuff ++
+(use-package stupid-indent-mode
+  :ensure t)
+(use-package all-the-icons
+  :ensure t)
+(use-package wttrin ; get the weather in Emacs!
   :ensure t
-  :pin melpa
-  :diminish " ?"
-  :config (ejh/globalize #'which-key-mode))
-
-;; ++ should be built in ++
-
-
-;; ++ core ++
-;; Packages that feel very core to my editing experience, but aren't
-;; so core that I think Emacs ought to ship with them by default.
-(use-package magit              :ensure t :pin melpa)
-(use-package projectile         :ensure t :pin melpa)
-(use-package counsel            :ensure t :pin melpa)
-(use-package counsel-projectile :ensure t :pin melpa)
-(use-package avy                :ensure t :pin melpa)
-(use-package google-translate   :ensure t :pin melpa)
-(use-package swoop              :ensure t :pin melpa)
-(use-package ripgrep            :ensure t :pin melpa)
-(use-package projectile-ripgrep :ensure t :pin melpa)
-(use-package multiple-cursors   :ensure t :pin melpa)
-
-(use-package rainbow-delimiters
-  :ensure t
-  :pin melpa
-  :config (ejh/globalize #'rainbow-delimiters-mode))
-
-(use-package swiper
-  :ensure t
-  :pin melpa
-  :config (ejh/globalize #'ivy-mode))
-
-(use-package company
-  :ensure t
-  :diminish " C"
-  :pin melpa
-  :config (global-company-mode))
-
-(use-package general
-  :ensure t
-  :pin melpa
+  :commands (wttrin)
+  :init
+  (setq wttrin-default-cities '("Detroit" "Novi"))
+  (setq wttrin-default-accept-language '("Accept-Language" . "en-US"))
+  (defun ejh/wttrin-default ()
+    "Open `wttrin' without prompting, use the first city in `wttrin-default-cities'."
+    (interactive)
+    (wttrin-query (car wttrin-default-cities)))
+  (defun ejh/wttrin-work ()
+    "Open `wttrin' without prompting to get the weather at work."
+    (interactive)
+    (wttrin-query "Detroit"))
+  (defun ejh/wttrin-home ()
+    "Open `wttrin' without prompting to get the weather at home."
+    (interactive)
+    (wttrin-query "Novi")))
+(use-package sx ; use StackExchange from Emacs!
   :config
-  (general-define-key
-   :prefix "s-SPC"
-   "b"   '(nil :which-key "buffers")
-   "bb"  '(ivy-switch-buffer :which-key "switch")
-   "bk"  '(kill-buffer :which-key "kill")
-   "g"   '(nil :which-key "git")
-   "gb"  '(magit-blame :which-key "blame")
-   "gs"  '(magit-status :which-key "status")
-   "gm"  '(magit-dispatch-popup :which-key "menu")
-   "j"   '(nil :which-key "jump")
-   "jc"  '(avy-goto-char :which-key "to character")
-   "jl"  '(avy-goto-line :which-key "to line")
-   "jn"  '(avy-goto-line-below :which-key "to next line")
-   "jp"  '(avy-goto-line-above :which-key "to previous line")
-   "jw"  '(avy-goto-word-0 :which-key "to word")
-   "s"   '(nil :which-key "search")
-   "sa"  '(counsel-ag :which-key "ag")
-   "sG"  '(counsel-grep :which-key "grep")
-   "sr"  '(counsel-rg :which-key "rg")
-   "ss"  '(swoop :which-key "swoop")
-   "sg"  '(nil :which-key "git project")
-   "sga" '(counsel-projectile-ag :which-key "ag")
-   "sgr" '(ejh/counsel-projectile-rg :which-key "rg")
-   "t"   '(nil :which-key "toggle")
-   "td"  '(hungry-delete-mode :which-key "hungry delete")
-   "tt"  '(counsel-load-theme :which-key "theme")
-   "tn"  '(global-linum-mode :which-key "line numbers")
-   "tf"  '(fci-mode :which-key "fill column")
-   "tF"  '(auto-fill-mode :which-key "fill break")
-   "x"   '(nil :which-key "text")
-   "xf"  '(nil :which-key "format")
-   "xf=" '(ejh/align-repeat-equal "equal")
-   "xf:" '(ejh/align-repeat-colon "colon")
-   "xf-" '(ejh/align-repeat-arrow "arrow")
-   "xf>" '(ejh/align-repeat-fat-arrow "fat arrow")
-   "xfr" '(align-regexp "regex")))
-;; ++ core ++
+  (bind-keys :prefix "C-c X"
+             :prefix-map ejh/sx-map
+             :prefix-docstring "StackExchange"
+             ("q" . sx-tab-all-questions)
+             ("i" . sx-inbox)
+             ("o" . sx-open-link)
+             ("u" . sx-tab-unanswered-my-tags)
+             ("a" . sx-ask)
+             ("s" . sx-search)))
+(use-package system-packages
+  :ensure t)
+;; ++ other stuff ++
 
-;; ==================== packages ====================
+;; ========== packages ==========
+
+;; ========== alist ==========
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|prodspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+;; ========== alist ==========
 
 
-;; ==================== hooks ====================
+(defun ejh/custom-mode-icon ()
+  "This isn't working as intended. Based on the default font, if there is
+something defined on the unicode value that one of the given icon fonts wants to
+use, then this function gets thrown all off. This might be useful in the future
+so I'm leaving it in for now."
+  (format "%s"
+          (propertize (all-the-icons-icon-for-buffer
+                       'help-echo (format "Major-mode: `%s`" major-mode)
+                       'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer))))))
+
+;; ========== hooks ==========
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
+            ;; (setq mode-name (ejh/custom-mode-icon))
             (paredit-mode)
             (general-define-key
-             :prefix "s-,"
-             "e" '(nil :which-key "evaluate")
-             "er" '(eval-region :which-key "region")
-             "eb" '(eval-buffer :which-key "buffer"))))
+             :prefix "C-c"
+             "m" '(nil :which-key "mode")
+             "me" '(nil :which-key "evaluate")
+             "mer" '(eval-region :which-key "region")
+             "meb" '(eval-buffer :which-key "buffer"))))
 
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
+(add-hook 'flycheck-mode-hook
           (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+            (setq flycheck-vale-modes
+                  '(text-mode markdown-mode rst-mode org-mode))
+            (require 'flycheck-vale))) ; seems backwards, but it works?
+         
 
-;; ==================== hooks ====================
+(add-hook 'speedbar-mode-hook
+          (lambda ()
+            (speedbar-add-supported-extension ".rb")
+            (speedbar-add-supported-extension ".ru")
+            (speedbar-add-supported-extension ".erb")
+            (speedbar-add-supported-extension ".rjs")
+            (speedbar-add-supported-extension ".rhtml")
+            (speedbar-add-supported-extension ".rake")))
+
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq fill-column 80)
+            (flyspell-mode +1)
+            (fci-mode +1)
+            (auto-fill-mode +1)))
+
+(add-hook 'term-mode-hook
+          (lambda ()
+            ;; This prevents *really* slow rendering of some CLI programs
+            (setq bidi-paragraph-direction 'left-to-right)))
+
+;; NOTE: I think this could be `config:' on the `use-package' macro.
+(add-hook 'rjsx-mode-hook
+             (lambda ()
+               (setq js2-strict-missing-semi-warning nil)
+               (setq js2-basic-offset 2)
+               (setq js2-strict-trailing-comma-warning nil)))
+
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (electric-pair-local-mode)
+            (setq typescript-indent-level 2)))
+
+;; NOTE: I added this from somewhere about `ledger'. Not sure I want to keep
+;; this.
+(add-hook 'org-mode-hook
+             (lambda ()
+               (org-babel-do-load-languages
+                'org-babel-load-languages
+                '((R          . t)
+                  (ditaa      . t)
+                  (dot        . t)
+                  (emacs-lisp . t)
+                  (gnuplot    . t)
+                  (haskell    . t)
+                  (latex      . t)
+                  (ledger     . t)
+                  (ocaml      . t)
+                  (octave     . t)
+                  (python     . t)
+                  (ruby       . t)
+                  (screen     . nil)
+                  (sh         . t)
+                  (sql        . t)
+                  (sqlite     . t)))))
+;; ========== hooks ==========
+
+;; ========== diminish ==========
+(eval-after-load "Undo-Tree"
+  '(diminish 'undo-tree-mode "[UT]"))
+(eval-after-load "wakatime-mode"
+  '(diminish 'wakatime-mode "[w]"))
+(eval-after-load "ivy"
+  '(diminish 'ivy-mode "[i]"))
+(eval-after-load "Rinari"
+  '(diminish 'rinari-minor-mode "[リ]")) ; shouldn't need this, set in `use-package'
+(eval-after-load "ARev"
+  '(diminish 'auto-revert-mode "[_]"))
+(eval-after-load "RSpec"
+  '(diminish 'rspec-mode "[S]"))
+;; ========== diminish ==========
+(provide 'init)
+;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(global-linum-mode nil)
+ '(package-selected-packages
+   (quote
+    (git-gutter swift-mode gruvbox-theme darktooth-theme spaceline spaceline-all-the-icons yaml-mode which-key web-mode wakatime-mode use-package typed-clojure-mode tide stupid-indent-mode scala-mode rust-mode ruby-end rainbow-delimiters projectile-ripgrep powerline paredit nim-mode neotree multiple-cursors magit js2-mode hungry-delete hl-todo highlight-numbers haskell-mode general fill-column-indicator evil ess enh-ruby-mode elm-mode elixir-mode dockerfile-mode counsel-projectile company coffee-mode avy all-the-icons-ivy all-the-icons-dired))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :family "Source Code Pro")))))
