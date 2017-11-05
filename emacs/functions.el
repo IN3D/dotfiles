@@ -46,7 +46,7 @@ the left instead of the right."
 (defun ejh/counsel-projectile-rg  (&optional options)
   "Ivy version of `projectile-ripgrep'.
 This is hacked together based off the code of `counsel-projectile-ag'.
-OPTIONS are CLI options that could be passed to ripgrep."
+`OPTIONS' are CLI options that could be passed to ripgrep."
   (interactive)
   ;; initalize these variables if they aren't set.
   (defvar grep-find-ignored-files)
@@ -57,7 +57,7 @@ OPTIONS are CLI options that could be passed to ripgrep."
       (read-string "options: ")
     options))
        (ignored
-        (unless (eq (projectile-projects-vcs) 'git)
+        (unless (eq (projectile-project-vcs) 'git)
     ;; rg supports git ignored files
     (append
      (cl-union (projectile-ignored-files-rel)
