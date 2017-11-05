@@ -73,6 +73,7 @@
   :diminish "[內]") ; "inside"
 (use-package tide
   :ensure t)
+
 ;; ========== Ruby Stuff ==========
 (use-package robe
   :ensure t)
@@ -154,9 +155,10 @@ so I'm leaving it in for now."
 
 (add-hook 'flycheck-mode-hook
           (lambda ()
+            (require 'flycheck-vale)
             (setq flycheck-vale-modes
                   '(text-mode markdown-mode rst-mode org-mode))
-            (require 'flycheck-vale))) ; seems backwards, but it works?
+            (flycheck-add-mode 'vale 'org-mode)))
          
 
 (add-hook 'speedbar-mode-hook
@@ -174,8 +176,10 @@ so I'm leaving it in for now."
           (lambda ()
             (setq fill-column 80)
             (flyspell-mode +1)
+            (flycheck-mode +1)
             (fci-mode +1)
-            (auto-fill-mode +1)))
+            (auto-fill-mode +1)
+            (flycheck-select-checker 'vale)))
 
 (add-hook 'term-mode-hook
           (lambda ()
