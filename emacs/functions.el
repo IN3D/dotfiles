@@ -99,6 +99,8 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 (ejh/when-os-do "linux" "gnu/linux")
 (ejh/when-os-do "windows" "windows-nt")
 (ejh/when-os-do "bsd" "berkeley-unix" t)
+(ejh/when-os-do "cygwin" "cygwin")
+(ejh/when-os-do "gnu" "gnu" t)
 
 (provide 'functions)
 ;;; functions.el ends here
