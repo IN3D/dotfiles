@@ -92,6 +92,7 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 (ejh/create-align-x "comma" "," nil t)
 (ejh/create-align-x "equal" "=")
 (ejh/create-align-x "arrow" "->")
+(ejh/create-align-x "back-arrow" "<-")
 (ejh/create-align-x "fat-arrow" "=>")
 
 (ejh/when-os-do "osx" "darwin" t)

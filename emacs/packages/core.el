@@ -92,6 +92,7 @@
    "xf:" '(ejh/align-repeat-colon :which-key "colon")
    "xf-" '(ejh/align-repeat-arrow :which-key "arrow")
    "xf>" '(ejh/align-repeat-fat-arrow :which-key "fat arrow")
+   "xf<" '(ejh/align-repeat-back-arrow :which-key "back arrow")
    "xf," '(ejh/align-repeat-comma :which-key "comma")
    "xfr" '(align-regexp :which-key "regex")))
 (use-package iedit
@@ -99,10 +100,9 @@
   :config
   (general-define-key
    :prefix "C-c"
-   ";" '(iedit-mode :which-key "Simple name refactor")))
+   ";" '(iedit-mode :which-key "iedit")))
 (use-package fci-mode
   :ensure t)
 
 (provide 'core.el)
-
 ;;; core.el ends here
