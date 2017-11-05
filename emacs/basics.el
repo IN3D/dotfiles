@@ -13,6 +13,8 @@
 (setq default-fill-column 80)       ; default to this instead of 70
 (setq-default indent-tabs-mode nil) ; don't use tabs by default
 
+(fset 'yes-or-no-p 'y-or-n-p) ; Stop having to type yes/no. Only y/n
+
 ;; (setq ejh/default-font "Source Code Pro")
 
 ;; (add-to-list 'default-frame-alist '(font . ejh/default-font))
