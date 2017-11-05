@@ -76,11 +76,28 @@ This is hacked together based off the code of `counsel-projectile-ag'.
         (projectile-prepend-project-name "rg")))
     (user-error "You're not in a project")))
 
+(defmacro ejh/when-os-do (name os &optional upcase-p)
+  "Create a function with `NAME' run only when on `OS'.
+If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+  (let ((new-func (intern (format "ejh/when-%s-do" name)))
+        (doc-name (if upcase-p
+                      (upcase name)
+                    (capitalize name))))
+    `(defun ,new-func (thing)
+       ,(format "Does the `THING' if the device is %s." doc-name)
+       (when (string-equal system-type ,os) thing))))
+
+;; ========== Create functions with Macros ==========
 (ejh/create-align-x "colon" ":" nil t)
 (ejh/create-align-x "comma" "," nil t)
 (ejh/create-align-x "equal" "=")
 (ejh/create-align-x "arrow" "->")
 (ejh/create-align-x "fat-arrow" "=>")
+
+(ejh/when-os-do "osx" "darwin" t)
+(ejh/when-os-do "linux" "gnu/linux")
+(ejh/when-os-do "windows" "windows-nt")
+(ejh/when-os-do "bsd" "berkeley-unix" t)
 
 (provide 'functions)
 ;;; functions.el ends here
