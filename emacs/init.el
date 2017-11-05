@@ -17,11 +17,11 @@
 (setq ejh/config-files '("basics"
                          "functions"
                          "font-lock-enhancements"))
-(setq ejh/package-config-files '("should-be-built-in"
-                                 "core"))
+(setq ejh/package-files '("should-be-built-in"
+                          "core"))
 
 (ejh/load-dir ejh/config-dir ejh/config-files)
-(ejh/load-dir ejh/package-dir ejh/package-config-files)
+(ejh/load-dir ejh/package-dir ejh/package-files)
 
 ;; This is necessary for OSX, it gets the colors wrong in powerline
 (ejh/when-osx-do
