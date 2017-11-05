@@ -24,7 +24,7 @@
 (ejh/load-dir ejh/package-dir ejh/package-config-files)
 
 ;; This is necessary for OSX, it gets the colors wrong in powerline
-(ejh/when-mac-do
+(ejh/when-osx-do
  (setq ns-use-srgb-colorspace nil))
 ;; ========== packages ==========
 
@@ -34,7 +34,11 @@
 (use-package js2-mode
   :ensure t)
 (use-package rjsx-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-strict-trailing-comma-warning nil)
+  (setq js2-basic-offset 2))
 (use-package elixir-mode
   :ensure t)
 (use-package typescript-mode
@@ -76,6 +80,7 @@
 (use-package rinari
   :diminish "[リ]" ; "Ri"
   :ensure t)
+;; TODO: add `yari-mode'
 ;; ========== /Ruby Stuff ==========
 ;; ++ for languages ++
 
@@ -125,6 +130,7 @@
 ;; ========== alist ==========
 
 
+;; Not using this at the moment, meant to do something with `all-the-icons'
 (defun ejh/custom-mode-icon ()
   "This isn't working as intended. Based on the default font, if there is
 something defined on the unicode value that one of the given icon fonts wants to
@@ -179,13 +185,6 @@ so I'm leaving it in for now."
           (lambda ()
             ;; This prevents *really* slow rendering of some CLI programs
             (setq bidi-paragraph-direction 'left-to-right)))
-
-;; NOTE: I think this could be `config:' on the `use-package' macro.
-(add-hook 'rjsx-mode-hook
-             (lambda ()
-               (setq js2-strict-missing-semi-warning nil)
-               (setq js2-basic-offset 2)
-               (setq js2-strict-trailing-comma-warning nil)))
 
 (add-hook 'typescript-mode-hook
           (lambda ()
