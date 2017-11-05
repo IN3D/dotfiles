@@ -15,10 +15,10 @@
 
 ;; Load packages
 (setq ejh/config-files '("basics"
-                         "functions"))
+                         "functions"
+                         "font-lock-enhancements"))
 (setq ejh/package-config-files '("should-be-built-in"
-                                 "core"
-                                 "font-lock-enhancements"))
+                                 "core"))
 
 (ejh/load-dir ejh/config-dir ejh/config-files)
 (ejh/load-dir ejh/package-dir ejh/package-config-files)
