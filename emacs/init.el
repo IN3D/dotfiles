@@ -141,6 +141,14 @@ so I'm leaving it in for now."
                        'help-echo (format "Major-mode: `%s`" major-mode)
                        'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer))))))
 
+;; ========== bindings ==========
+(progn ; Bindings for `package-menu'
+  (define-key package-menu-mode-map (kbd "a") 'move-beginning-of-line)
+  (define-key package-menu-mode-map (kbd "e") 'move-end-of-line)
+  (define-key package-menu-mode-map (kbd "l") 'recenter-top-bottom)
+  (define-key package-menu-mode-map (kbd "s") 'isearch-forward))
+;; ========== bindings ==========
+
 ;; ========== hooks ==========
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
