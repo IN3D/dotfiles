@@ -6,32 +6,26 @@
 ;; Define where my config files live.
 (defvar ejh/config-dir "~/.emacs.d")
 (defvar ejh/package-dir (format "%s/packages" ejh/config-dir))
-(defvar ejh/basics (format "%s/basics.el" ejh/config-dir))
-(defvar ejh/functions (format "%s/functions.el" ejh/config-dir))
-(defvar ejh/font-lock-enhancements (format "%s/font-lock-enhancements.el" ejh/config-dir))
-(defvar ejh/packages-should-be-built-in
-  (format "%s/should-be-built-in.el" ejh/package-dir))
-(defvar ejh/packages-core (format "%s/core.el" ejh/package-dir))
 
-;; Load config files
-(load ejh/basics)
-(load ejh/functions)
-(load ejh/font-lock-enhancements)
+(defun ejh/load-dir (directory files)
+  "Takes a list of `FILES' in `DIRECTORY' and loads them in the provided order."
+  (dolist (f files)
+    (load-file (format "%s/%s.el" directory f))))
+
 
 ;; Load packages
-(load ejh/packages-should-be-built-in)
-(load ejh/packages-core)
+(setq ejh/config-files '("basics"
+                         "functions"))
+(setq ejh/package-config-files '("should-be-built-in"
+                                 "core"
+                                 "font-lock-enhancements"))
 
-;;; A way I'd done this before, define a list of file names and load them in
-;;; a loop, maybe do this instead?
-;; (setq config-dir "~/.emacs.d/")
-;; (setq files '("basics" "custom"))
-;; (dolist (f files)
-;;   (load-file (format "%s/%s.el" config-dir f)))
+(ejh/load-dir ejh/config-dir ejh/config-files)
+(ejh/load-dir ejh/package-dir ejh/package-config-files)
 
-;; This is necessary for Macs, they get the colors wrong in powerline
-(when (string-equal system-type "darwin")
-    (setq ns-use-srgb-colorspace nil))
+;; This is necessary for OSX, it gets the colors wrong in powerline
+(ejh/when-mac-do
+ (setq ns-use-srgb-colorspace nil))
 ;; ========== packages ==========
 
 ;; ++ languages ++
