@@ -56,7 +56,7 @@
   (general-define-key
    :prefix "SPC"
    :states 'normal
-   "SPC" '(counsel-M-x)
+   "SPC" '(counsel-M-x :which-key "commands")
    "b"   '(nil :which-key "buffers")
    "bb"  '(ivy-switch-buffer :which-key "switch")
    "bk"  '(kill-buffer :which-key "kill")
