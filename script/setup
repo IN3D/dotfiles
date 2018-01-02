@@ -1,12 +1,49 @@
 #! /bin/bash
 
+# Fail if an error is returned
+set -e
+
+# Declare functions before using them
+function link_file() {
+    if [ -e $HOME/$1 ]; then
+        echo "Backing up original $1"
+        mv $HOME/$1 $HOME/.old/$1
+    fi
+    echo "Linking $1"
+    ln -s $HOME/dotfiles/$2 $HOME/$1
+}
+
+### Linking things up
+
+# Create a directory to backup files in
+if [ ! -d $HOME/.old ]; then
+    echo "Making a directory to backup old files"
+    mkdir $HOME/.old
+fi
+
+# This probably already exists, but NeoVim will need it if it's not there
+if [ ! -d $HOME/.config ]; then
+    echo "Making the .config directory"
+    mkdir $HOME/.config
+fi
+
+# On OS X it's called ".bash_profile", on Linux it's ".bashrc"
 if [ `uname` == "Darwin" ]; then
-  echo "This will setup a Mac"
-  echo "Moving the brewfile into the home directory..."
-  ln -s ~/dotfiles/Brewfile $HOME/.Brewfile
-elif [ `uname` == "Linux" ]; then
-  echo "This would setup a Linux machine"
+    link_file .bash_profile bash/config.bash
 else
-  echo "What are you trying to setup?"
-  exit 1
+    link_file .bashrc bash/config.bash
+fi
+link_file .cshrc       csh/config.csh
+link_file .tcshrc      csh/config.csh
+link_file .zshrc       zsh/config.zsh
+link_file .gitconfig   .gitconfig
+link_file .vim         nvim
+link_file .config/nvim nvim
+link_file .vimrc       nvim/init.vim
+link_file .emacs.d     emacs
+link_file .xmonad      xmonad
+link_file .inputrc     inputrc
+link_file .tmux.conf   tmux.conf
+if [ `uname` == "Darwin" ]; then
+    link_file .Brewfile Brewfile
 fi
