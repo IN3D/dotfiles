@@ -1,0 +1,12 @@
+#! /bin/bash
+
+if [ `uname` == "Darwin" ]; then
+  echo "This will setup a Mac"
+  echo "Moving the brewfile into the home directory..."
+  ln -s ~/dotfiles/Brewfile $HOME/.Brewfile
+elif [ `uname` == "Linux" ]; then
+  echo "This would setup a Linux machine"
+else
+  echo "What are you trying to setup?"
+  exit 1
+fi
