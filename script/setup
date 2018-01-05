@@ -7,7 +7,14 @@ set -e
 function link_file() {
     if [ -e $HOME/$1 ]; then
         echo "Backing up original $1"
-        mv $HOME/$1 $HOME/.old/$1
+        # If a third arguement isn't supplied
+        if [ -z "$3" ]; then
+            mv $HOME/$1 $HOME/.old/$1
+        else
+            echo "Backing up $1 as $HOME/.old/$3"
+            mv $HOME/$1 $HOME/.old/$3
+        fi
+
     fi
     echo "Linking $1"
     ln -s $HOME/dotfiles/$2 $HOME/$1
@@ -38,7 +45,7 @@ link_file .tcshrc      csh/config.csh
 link_file .zshrc       zsh/config.zsh
 link_file .gitconfig   .gitconfig
 link_file .vim         nvim
-link_file .config/nvim nvim
+link_file .config/nvim nvim           nvim
 link_file .vimrc       nvim/init.vim
 link_file .emacs.d     emacs
 link_file .xmonad      xmonad
