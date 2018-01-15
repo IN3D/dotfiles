@@ -54,3 +54,5 @@
 
 [push]
 	default = simple
+[github]
+	user = IN3D

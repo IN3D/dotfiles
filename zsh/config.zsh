@@ -70,9 +70,9 @@ alias grep='grep --color=always'
 alias sgrep='grep -R -n -H -s -I -C 5 --exclude-dir={.git,.svn,CVS,log}'
 # Small Super grep
 alias ssgrep='grep -R -n -H -s -I -C 1 --exclude-dir={.git,.svn,CVS,log}'
-# Provies a list of file names that have the searched text
+# Provies a list of file names that have the provided text
 alias fileswith='grep -R -l -s -I --exclude-dir={.git,.svn,CVS,log}'
-# Provides a list of filenames, and line numbers taht have the searched text
+# Provides a list of filenames, and line numbers that have the provided text
 alias lineswith='grep -R -n -o -s -I --exclude-dir={.git,.svn,CVS,log}'
 
 # head/tail shortcuts
