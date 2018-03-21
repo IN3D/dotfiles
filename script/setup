@@ -51,6 +51,7 @@ link_file .emacs.d     emacs
 link_file .xmonad      xmonad
 link_file .inputrc     inputrc
 link_file .tmux.conf   tmux.conf
+
 if [ `uname` == "Darwin" ]; then
     link_file .Brewfile Brewfile
 fi

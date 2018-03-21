@@ -1,4 +1,4 @@
-**/local.*
+## Vim stuff
 nvim/bundle
 nvim/autoload/plug.vim.old
 nvim/local.vim
@@ -10,7 +10,18 @@ nvim/eclim
 nvim/.init.vim-rplugin~
 nvim/plugins/mega_colors.vim
 
-# Ignore results of compiling XMonad
+## Emacs stuff
+emacs/elpa
+emacs/abbrev_defs
+emacs/auto-save-list/
+emacs/network-security.data
+emacs/recentf
+# Temporary file buffers
+emacs/*~
+*.*~
+
+## XMonad
+# results of compiling
 xmonad/xmonad-x86_64-linux
 xmonad/xmonad.errors
 xmonad/xmonad.hi
@@ -26,51 +37,5 @@ zsh/functions/_*.zsh
 .setup/git-prompt.sh
 .setup/javarepl.jar
 
-# Things I'm not tracking
-.DS_STORE
-Atom/
-Thunar/
-butterfly/
-dconf/
-fontconfig/
-gtk-2.0/
-pulse/
-terminator/
-xfce4/
-htop/
-heroku/
-configstore/
-user-dirs.*
-Terminal/
-audacious/
-autostart/
-chromium/
-entropy/
-google-chrome/
-gtk-3.0/
-hexchat/
-libreoffice/
-lxpanel/
-lxsession/
-lxterminal/
-menus/
-nautilus/
-openbox/
-pcmanfm/
-session/
-GIMP/
-ristretto/
-qterminal.org/
-Black Screen/
-
-# Files I'm not tracking
-Trolltech.conf
-kactivitymanagerdrc
-kickoffrc
-ksplashrc
-konsolerc
-plasma*
-qtcurve.gtk*
-glade.conf
-mimeapps.list
-QtProject.conf
+# NOTE: What is this?
+**/local.*
