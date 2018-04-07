@@ -1,0 +1,773 @@
+#+TITLE: Hop's Emacs config
+#+AUTHOR: Eric Hopkins
+#+EMAIL: eric.on.tech@gmail.com
+
+* Fundamental stuff
+  "Fundamental" in the sense that it's just about Emacs here, couldn't think of
+  a better heading to be honest.
+  NOTE: This particular heading has gotten pretty long. Might be worth breaking
+  it up a bit?
+
+  By default Emacs tries to protect you from some of it's "weirder"
+  functionalities, which is honestly funny considering most uninitiated people
+  would consider the "weirder parts" all of Emacs. And besides, I know what I'm
+  doing. I'm pretty sure there are a few others, But I've never used them.
+#+BEGIN_SRC emacs-lisp
+(put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+#+END_SRC
+
+  This will help Emacs load faster, basically give it more memory to do it's
+  thing.
+#+BEGIN_SRC emacs-lisp
+(defvar ejh/default-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold 100000000)
+#+END_SRC
+
+  A crappy function that I wrote for when a package, usually a minor-mode of
+  some kind that doesn't have a function to invoke it globally.
+#+BEGIN_SRC emacs-lisp
+(defun ejh/globalize (mode)
+  "Janky function to make global modes when one isn't provided.
+MODE is the mode to rig a global mode for."
+  (add-hook 'prog-mode-hook mode))
+#+END_SRC
+  
+  It's frequent enough that I have to do something for an operating system that
+  I find it worth having specific functions for it. /However/, Emacs has some
+  strange names for them (Windows is =windows-nt= for some reason). So I make
+  some nice wrappers for them.
+#+BEGIN_SRC emacs-lisp
+(defmacro ejh/when-os-do (name os &optional upcase-p)
+  "Create a function with `NAME' run only when on `OS'.
+If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+  (let ((new-func (intern (format "ejh/when-%s-do" name)))
+        (doc-name (if upcase-p
+                      (upcase name)
+                    (capitalize name))))
+    `(defun ,new-func (thing)
+       ,(format "Does the `THING' if the device is %s." doc-name)
+       (when (string-equal system-type ,os) thing))))
+
+(ejh/when-os-do "osx" "darwin" t)
+(ejh/when-os-do "linux" "gnu/linux")
+(ejh/when-os-do "windows" "windows-nt")
+(ejh/when-os-do "bsd" "berkeley-unix" t)
+(ejh/when-os-do "cygwin" "cygwin")
+(ejh/when-os-do "gnu" "gnu" t)
+#+END_SRC
+
+  All the bells and stuff are just as annoying in Emacs as they are in Vim.
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC
+  
+  Emacs has two prompts "yes or no" or "y or n". There's no reason to have to
+  type out "yes" and "no" all the time. Just use "y" and "n".
+#+BEGIN_SRC emacs-lisp
+(fset 'ejh/default-yes-or-no-p 'yes-or-no-p)
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+* Setup packages
+  Configure where to get packages from, and what priority to give
+  them.
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+
+  (setq package-archives
+        '(("elpa"         . "http://elpa.gnu.org/packages/")
+          ("melpa"        . "http://melpa.org/packages/")
+          ("melpa-stable" . "http://stable.melpa.org/packages/")
+          ("marmalade"    . "http://marmalade-repo.org/packages/"))
+        package-archive-priorities
+        '(("melpa"        . 10)  ; "I too, like to live dangerously"
+          ("melpa-stable" . 5)   ; The safe bet
+          ("elpa"         . 3)   ; The standard
+          ("marmalade"    . 0))) ; Probably a bad sign if it gets here
+
+  (package-initialize)
+#+END_SRC
+
+  Make sure that =use-package= is installed if it isn't already.
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+#+END_SRC
+* Setup my personal info
+  Let's make sure my personal information is setup. This will effect inserts
+  into change logs, note taking, stuff like that.
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Eric Hopkins"
+        user-mail-address "eric.on.tech@gmail.com"
+        calendar-latitude 42.33
+        calendar-logitude -83.04
+        calendar-location-name "Detroit, MI")
+#+END_SRC
+* Spell checking
+  If =aspell= exists on the system, it should be preferred over =ispell=.
+#+BEGIN_SRC emacs-lisp
+  (if (executable-find "aspell")
+      (setq ispell-program-name "aspell"
+            ispell-list-command "--list"))
+#+END_SRC
+* Visuals
+** OS Tuning
+   OSX (or macOS, whatever), being the bastard UNIX that it is, gets a lot of
+   stuff wrong. It has this weird color error that this fixes.
+#+BEGIN_SRC emacs-lisp
+(ejh/when-osx-do
+  (setq ns-use-srgb-colorspace nil))
+#+END_SRC
+** GUI stuff
+   Let's get rid of all this extra crap.
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)        ; this can always be turned off, GUI or terminal
+  (when (display-graphic-p) ; if we're in a GUI, turn this off too
+    (tool-bar-mode -1)
+    (toggle-scroll-bar -1))
+#+END_SRC
+
+   Replace the default window title with the name of the current project.
+#+BEGIN_SRC emacs-lisp
+(setq frame-title-format '((:eval (projectile-project-name))))
+#+END_SRC
+** Fonts
+   I tend to change this a lot, right now I'm partial to Google's new monospaced
+   font "Noto Sans Mono" (not to be confused with "Noto Mono").
+#+BEGIN_SRC emacs-lisp
+  (setq ejh/default-font "NotoSansMono")
+  (setq ejh/default-font-size 12)
+  (setq ejh/current-font-size ejh/default-font-size)
+
+  (setq ejh/font-change-increment 1)
+
+  (defun ejh/font-code ()
+    "Returns a string representing the current font"
+    (concat ejh/default-font "-" (number-to-string ejh/current-font-size)))
+
+  (defun ejh/set-font-size ()
+    "Set the font to `ejh/default-font' at at `ejh/current-font-size'.
+  Set that for the current frame, and also make it the default for
+  other, future frames."
+    (let ((font-code (ejh/font-code)))
+      (add-to-list 'default-frame-alist '(font . font-code))
+      (set-frame-font font-code)))
+
+  (defun ejh/reset-font-size ()
+    "Change font size back to `ejh/default-font-size'."
+    (interactive)
+    (setq ejh/current-font-size ejh/default-font-size)
+    (ejh/set-font-size))
+
+  (defun ejh/increase-font-size ()
+    "Increase current font size by a factor of `ejh/font-change-increment'."
+    (interactive)
+    (setq ejh/current-font-size
+          (ceiling (+ ejh/current-font-size ejh/font-change-increment)))
+    (ejh/set-font-size))
+
+  (defun ejh/decrease-font-size ()
+    "Decrease current font size by a factor of `ejh/font-change-increment'."
+    (interactive)
+    (setq ejh/current-font-size
+          (max 1
+               (floor (- ejh/current-font-size ejh/font-change-increment))))
+    (ejh/set-font-size))
+
+  (ejh/reset-font-size)
+#+END_SRC
+* Package configuration
+  First things first! My config uses the great =use-package=. Among the many
+  things it can do, if it runs across something that isn't installed it can go
+  and get it, but rather than typing =:ensure t= all over the place...
+#+BEGIN_SRC emacs-lisp
+(setq use-package-always-ensure t)
+#+END_SRC
+** Language independent
+*** Terminal settings
+    This will help prevent *really* slow rendering in =term=.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (setq bidi-paragraph-direction 'left-to-right)))
+#+END_SRC
+*** Keybindings / General
+    I have a history with RSI (ironically from before I even considered using
+    Emacs, it was from one of those terrible Apple keyboards and reaching for my
+    mouse too often) so I use =evil-mode=. Let's setup some leader key
+    information.
+    This will also make sure =general= is there, but not going to put any sort
+    of bindings on it directly. Now that it's available, other use package
+    statements can use =:general= to set up bindings.
+#+BEGIN_SRC emacs-lisp
+  ;; Set these for normal mode
+  (setq ejh/leader-key "SPC")
+  ;; This requires some explaining. On a normal keyboard, this would be instanity
+  ;; however for the RSI reasons mentioned above; I actually use an ErgoDox, so my
+  ;; Space and Backspace keys are right under my left thumb.
+  (setq ejh/local-leader-key
+        (if (getenv "ergodox")
+            "<backspace>"
+          ","))
+
+  ;; For non-normal modes (abnormal har har), fall back on good 'ol C-c
+  (setq ejh/abnormal-leader-key "C-c")
+  (setq ejh/abnormal-local-leader-key "C-,") ; should be good
+
+  (use-package general
+    :general ; well that's meta
+    (:prefix ejh/leader-key
+             :states 'normal
+             "b" '(nil :which-key "buffers")
+             "g" '(nil :which-key "git")
+             "j" '(nil :which-key "jump")
+             "p" '(nil :which-key "project")
+             "s" '(nil :which-key "search")
+             "sg" '(nil :which-key "git project")
+             "t" '(nil :which-key "toggle")
+             "tF" '(nil :which-key "fill break")
+             "tn" '(linum-mode :which-key "line numbers")
+             "tN" '(global-linum-mode :which-key "global line numbers")
+             "x" '(nil :which-key "text")))
+#+END_SRC
+    
+    These are some really helpful functions I've put together for aligning text,
+    I took inspiration for them from Spacemacs, and the Emacs Wiki.
+#+BEGIN_SRC emacs-lisp
+  ;; Jocked from http://emacswiki.org/emacs/AlignCommands
+  (defun ejh/align-repeat (start end regexp &optional justify-right after)
+    "Repeat alignment with respect to the given regular expression.
+  START and END are where the selected region starts and ends, and are
+  provided to 'align-regexp'.  REGEXP is the character, or expression to be
+  aligned.  If JUSTIFY-RIGHT is non-nil justify to the right instead of the
+  left. If AFTER is non-nil, add whitespace to the left instead of the right."
+    (interactive "r\nsAlign regexp: ")
+    (let* ((ws-regexp (if (string-empty-p regexp)
+        "\\(\\s-+\\)"
+            "\\(\\s-*\\)"))
+     (complete-regexp (if after
+              (concat regexp ws-regexp)
+            (concat ws-regexp regexp)))
+     (group (if justify-right -1 1)))
+      (message "%S" complete-regexp)
+      (align-regexp start end complete-regexp group 1 t)))
+
+  (defmacro ejh/create-align-x (name regexp &optional justify-right default-after)
+    "This will create a new function to align text.
+  NAME is the name that will be appended to the created function.  For example
+  \"colon\" will produce the function \"ejh/align-repeat-colon\".  REGEXP is the
+  character or expression to be aligned.  If JUSTIFY-RIGHT is non-nil, justify to
+  the right instead of the left.  If DEFAULT-AFTER is non-nil, add whitespace to
+  the left instead of the right."
+    (let ((new-func (intern (concat "ejh/align-repeat-" name))))
+      `(defun ,new-func (start end switch)
+         (interactive "r\nP")
+         (let ((after (not (eq (if switch t nil) (if ,default-after t nil)))))
+           (ejh/align-repeat start end ,regexp ,justify-right after)))))
+
+  (ejh/create-align-x "colon" ":" nil t)
+  (ejh/create-align-x "comma" "," nil t)
+  (ejh/create-align-x "equal" "=")
+  (ejh/create-align-x "arrow" "->")
+  (ejh/create-align-x "back-arrow" "<-")
+  (ejh/create-align-x "fat-arrow" "=>")
+
+  (general-define-key
+   :prefix ejh/abnormal-leader-key
+   :states '(emacs visual visual-line)
+   "xf=" '(ejh/align-repeat-equal :which-key "equal")
+   "xf:" '(ejh/align-repeat-colon :which-key "colon")
+   "xf-" '(ejh/align-repeat-arrow :which-key "arrow")
+   "xf>" '(ejh/align-repeat-fat-arrow :which-key "fat arrow")
+   "xf<" '(ejh/align-repeat-back-arrow :which-key "back arrow")
+   "xf," '(ejh/align-repeat-comma :which-key "comma")
+   "xfr" '(align-regexp :which-key "regex"))
+#+END_SRC
+*** Evil mode
+    I used Vim for ~6 years, and over a period of a year or so, I transitioned
+    over to Emacs.
+    For a while I was using the standard Emacs bindings, and so I don't really
+    have much of a configuration for =evil-mode=, I expect I'll start putting
+    more here now that I'm using it regularly.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :commands (evil-mode)
+    :config
+    (evil-mode))
+#+END_SRC
+*** Highlight numbers
+    I honestly don't know why Emacs doesn't have number highlighting by default,
+    here's a little package that puts it in.
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-numbers)
+#+END_SRC
+*** Hungry delete
+    This becomes less necessary with =evil-mode= because =C-w= deletes
+    whitespace pretty well. But it's still a nice to have.
+#+BEGIN_SRC emacs-lisp
+  (use-package hungry-delete
+    :general
+    ("H-<backspace>" 'hungry-delete-backward)
+    (:prefix ejh/leader-key
+     :states 'normal
+     "td" '(hungry-delete-mode :which-key "hungry delete")))
+#+END_SRC
+*** Fill column
+    I've been souring on =fill-column-indicator= lately, it interferes with
+    =company= quite a bit, among others. I think long term I want to replace it
+    with just regular 'IL =whitespace-mode= or something.
+#+BEGIN_SRC emacs-lisp
+  (use-package fill-column-indicator)
+#+END_SRC
+*** Which key
+    This is a crazy helpful minor mode that basically shows completion for key
+    chords.
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :config (ejh/globalize #'which-key-mode))
+#+END_SRC
+*** Magit! & other Git stuff
+    The only other complete Git porcelain aside from the Git CLI itself. I
+    really have a surprisingly small configuration for it. For how much time I
+    invest in Git, I should really learn to do more with Magit.
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :general (:prefix ejh/leader-key
+                      "gb" '(magit-blame :which-key "blame")
+                      "gs" '(magit-status :which-key "status")
+                      "gm" '(magit-dispatch-popup :which-key "menu")))
+  ;; This is the basic git-gutter. Maybe in the future I'll do something fancier
+  ;; like the fringe git-gutter.
+  (use-package git-gutter) ; TODO: Enable global git gutter mode?
+#+END_SRC
+*** Ivy / Counsel / Swiper
+    This is what lets me search through all sorts of things in Emacs, with a
+    fuzzy-finding sort of behavior. It's a lot like a "Command Pallet" in
+    several newer editors. =ivy=, =counsel=, and =swiper= all sort of go
+    together, though they do slightly different things.
+    I use =ivy= instead of =helm= for a bit of a lighter experience. I've liked
+    it a lot so far, though I'm not opposed to trying =helm= again at some point
+    (I used it for a bit when I was first learning Emacs via Spacemacs).
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :config
+    (ejh/globalize #'ivy-mode)
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) ")
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "bb" '(ivy-switch-buffer :which-key "buffers")
+     "bk" '(kill-buffer :which-key "kill")))
+
+  (use-package counsel
+    :general
+    ("M-x" 'counsel-M-x)
+    (:prefix ejh/leader-key
+     :states 'normal
+     "SPC" '(counsel-M-x :which-key "commands")
+     "sa"  '(counsel-ag :which-key "ag")
+     "sG"  '(counsel-grep :which-key "grep")
+     "sr"  '(counsel-rg :which-key "rg")
+     "tt"  '(counsel-load-theme :which-key "theme")))
+
+  (use-package swiper
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "ss" '(swiper :which-key "swiper"))
+    (:prefix ejh/abnormal-leader-key
+     :states '(insert emacs)
+     "ss" '(swiper :which-key "swiper")))
+#+END_SRC
+*** Projectile
+    =projectile= is what makes working with "projects" really nice. A project
+    has a few definitions in Projectile's terminology, but the only one I really
+    care about is one that is under version control (i.e. has a =.git/=
+    directory, etc).
+    Put =ripgrep= in here, it's only meaningful in that context.
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile)
+
+  (use-package ripgrep)
+
+  (use-package counsel-projectile
+    :after (counsel projectile)
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "pf" '(counsel-projectile-find-file :which-key "find file")
+     "sga" '(counsel-projectile-ag :which-key "ag")))
+
+  (use-package projectile-ripgrep
+    :after (counsel projectile ripgrep)
+    :config
+    (defun ejh/counsel-projectile-rg (&optional options)
+      "Ivy version of `projectile-ripgrep'.
+  This is hacked together off the code of `counsel-projectile-ag'.
+  `OPTIONS' are CLI options that could be passed to ripgrep."
+      (interactive)
+      ;; initalize these variables if they aren't set.
+      (defvar grep-find-ignored-files)
+      (defvar grep-find-ignored-directories)
+      (if (projectile-project-p)
+          (let* ((options
+                  (if current-prefix-arg
+                      (read-string "options: ")
+                    options))
+                 (ignored
+                  (unless (eq (projectile-project-vcs) 'git)
+                    ;; rg supports git ignored files
+                    (append
+                     (cl-union (projectile-ignored-files-rel)
+                               grep-find-ignored-files)
+                     (cl-union (projectile-ignored-directories-rel)
+                               grep-find-ignored-directories))))
+                 (options
+                  (concat options " "
+                          (mapconcat (lambda (i)
+                                       (concat "--ignore " i))
+                                     ignored
+                                     " "))))
+            (counsel-rg nil
+                        (projectile-project-root)
+                        options
+                        (projectile-prepend-project-name "rg")))
+        (user-error "You're not in a project!")))
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "sgr" '(ejh/counsel-projectile-rg :which-key "rg")))
+#+END_SRC
+*** Avy
+    In Vim there's a package called =EasyMotion=, and apparently it's creator
+    switched to Emacs over the experience of trying to make that in =VimL=. Avy
+    is that in Emacs, but obviously better.
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :commands (avy-goto-char
+               avy-goto-line
+               avy-goto-line-above
+               avy-goto-line-below
+               avy-goto-word-0)
+    :general (:prefix ejh/leader-key
+              :states 'normal
+              "jc" '(avy-goto-char :which-key "to character")
+              "jC" '(avy-goto-char-2 :which-key "to character w/ input")
+              "jl" '(avy-goto-line :which-key "to line")
+              "jj" '(avy-goto-line-below :which-key "to next line")
+              "jk" '(avy-goto-line-above :which-key "to previous line")
+              "jw" '(avy-goto-word-0 :which-key "to word")
+              "jW" '(avy-goto-word-1 :which-key "to word w/ input")
+              (:prefix ejh/abnormal-leader-key ; There's probably a better way to do this...
+               :states '(emacs insert)
+               "jc" '(avy-goto-char :which-key "to character")
+               "jC" '(avy-goto-char-2 :which-key "to character w/ input")
+               "jl" '(avy-goto-line :which-key "to line")
+               "jj" '(avy-goto-line-below :which-key "to next line")
+               "jk" '(avy-goto-line-above :which-key "to previous line")
+               "jw" '(avy-goto-word-0 :which-key "to word")
+               "jW" '(avy-goto-word-1 :which-key "to word w/ input"))))
+#+END_SRC
+*** Multiple Cursors
+    I've been meaning to do more with this, but I've never dedicated enough time
+    to it. I mean, look at [[http://emacsrocks.com/e13.html][this]]!
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :defer t) ; Not preferable, but not sure what else to defer on
+#+END_SRC
+*** Rainbow delimiters
+    People mention =org-mode= and =magit= as killer packages that are reasons
+    that someone might want to switch to Emacs. This is one of those little
+    packages that doesn't change your life; but damn is it nice. I think VS Code
+    has something like it, but it doesn't seem to hold up next to Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :config
+    (ejh/globalize #'rainbow-delimiters-mode))
+#+END_SRC
+*** Company
+    Emacsers seem loves cutesy names that don't immediately tell you what the
+    package actually does. =company= is short for *Comp*-lete
+    *any*-thing. Basically, isn't my auto-completion.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :config
+    (global-company-mode)
+    ;; This unsets a super weird default where `company' will downcase
+    ;; suggestions that come from buffer completion.
+    (setq company-dabbrev-downcase nil))
+#+END_SRC
+*** iedit
+    Another entry in the long Emacs tradition of "Names that don't convey what
+    the package does", =iedit= allows for editing a bunch of like symbols at
+    once. There's some feature overlap with =multiple-cursors= here, but
+    whatevs.
+#+BEGIN_SRC emacs-lisp
+  (use-package iedit
+    :general
+    (:prefix ejh/abnormal-leader-key
+             ";" '(iedit-mode :which-key "iedit")))
+#+END_SRC
+*** Stupid indent
+    Most of the time, Emacs' smart indentation is great. But when it's wrong,
+    *wow* is it wrong. =stupid-indent-mode= will make indentation behave more
+    like Vim's (in most cases).
+#+BEGIN_SRC emacs-lisp
+  (use-package stupid-indent-mode
+    :defer t) ; usually I'd avoid this, but I don't know what else to defer it on
+#+END_SRC
+*** Yasnippets
+    Forthcoming: For some reason I haven't been using this for a while.
+*** Tags
+    Emacs' tags situation is a lot wider than what's available in Vim; I'm not
+    exactly sure that's a good thing though. It ends up feeling pretty confused
+    at times.
+    Emacs uses the =ETags= format, =ctags= can create them with the =-e= flag,
+    and /most/ other programs seem to handle them well enough (=gotags= is a
+    notable exception).
+    There's also stuff like =ggtags= which I haven't dug into at all.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'speedbar-mode-hook
+            (lambda ()
+              (speedbar-add-supported-extension ".rb")
+              (speedbar-add-supported-extension ".ru")
+              (speedbar-add-supported-extension ".erb")
+              (speedbar-add-supported-extension ".rjs")
+              (speedbar-add-supported-extension ".rhtml")
+              (speedbar-add-supported-extension ".rake")))
+#+END_SRC
+*** Fun stuff
+    Nothing in here exactly matters in the way that other parts of the
+    configuration do. But they're pretty cool
+**** Get the weather
+     This will make use of the =wttrin= API to display the weather in a buffer.
+#+BEGIN_SRC emacs-lisp
+  (use-package wttrin ; get the weather in Emacs!
+    :commands (wttrin)
+    :init
+    (setq wttrin-default-cities '("Detroit" "Novi"))
+    (setq wttrin-default-accept-language '("Accept-Language" . "en-US"))
+    (defun ejh/wttrin-default ()
+      "Open `wttrin' without prompting, use the first city in `wttrin-default-cities'."
+      (interactive)
+      (wttrin-query (car wttrin-default-cities)))
+    (defun ejh/wttrin-work ()
+      "Open `wttrin' without prompting to get the weather at work."
+      (interactive)
+      (wttrin-query "Detroit"))
+    (defun ejh/wttrin-home ()
+      "Open `wttrin' without prompting to get the weather at home."
+      (interactive)
+      (wttrin-query "Novi")))
+#+END_SRC
+** Languages
+   This is still *very* much a work in progress. I'm filling these out on an as
+   needed basis. I have a file I'm working off of for the packages that I want
+   to investigate/add for each of these languages.
+*** C Family
+*** C#
+*** CSS
+*** Cucumber
+*** D
+*** Dart
+*** Elixir
+    Nothing interesting here, The Ruby-ness of Elixir make me pretty interested
+    in it. Hoping to get into it more in the future.
+#+BEGIN_SRC emacs-lisp
+  (use-package elixir-mode
+    :commands (elixir-mode))
+#+END_SRC
+*** Elm
+    I was writing a lot of Elm for a while but fell out of it. There's probably
+    been a new version or two since I've used it.
+#+BEGIN_SRC emacs-lisp
+  (use-package elm-mode
+    :mode "\\.elm\\'")
+#+END_SRC
+*** Erlang
+*** F#
+*** Go
+*** Haskell
+    Everyone's favorite hobby language. There's so much more I could do with
+    this that I haven't yet.
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :commands (haskell-mode))
+#+END_SRC
+*** Hy
+*** Idris
+*** Java
+*** JavaScript & friends
+#+BEGIN_SRC emacs-lisp
+  (defun ejh/less-annoying-js2 ()
+    "`js2-mode' has some annoying defaults that really should be left to something
+  like `flycheck'. This turns them off."
+    (setq js2-strict-missing-semi-warning nil
+          js2-strict-trailing-comma-warning nil
+          js2-basic-offset 2))
+  (use-package js2-mode
+    :config
+    (ejh/less-annoying-js2)
+    :commands (js2-mode))
+
+  (use-package rjsx-mode
+    :config
+    (ejh/less-annoying-js2) ; `rjsx-mode' is based on `js2-mode'
+    :commands (rjsx-mode))
+
+  (use-package coffee-mode
+    :config
+    (setq coffee-tab-width 2)
+    :commands (coffee-mode))
+#+END_SRC
+*** Kotlin
+*** LaTeX
+*** Lisp Family
+    Lisps tend to share quite a bit between them. =paredit= for example is
+    something that all of them would want.
+#+BEGIN_SRC emacs-lisp
+  (use-package paredit
+    :commands (paredit-mode)
+    :diminish "[内]") ; "Inside"
+#+END_SRC
+**** Clojure / ClojureScript
+     I haven't done nearly as much Clojure as I would like to, so for now this
+     is just real simple.
+#+BEGIN_SRC emacs-lisp
+  (use-package clojure-mode
+    :mode "\\(?:\\.clj\\|.cljs\\)\\'"
+    :init (add-hook 'clojure-mode-hook #'paredit-mode)
+    :commands (clojure-mode))
+#+END_SRC
+**** Common Lisp
+**** Emacs Lisp
+     It should come as no surprise that I write a fair amount of this
+#+BEGIN_SRC emacs-lisp
+  (use-package elisp-mode ; I think this is the right name to use
+    :init (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "e" '(nil :which-key "evaluate")
+     "eb" '(eval-buffer :which-key "buffer"))
+    (:prefix ejh/abnormal-leader-key
+     :states '(visual visual-line emacs)
+     "e" '(nil :which-key "evaluate")
+     "eb" '(eval-buffer :which-key "buffer")
+     "er" '(eval-region :which-key "region")))
+#+END_SRC
+**** Racket
+**** Scheme
+*** Lua
+*** Nim
+    Haven't payed much attention to this. Has a sort of Python-y syntax if I
+    remember correct. Kinda interesting. I might look at it more in the future.
+#+BEGIN_SRC emacs-lisp
+  (use-package nim-mode
+    :init
+    (nim-mode-hook #'stupid-indent-mode) ; Hopefully that hook is there..
+#+END_SRC
+*** Nix
+*** OCaml
+*** Org
+    Along with =magit=, =org-mode= is a huge selling point for Emacs. I'm
+    obviously partial because this config is written in it.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq fill-column 80)
+              (flyspell-mode +1)
+              (flycheck-mode +1)
+              ;; (fci-mode +1)
+              (auto-fill-mode +1)))
+#+END_SRC
+*** PHP
+*** Perl
+*** PureScript
+*** Python
+*** R
+    There's actually a whole package called =ess= for "Emacs Speaks
+    Statistics". I haven't had a chance too look too deeply at it, partially
+    because I don't have a need to do statistics atm. But it looks so cool!
+#+BEGIN_SRC emacs-lisp
+  (use-package ess ; This contains `R-mode' among others
+    :ensure t)
+#+END_SRC
+*** Ruby
+    This is my day job, so naturally I've put more effort into this than
+    anything else at the moment. Hopefully some of these other languages will
+    start reaching parity soon.
+    Also, who doesn't love Ruby?
+    Most of these minor modes that are specific to Ruby come with a lot of key
+    bindings already set up, and I've been using them for a while, but I'll want
+    to start figuring out what to do for =evil=.
+#+BEGIN_SRC emacs-lisp
+  (use-package enh-ruby-mode
+    :config
+    ;; NOTE: This could probably be turned into a `:mode' here in `use-package'.
+    ;; However, I'm not positive this works that well right now. I think it's just
+    ;; a copy-paste from Stack Overflow.
+    (add-to-list 'auto-mode-alist
+                 '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|prodspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+    :commands (enh-ruby-mode))
+
+  (use-package robe
+    :after (enh-ruby-mode)
+    :commands (robe-start robe-mode))
+
+  (use-package rspec-mode
+    :after (enh-ruby-mode)
+    :commands (rspec-mode))
+
+  (use-package rinari
+    :diminish "[リ]" ; "Ri"
+    :after (enh-ruby-mode)
+    :commands (rinari-minor-mode))
+#+END_SRC
+*** Rust
+    On my infinitely growing list of "Languages that look cool and I want to
+    learn". Maybe one day..
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-mode
+    :commands (rust-mode))
+#+END_SRC
+*** Scala
+    I like what I've seen of Scala so far. "Functional Programming in Scala" is
+    really what made a lot of Functional Programming concepts click for me. I'd
+    like to get back to working with it.
+#+BEGIN_SRC emacs-lisp
+  (use-package scala-mode
+    :commands (scala-mode))
+#+END_SRC
+*** Standard ML
+*** TypeScript
+    Haven't done much with Typescript, though I'd like to.
+#+BEGIN_SRC emacs-lisp
+  (use-package typescript-mode
+    :mode "\\.ts\\'"
+    :commands (typescript-mode))
+
+  (use-package tide
+    :after (typescript-mode)
+    :ensure t)
+#+END_SRC
+*** Vim Script
+    This is honestly a little silly, but why leave Emacs?
+#+BEGIN_SRC emacs-lisp
+  (use-package vimrc-mode
+    :mode "\\(?:\\.vimrc\\|.vim\\)\\'"
+    :commands (vimrc-mode))
+#+END_SRC
+*** Vue
+*** Web
+    This is a space for =web-mode=, or anything else generically web related.
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :commands (web-mode))
+#+END_SRC

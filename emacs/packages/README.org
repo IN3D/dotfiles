@@ -1,5 +1,0 @@
-* About
-
-My idea here was to group packages around how I used them, or how much having
-them mattered to me. I've stopped liking this idea so much. And would prefer to
-group them around what mode I've included them for.
