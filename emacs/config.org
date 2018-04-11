@@ -320,7 +320,7 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 *** Fill column
     I've been souring on =fill-column-indicator= lately, it interferes with
     =company= quite a bit, among others. I think long term I want to replace it
-    with just regular 'IL =whitespace-mode= or something.
+    with just regular 'ol =whitespace-mode= or something.
 #+BEGIN_SRC emacs-lisp
   (use-package fill-column-indicator)
 #+END_SRC
