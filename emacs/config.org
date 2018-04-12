@@ -120,8 +120,8 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
    OSX (or macOS, whatever), being the bastard UNIX that it is, gets a lot of
    stuff wrong. It has this weird color error that this fixes.
 #+BEGIN_SRC emacs-lisp
-(ejh/when-osx-do
-  (setq ns-use-srgb-colorspace nil))
+  (ejh/when-osx-do
+    (setq ns-use-srgb-colorspace nil))
 #+END_SRC
 ** GUI stuff
    Let's get rid of all this extra crap.
@@ -132,10 +132,6 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
     (toggle-scroll-bar -1))
 #+END_SRC
 
-   Replace the default window title with the name of the current project.
-#+BEGIN_SRC emacs-lisp
-(setq frame-title-format '((:eval (projectile-project-name))))
-#+END_SRC
 ** Fonts
    I tend to change this a lot, right now I'm partial to Google's new monospaced
    font "Noto Sans Mono" (not to be confused with "Noto Mono").
@@ -151,11 +147,11 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
     (concat ejh/default-font "-" (number-to-string ejh/current-font-size)))
 
   (defun ejh/set-font-size ()
-    "Set the font to `ejh/default-font' at at `ejh/current-font-size'.
+    "Set the font to `ejh/default-font' at `ejh/current-font-size'.
   Set that for the current frame, and also make it the default for
   other, future frames."
     (let ((font-code (ejh/font-code)))
-      (add-to-list 'default-frame-alist '(font . font-code))
+      (add-to-list 'default-frame-alist (cons 'font font-code))
       (set-frame-font font-code)))
 
   (defun ejh/reset-font-size ()
@@ -186,7 +182,7 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
   things it can do, if it runs across something that isn't installed it can go
   and get it, but rather than typing =:ensure t= all over the place...
 #+BEGIN_SRC emacs-lisp
-(setq use-package-always-ensure t)
+  (setq use-package-always-ensure t)
 #+END_SRC
 ** Language independent
 *** Terminal settings
@@ -220,20 +216,21 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
   (setq ejh/abnormal-local-leader-key "C-,") ; should be good
 
   (use-package general
-    :general ; well that's meta
-    (:prefix ejh/leader-key
-             :states 'normal
-             "b" '(nil :which-key "buffers")
-             "g" '(nil :which-key "git")
-             "j" '(nil :which-key "jump")
-             "p" '(nil :which-key "project")
-             "s" '(nil :which-key "search")
-             "sg" '(nil :which-key "git project")
-             "t" '(nil :which-key "toggle")
-             "tF" '(nil :which-key "fill break")
-             "tn" '(linum-mode :which-key "line numbers")
-             "tN" '(global-linum-mode :which-key "global line numbers")
-             "x" '(nil :which-key "text")))
+    :config
+    (general-define-key
+     :prefix ejh/leader-key
+     :states 'normal
+     "b" '(nil :which-key "buffers")
+     "g" '(nil :which-key "git")
+     "j" '(nil :which-key "jump")
+     "p" '(nil :which-key "project")
+     "s" '(nil :which-key "search")
+     "sg" '(nil :which-key "git project")
+     "t" '(nil :which-key "toggle")
+     "tF" '(auto-fill-mode :which-key "fill break")
+     "tn" '(linum-mode :which-key "line numbers")
+     "tN" '(global-linum-mode :which-key "global line numbers")
+     "x" '(nil :which-key "text")))
 #+END_SRC
     
     These are some really helpful functions I've put together for aligning text,
@@ -279,7 +276,7 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 
   (general-define-key
    :prefix ejh/abnormal-leader-key
-   :states '(emacs visual visual-line)
+   :states '(emacs visual)
    "xf=" '(ejh/align-repeat-equal :which-key "equal")
    "xf:" '(ejh/align-repeat-colon :which-key "colon")
    "xf-" '(ejh/align-repeat-arrow :which-key "arrow")
@@ -296,9 +293,8 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
     more here now that I'm using it regularly.
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :commands (evil-mode)
-    :config
-    (evil-mode))
+    :commands (evil-mode))
+  (evil-mode)
 #+END_SRC
 *** Highlight numbers
     I honestly don't know why Emacs doesn't have number highlighting by default,
@@ -337,10 +333,13 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
     invest in Git, I should really learn to do more with Magit.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :general (:prefix ejh/leader-key
-                      "gb" '(magit-blame :which-key "blame")
-                      "gs" '(magit-status :which-key "status")
-                      "gm" '(magit-dispatch-popup :which-key "menu")))
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "gb" '(magit-blame :which-key "blame")
+     "gs" '(magit-status :which-key "status")
+     "gm" '(magit-dispatch-popup :which-key "menu")))
+
   ;; This is the basic git-gutter. Maybe in the future I'll do something fancier
   ;; like the fringe git-gutter.
   (use-package git-gutter) ; TODO: Enable global git gutter mode?
@@ -392,12 +391,16 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
     directory, etc).
     Put =ripgrep= in here, it's only meaningful in that context.
 #+BEGIN_SRC emacs-lisp
-  (use-package projectile)
+  (use-package projectile
+    :defer nil
+    :config
+    (setq frame-title-format '((:eval (projectile-project-name)))))
 
   (use-package ripgrep)
 
   (use-package counsel-projectile
     :after (counsel projectile)
+    :defer nil
     :general
     (:prefix ejh/leader-key
      :states 'normal
@@ -455,24 +458,25 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
                avy-goto-line-above
                avy-goto-line-below
                avy-goto-word-0)
-    :general (:prefix ejh/leader-key
-              :states 'normal
-              "jc" '(avy-goto-char :which-key "to character")
-              "jC" '(avy-goto-char-2 :which-key "to character w/ input")
-              "jl" '(avy-goto-line :which-key "to line")
-              "jj" '(avy-goto-line-below :which-key "to next line")
-              "jk" '(avy-goto-line-above :which-key "to previous line")
-              "jw" '(avy-goto-word-0 :which-key "to word")
-              "jW" '(avy-goto-word-1 :which-key "to word w/ input")
-              (:prefix ejh/abnormal-leader-key ; There's probably a better way to do this...
-               :states '(emacs insert)
-               "jc" '(avy-goto-char :which-key "to character")
-               "jC" '(avy-goto-char-2 :which-key "to character w/ input")
-               "jl" '(avy-goto-line :which-key "to line")
-               "jj" '(avy-goto-line-below :which-key "to next line")
-               "jk" '(avy-goto-line-above :which-key "to previous line")
-               "jw" '(avy-goto-word-0 :which-key "to word")
-               "jW" '(avy-goto-word-1 :which-key "to word w/ input"))))
+    :general
+    (:prefix ejh/leader-key
+     :states 'normal
+     "jc" '(avy-goto-char :which-key "to character")
+     "jC" '(avy-goto-char-2 :which-key "to character w/ input")
+     "jl" '(avy-goto-line :which-key "to line")
+     "jj" '(avy-goto-line-below :which-key "to next line")
+     "jk" '(avy-goto-line-above :which-key "to previous line")
+     "jw" '(avy-goto-word-0 :which-key "to word")
+     "jW" '(avy-goto-word-1 :which-key "to word w/ input"))
+    (:prefix ejh/abnormal-leader-key ; There's probably a better way to do this...
+     :states '(emacs insert)
+     "jc" '(avy-goto-char :which-key "to character")
+     "jC" '(avy-goto-char-2 :which-key "to character w/ input")
+     "jl" '(avy-goto-line :which-key "to line")
+     "jj" '(avy-goto-line-below :which-key "to next line")
+     "jk" '(avy-goto-line-above :which-key "to previous line")
+     "jw" '(avy-goto-word-0 :which-key "to word")
+     "jW" '(avy-goto-word-1 :which-key "to word w/ input")))
 #+END_SRC
 *** Multiple Cursors
     I've been meaning to do more with this, but I've never dedicated enough time
@@ -541,6 +545,12 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
               (speedbar-add-supported-extension ".rjs")
               (speedbar-add-supported-extension ".rhtml")
               (speedbar-add-supported-extension ".rake")))
+#+END_SRC
+*** Flycheck
+    Don't have much in mind for this yet. Just want to make sure that
+    it's here.
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck)
 #+END_SRC
 *** Fun stuff
     Nothing in here exactly matters in the way that other parts of the
@@ -649,15 +659,16 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 **** Emacs Lisp
      It should come as no surprise that I write a fair amount of this
 #+BEGIN_SRC emacs-lisp
-  (use-package elisp-mode ; I think this is the right name to use
+  (use-package elisp-mode
     :init (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+    :ensure nil ; necessary for a built-in
     :general
     (:prefix ejh/leader-key
      :states 'normal
      "e" '(nil :which-key "evaluate")
      "eb" '(eval-buffer :which-key "buffer"))
     (:prefix ejh/abnormal-leader-key
-     :states '(visual visual-line emacs)
+     :states '(visual emacs)
      "e" '(nil :which-key "evaluate")
      "eb" '(eval-buffer :which-key "buffer")
      "er" '(eval-region :which-key "region")))
@@ -668,10 +679,12 @@ If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc
 *** Nim
     Haven't payed much attention to this. Has a sort of Python-y syntax if I
     remember correct. Kinda interesting. I might look at it more in the future.
+
+    Worth noting. I want to add a hook so that whenever ~nim-mode~ is entered,
+    ~stupid-indent-mode~ is enabled, but for some reason ~nim-mode-hook~ isn't
+    defined? I'll have to look into that.
 #+BEGIN_SRC emacs-lisp
-  (use-package nim-mode
-    :init
-    (nim-mode-hook #'stupid-indent-mode) ; Hopefully that hook is there..
+  (use-package nim-mode)
 #+END_SRC
 *** Nix
 *** OCaml
