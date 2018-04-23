@@ -33,29 +33,48 @@
 MODE is the mode to rig a global mode for."
   (add-hook 'prog-mode-hook mode))
 #+END_SRC
-  
-  It's frequent enough that I have to do something for an operating system that
-  I find it worth having specific functions for it. /However/, Emacs has some
-  strange names for them (Windows is =windows-nt= for some reason). So I make
-  some nice wrappers for them.
-#+BEGIN_SRC emacs-lisp
-(defmacro ejh/when-os-do (name os &optional upcase-p)
-  "Create a function with `NAME' run only when on `OS'.
-If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
-  (let ((new-func (intern (format "ejh/when-%s-do" name)))
-        (doc-name (if upcase-p
-                      (upcase name)
-                    (capitalize name))))
-    `(defun ,new-func (thing)
-       ,(format "Does the `THING' if the device is %s." doc-name)
-       (when (string-equal system-type ,os) thing))))
 
-(ejh/when-os-do "osx" "darwin" t)
-(ejh/when-os-do "linux" "gnu/linux")
-(ejh/when-os-do "windows" "windows-nt")
-(ejh/when-os-do "bsd" "berkeley-unix" t)
-(ejh/when-os-do "cygwin" "cygwin")
-(ejh/when-os-do "gnu" "gnu" t)
+  Frequently enough I have to do something /or/ skip something for a specific
+  operating system (looking at you Windows). However Emacs has some really
+  strange names for them For example Windows is =windows-nt= and BSD is
+  =berkeley-unix=. So I make some nice wrappers for them.
+#+BEGIN_SRC emacs-lisp
+  (defmacro ejh/when-os-do (name os &optional upcase-p)
+      "Create a function with `NAME' that is run only when on `OS'.
+    If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+      (let ((new-func (intern (format "ejh/when-%s-do" name)))
+            (doc-name (if upcase-p
+                          (upcase name)
+                        (capitalize name))))
+        `(defun ,new-func (thing)
+           ,(format "Does the `THING' if the device is %s." doc-name)
+           (when (string-equal system-type ,os) thing))))
+
+    (defmacro ejh/unless-os-do (name os &optional upcase-p)
+      "Create a function with `NAME' that is not run when on `OS'.
+    If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+      (let ((new-func (intern (format "ejh/unless-%s-do" name)))
+            (doc-name (if upcase-p
+                          (upcase name)
+                        (capitalize name))))
+        `(defun ,new-func (thing)
+           ,(format "Does `THING' unless the device is %s." doc-name)
+           (unless (string-equal system-type ,os) thing))))
+
+    (ejh/when-os-do "osx" "darwin" t)
+    (ejh/when-os-do "linux" "gnu/linux")
+    (ejh/when-os-do "windows" "windows-nt")
+    (ejh/when-os-do "bsd" "berkeley-unix" t)
+    (ejh/when-os-do "cygwin" "cygwin")
+    (ejh/when-os-do "gnu" "gnu" t)
+
+    (ejh/unless-os-do "osx" "darwin" t)
+    (ejh/unless-os-do "linux" "gnu/linux")
+    (ejh/unless-os-do "windows" "windows-nt")
+    (ejh/unless-os-do "bsd" "berkeley-unix" t)
+    (ejh/unless-os-do "cygwin" "cygwin")
+    (ejh/unless-os-do "gnu" "gnu" t)
+
 #+END_SRC
 
   All the bells and stuff are just as annoying in Emacs as they are in Vim.
