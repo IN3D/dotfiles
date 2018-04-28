@@ -155,10 +155,15 @@ MODE is the mode to rig a global mode for."
    I tend to change this a lot, right now I'm partial to Google's new monospaced
    font "Noto Sans Mono" (not to be confused with "Noto Mono").
 #+BEGIN_SRC emacs-lisp
-  (setq ejh/default-font "NotoSansMono")
-  (setq ejh/default-font-size 12)
+  (setq ejh/env-emacs-font (getenv "EMACS_FONT"))
+  (setq ejh/env-emacs-font-size (getenv "EMACS_FONT_SIZE"))
+  (setq ejh/default-font (if ejh/env-emacs-font
+                             ejh/env-emacs-font
+                           "monospace"))
+  (setq ejh/default-font-size (if ejh/env-emacs-font-size
+                                  (string-to-number ejh/env-emacs-font-size)
+                                12))
   (setq ejh/current-font-size ejh/default-font-size)
-
   (setq ejh/font-change-increment 1)
 
   (defun ejh/font-code ()
@@ -226,7 +231,7 @@ MODE is the mode to rig a global mode for."
   ;; however for the RSI reasons mentioned above; I actually use an ErgoDox, so my
   ;; Space and Backspace keys are right under my left thumb.
   (setq ejh/local-leader-key
-        (if (getenv "ergodox")
+        (if (getenv "ERGODOX")
             "<backspace>"
           ","))
 
