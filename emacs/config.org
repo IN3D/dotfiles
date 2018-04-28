@@ -719,9 +719,10 @@ MODE is the mode to rig a global mode for."
   (add-hook 'org-mode-hook
             (lambda ()
               (setq fill-column 80)
-              (flyspell-mode +1)
+              (if (or (executable-find "ispell")
+                      (executable-find "aspell"))
+                  (flyspell-mode +1))
               (flycheck-mode +1)
-              ;; (fci-mode +1)
               (auto-fill-mode +1)))
 #+END_SRC
 *** PHP
