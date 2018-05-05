@@ -385,7 +385,7 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
     :config
-    (ejh/globalize #'ivy-mode)
+    (ivy-mode)
     (setq ivy-use-virtual-buffers t
           ivy-count-format "(%d/%d) ")
     :general
@@ -424,6 +424,7 @@ MODE is the mode to rig a global mode for."
   (use-package projectile
     :defer nil
     :config
+    (projectile-mode)
     (setq frame-title-format '((:eval (projectile-project-name)))))
 
   (use-package ripgrep)
