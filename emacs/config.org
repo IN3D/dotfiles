@@ -724,7 +724,8 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
-              (setq fill-column 80)
+              (setq fill-column 80
+                    org-src-fontify-natively t)
               (if (or (executable-find "ispell")
                       (executable-find "aspell"))
                   (flyspell-mode +1))
