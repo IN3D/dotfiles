@@ -554,8 +554,7 @@ MODE is the mode to rig a global mode for."
     *wow* is it wrong. =stupid-indent-mode= will make indentation behave more
     like Vim's (in most cases).
 #+BEGIN_SRC emacs-lisp
-  (use-package stupid-indent-mode
-    :defer t) ; usually I'd avoid this, but I don't know what else to defer it on
+  (use-package stupid-indent-mode)
 #+END_SRC
 *** Yasnippets
     Forthcoming: For some reason I haven't been using this for a while.
@@ -715,7 +714,9 @@ MODE is the mode to rig a global mode for."
     ~stupid-indent-mode~ is enabled, but for some reason ~nim-mode-hook~ isn't
     defined? I'll have to look into that.
 #+BEGIN_SRC emacs-lisp
-  (use-package nim-mode)
+  (use-package nim-mode
+    :config
+    (add-hook 'nim-mode-hook 'stupid-indent-mode))
 #+END_SRC
 *** Nix
 *** OCaml
