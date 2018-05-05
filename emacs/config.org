@@ -749,7 +749,9 @@ MODE is the mode to rig a global mode for."
     :general
     (:prefix ejh/leader-key
      :states 'normal
+     "pd" '(counsel-projectile-find-dir :which-key "find directory")
      "pf" '(counsel-projectile-find-file :which-key "find file")
+     "pp" '(counsel-projectile-switch-project :which-key "switch project")
      "sga" '(counsel-projectile-ag :which-key "ag")))
 
   (use-package projectile-ripgrep
