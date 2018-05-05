@@ -5,3 +5,4 @@ emacs/*.org linguist-language=Emacs
 xmobar/* linguist-language=Haskell
 
 nvim/autoload/plug.vim linguist-vendored
+emacs/vendor linguist-vendored
