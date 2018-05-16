@@ -686,7 +686,9 @@ MODE is the mode to rig a global mode for."
 
   ;; This is the basic git-gutter. Maybe in the future I'll do something fancier
   ;; like the fringe git-gutter.
-  (use-package git-gutter) ; TODO: Enable global git gutter mode?
+  (use-package git-gutter
+    :config (global-git-gutter-mode))
+
 #+END_SRC
 *** Ivy / Counsel / Swiper
     This is what lets me search through all sorts of things in Emacs, with a
@@ -1025,10 +1027,6 @@ MODE is the mode to rig a global mode for."
 *** Nim
     Haven't payed much attention to this. Has a sort of Python-y syntax if I
     remember correct. Kinda interesting. I might look at it more in the future.
-
-    Worth noting. I want to add a hook so that whenever ~nim-mode~ is entered,
-    ~stupid-indent-mode~ is enabled, but for some reason ~nim-mode-hook~ isn't
-    defined? I'll have to look into that.
 #+BEGIN_SRC emacs-lisp
   (use-package nim-mode
     :config
