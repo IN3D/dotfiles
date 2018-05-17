@@ -1,22 +1,46 @@
 import XMonad
 import XMonad.Actions.WorkspaceNames
+import XMonad.Config.Desktop -- still relevant?
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+
+import XMonad.Layout.Spacing
+import XMonad.Layout.Dishes
+import XMonad.Layout.Roledex
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.WindowArranger
+import XMonad.Layout.Circle
+import XMonad.Layout.Gaps
+
 import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 
+withGaps layout = gaps [(U, 42), (R, 8), (L, 8), (D, 8)] $ avoidStruts (spacing 10 $ layout)
+
+res = ResizableTall 1 (2/100) (1/2) []
+dis = Dishes 2 (1/6)
+ful = fullscreenFull Full
+layout = (avoidStruts $ res)
+         ||| withGaps res
+         ||| (avoidStruts $ ful)
+         ||| withGaps ful
+         ||| (avoidStruts $ dis)
+         ||| withGaps dis
+         ||| (avoidStruts $ Circle) -- Circle is unlikely to have a problem, but play it safe
+
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/eric/.xmonad/xmobar.hs"
   xmonad $ defaultConfig
       { manageHook = manageDocks <+> manageHook defaultConfig
-      , layoutHook = avoidStruts  $  layoutHook defaultConfig
+      , layoutHook = windowArrange layout
       , handleEventHook = mconcat
                           [ docksEventHook
-			  , handleEventHook defaultConfig
-			  ]
+                          , handleEventHook defaultConfig
+                          ]
       , logHook = dynamicLogWithPP xmobarPP
                       { ppOutput = hPutStrLn xmproc
                       , ppTitle  = xmobarColor "green" "" . shorten 50
