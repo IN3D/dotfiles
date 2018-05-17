@@ -9,7 +9,7 @@ import System.IO
 
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar /home/eric/.config/xmobar/xmobarrc"
+  xmproc <- spawnPipe "/usr/bin/xmobar /home/eric/.xmonad/xmobar.hs"
   xmonad $ defaultConfig
       { manageHook = manageDocks <+> manageHook defaultConfig
       , layoutHook = avoidStruts  $  layoutHook defaultConfig
