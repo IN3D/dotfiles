@@ -24,6 +24,19 @@
 (put 'upcase-region 'disabled nil)
 #+END_SRC
 
+  Never use tab characters unless a mode calls for it.
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+  On the subject of whitespace, Emacs' default settings are not [[https://www.emacswiki.org/emacs/TabsAreEvil#toc3][...not good]]. So
+  this will make sure that they're in a better default state.
+#+BEGIN_SRC emacs-lisp
+  (setq tab-width 4
+        c-basic-offset 4 ; not just for C, a lot of Emacs modes reference this
+        cperl-indent-level 4)
+#+END_SRC
+
   This will help Emacs load faster, basically give it more memory to do it's
   thing.
 #+BEGIN_SRC emacs-lisp
