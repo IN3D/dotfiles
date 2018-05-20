@@ -100,7 +100,7 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
 (setq ring-bell-function 'ignore)
 #+END_SRC
-  
+
   Emacs has two prompts "yes or no" or "y or n". There's no reason to have to
   type out "yes" and "no" all the time. Just use "y" and "n".
 #+BEGIN_SRC emacs-lisp
@@ -589,7 +589,7 @@ MODE is the mode to rig a global mode for."
      "tN" '(global-linum-mode :which-key "global line numbers")
      "x" '(nil :which-key "text")))
 #+END_SRC
-    
+
     These are some really helpful functions I've put together for aligning text,
     I took inspiration for them from Spacemacs, and the Emacs Wiki.
 #+BEGIN_SRC emacs-lisp
