@@ -947,6 +947,25 @@ MODE is the mode to rig a global mode for."
 *** Cucumber
 *** D
 *** Dart
+*** Docker
+    Docker has been on my "to learn" list for probably two years now. Between
+    places of work not having that much interest and it being a fast moving
+    target has made this hard. I'm finally getting serious about learning it.
+#+BEGIN_SRC emacs-lisp
+  (use-package docker
+    :config
+    (setq docker-run-as-root t)
+    (ejh/when-osx-do
+     (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+     (setq exec-path (append exec-path '("/usr/local/bin")))
+     ;; Use "docker-machine env box" command to find out your env variables
+     (setenv "DOCKER_TLS_VERIFY" "1")
+     (setenv "DOCKER_HOST" "tcp://10.11.12.13:2376")
+     (setenv "DOCKER_CERT_PATH" (concat (getenv "HOME") "/.docker/machine/machines/box"))
+     (setenv "DOCKER_MACHINE_NAME" "box")))
+  (use-package dockerfile-mode)
+  (use-package docker-compose-mode)
+#+END_SRC
 *** Elixir
     Nothing interesting here, The Ruby-ness of Elixir make me pretty interested
     in it. Hoping to get into it more in the future.
