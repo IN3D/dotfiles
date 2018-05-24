@@ -20,19 +20,19 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 
-layout = (avoidStruts $ res)
-         ||| withGaps res
-         ||| (avoidStruts $ ful)
-         ||| withGaps ful
-         ||| (avoidStruts $ dis)
-         ||| withGaps dis
+layout = (avoidStruts $ resizeableTall)
+         ||| withGaps resizeableTall
+         ||| (avoidStruts $ fullScreen)
+         ||| withGaps fullScreen
+         ||| (avoidStruts $ dishes)
+         ||| withGaps dishes
          ||| withGaps wide
          ||| (avoidStruts $ wide)
          ||| (avoidStruts $ Circle) -- Circle is unlikely to have a problem, but play it safe
   where
-    res             = ResizableTall 1 (2/100) (1/2) []
-    dis             = Dishes 2 (1/6)
-    ful             = fullscreenFull Full
+    resizeableTall  = ResizableTall 1 (2/100) (1/2) []
+    dishes          = Dishes 2 (1/6)
+    fullScreen      = fullscreenFull Full
     hintedTile      = HintedTile 1 (3/100) (1/2) TopLeft
     wide            = hintedTile Wide
     withGaps layout = gaps [(U, 42), (R, 8), (L, 8), (D, 8)] $ avoidStruts (spacing 10 $ layout)
