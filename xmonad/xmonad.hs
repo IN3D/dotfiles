@@ -6,6 +6,7 @@ import XMonad.Hooks.ManageDocks
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Dishes
+import XMonad.Layout.HintedTile
 import XMonad.Layout.Roledex
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Fullscreen
@@ -24,12 +25,16 @@ withGaps layout = gaps [(U, 42), (R, 8), (L, 8), (D, 8)] $ avoidStruts (spacing 
 res = ResizableTall 1 (2/100) (1/2) []
 dis = Dishes 2 (1/6)
 ful = fullscreenFull Full
+hintedTile = HintedTile 1 (3/100) (1/2) TopLeft
+wide = hintedTile Wide
 layout = (avoidStruts $ res)
          ||| withGaps res
          ||| (avoidStruts $ ful)
          ||| withGaps ful
          ||| (avoidStruts $ dis)
          ||| withGaps dis
+         ||| withGaps wide
+         ||| (avoidStruts $ wide)
          ||| (avoidStruts $ Circle) -- Circle is unlikely to have a problem, but play it safe
 
 main = do
