@@ -998,6 +998,11 @@ MODE is the mode to rig a global mode for."
 *** Erlang
 *** F#
 *** Go
+*** Groovy
+#+BEGIN_SRC emacs-lisp
+    (use-package groovy-mode
+      :defer t) ; My use-case for this is *very* rare
+#+END_SRC
 *** Haskell
     Everyone's favorite hobby language. There's so much more I could do with
     this that I haven't yet.
@@ -1008,6 +1013,29 @@ MODE is the mode to rig a global mode for."
 *** Hy
 *** Idris
 *** Java
+    I'm pretty rusty with Java, this isn't much; but I want to set something up
+    for some practice.
+#+BEGIN_SRC emacs-lisp
+  (use-package meghanada
+    :commands (meghanada-mode))
+
+  (use-package java-mode
+    :commands java-mode ; why does this make it work??
+    :ensure nil
+    :config
+    (meghanada-mode t)
+    (flycheck-mode +1)
+    (add-hook 'before-save-hook
+              'meghanada-code-beautify-before-save)
+    ;; I don't think this should be neccessary,
+    ;; but it seems to help ¯\_(ツ)_/¯
+    (add-hook 'after-save-hook
+              'meghanada-import-all)
+    (ejh/when-windows-do (setq meghanada-java-path
+                               (expand-file-name "bin/java.exe" (getenv "JAVA_HOME"))
+                               meghanada-maven-path "mvn.cmd")))
+
+#+END_SRC
 *** JavaScript & friends
 #+BEGIN_SRC emacs-lisp
   (defun ejh/less-annoying-js2 ()
