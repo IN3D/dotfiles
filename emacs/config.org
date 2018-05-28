@@ -541,6 +541,13 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-ensure t)
 #+END_SRC
+
+  ~use-package~ has it's own plugin system. Here, lets
+#+BEGIN_SRC emacs-lisp
+  (use-package system-packages)
+  (use-package use-package-ensure-system-package
+    :after (system-packages))
+#+END_SRC
 ** Language independent
 *** Terminal settings
     This will help prevent *really* slow rendering in =term=.
@@ -756,7 +763,10 @@ MODE is the mode to rig a global mode for."
     (projectile-mode)
     (setq frame-title-format '((:eval (projectile-project-name)))))
 
-  (use-package ripgrep)
+  ;; I should probably change up my `when-os-do' so that it's an `if'
+  ;; rather than a `when'. It would end up being more versitile
+  (use-package ripgrep
+    :ensure-system-package (rg . ripgrep))
 
   (use-package counsel-projectile
     :after (counsel projectile)
