@@ -961,6 +961,10 @@ MODE is the mode to rig a global mode for."
 *** CSS
 *** Cucumber
 *** D
+#+BEGIN_SRC emacs-lisp
+  (use-package d-mode
+    :commands d-mode)
+#+END_SRC
 *** Dart
 *** Docker
     Docker has been on my "to learn" list for probably two years now. Between
