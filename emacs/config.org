@@ -542,7 +542,9 @@ MODE is the mode to rig a global mode for."
   (setq use-package-always-ensure t)
 #+END_SRC
 
-  ~use-package~ has it's own plugin system. Here, lets
+  ~use-package~ has it's own plugin system. This adds one that allows for
+  interaction with the OS's package manager. One stop closer to being able to
+  bootstrap an entire system via Emacs.
 #+BEGIN_SRC emacs-lisp
   (use-package system-packages)
   (use-package use-package-ensure-system-package
