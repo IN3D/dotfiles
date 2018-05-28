@@ -677,6 +677,11 @@ MODE is the mode to rig a global mode for."
      :states 'normal
      "td" '(hungry-delete-mode :which-key "hungry delete")))
 #+END_SRC
+*** Google Translate
+    Translate blocks of text, right from inside Emacs!
+#+BEGIN_SRC emacs-lisp
+  (use-package google-translate)
+#+END_SRC
 *** Fill column
     I've been souring on =fill-column-indicator= lately, it interferes with
     =company= quite a bit, among others. I think long term I want to replace it
