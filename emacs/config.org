@@ -1149,6 +1149,15 @@ MODE is the mode to rig a global mode for."
     :commands (scala-mode))
 #+END_SRC
 *** Standard ML
+*** Text
+    ~text-mode~ is kind of a default for when you have to type something that
+    isn't strictly related to a particular programming language. It handles
+    typing commit messages in ~magit~ for example.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook (if (or (executable-find "ispell")
+                                    (executable-find "aspell"))
+                                (flyspell-mode +1)))
+#+END_SRC
 *** TypeScript
     Haven't done much with Typescript, though I'd like to.
 #+BEGIN_SRC emacs-lisp
