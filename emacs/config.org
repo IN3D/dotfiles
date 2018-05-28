@@ -1023,22 +1023,20 @@ MODE is the mode to rig a global mode for."
   (use-package meghanada
     :commands (meghanada-mode))
 
-  (use-package java-mode
-    :commands java-mode ; why does this make it work??
-    :ensure nil
-    :config
-    (meghanada-mode t)
-    (flycheck-mode +1)
-    (add-hook 'before-save-hook
-              'meghanada-code-beautify-before-save)
-    ;; I don't think this should be neccessary,
-    ;; but it seems to help ¯\_(ツ)_/¯
-    (add-hook 'after-save-hook
-              'meghanada-import-all)
-    (ejh/when-windows-do (setq meghanada-java-path
-                               (expand-file-name "bin/java.exe" (getenv "JAVA_HOME"))
-                               meghanada-maven-path "mvn.cmd")))
-
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (meghanada-mode +1)
+              (flycheck-mode +1)
+              (electric-pair-local-mode +1)
+              (add-hook 'before-save-hook
+                        'meghanada-code-beautify-before-save)
+              ;; I don't think this should be neccessary,
+              ;; but it seems to help ¯\_(ツ)_/¯
+              (add-hook 'after-save-hook
+                        'meghanada-import-all)
+              (ejh/when-windows-do (setq meghanada-java-path
+                                         (expand-file-name "bin/java.exe" (getenv "JAVA_HOME"))
+                                         meghanada-maven-path "mvn.cmd"))))
 #+END_SRC
 *** JavaScript & friends
 #+BEGIN_SRC emacs-lisp
