@@ -1045,8 +1045,18 @@ MODE is the mode to rig a global mode for."
     :mode "\\.elm\\'")
 #+END_SRC
 *** Erlang
+#+BEGIN_SRC emacs-lisp
+  (use-package erlang)
+#+END_SRC
 *** F#
+#+BEGIN_SRC emacs-lisp
+  (use-package fsharp-mode)
+#+END_SRC
 *** Go
+    This is real basic right now, I know that there's more I want to fill in here.
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode)
+#+END_SRC
 *** Groovy
 #+BEGIN_SRC emacs-lisp
     (use-package groovy-mode
