@@ -1010,7 +1010,15 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
   (use-package docker
     :config
-    (setq docker-run-as-root t)
+    ;; Red Hat based distros always need Docker to be run as root. It's not
+    ;; perfect, but if any of their package managers are preesent there's a
+    ;; 99.9% chance it's RHL based, and needs this.
+    (if (or (executable-find "dnf")
+            (executable-find "yum"))
+        (setq docker-run-as-root t))
+    ;; Apparently this is needed because of how Docker needs to be run in a
+    ;; virtual machine. Windows might need something similar, but I'll cross
+    ;; that bridge when I get there.
     (ejh/when-osx-do (lambda ()
                        (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
                        (setq exec-path (append exec-path '("/usr/local/bin")))
