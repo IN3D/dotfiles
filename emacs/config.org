@@ -538,22 +538,23 @@ MODE is the mode to rig a global mode for."
     (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati)))))
 #+END_SRC
 * Package configuration
-  First things first! My config uses the great =use-package=. Among the many
-  things it can do, if it runs across something that isn't installed it can go
-  and get it, but rather than typing =:ensure t= all over the place this setting
-  will do it for everything.
+** ~use-package~ bootstrapping
+   First things first! My config uses the great =use-package=. Among the many
+   things it can do, if it runs across something that isn't installed it can go
+   and get it, but rather than typing =:ensure t= all over the place this
+   setting will do it for everything.
 
-  There's one snag doing it this way. ~use-package~ can be used on built-in
-  packages, but naturally "ensuring" them doesn't make sense, and leads to
-  errors. If this is set, ~use-package~ calls for built-ins need to say
-  ~:ensure nil~.
+   There's one snag doing it this way. ~use-package~ can be used on built-in
+   packages, but naturally "ensuring" them doesn't make sense, and leads to
+   errors. If this is set, ~use-package~ calls for built-ins need to say
+   ~:ensure nil~.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-ensure t)
 #+END_SRC
 
-  ~use-package~ has it's own plugin system. This adds one that allows for
-  interaction with the OS's package manager. One stop closer to being able to
-  bootstrap an entire system via Emacs.
+   ~use-package~ has it's own plugin system. This adds one that allows for
+   interaction with the OS's package manager. One stop closer to being able to
+   bootstrap an entire system via Emacs.
 #+BEGIN_SRC emacs-lisp
   (use-package system-packages)
   (use-package use-package-ensure-system-package
