@@ -1247,8 +1247,8 @@ MODE is the mode to rig a global mode for."
     isn't strictly related to a particular programming language. It handles
     typing commit messages in ~magit~ for example.
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'text-mode-hook (if ejh/can-spellcheck-p
-                                (flyspell-mode +1)))
+  (if ejh/can-spellcheck-p
+      (add-hook 'text-mode-hook 'flyspell-mode))
 #+END_SRC
 *** TypeScript
     Haven't done much with Typescript, though I'd like to.
