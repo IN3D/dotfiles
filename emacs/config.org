@@ -960,6 +960,32 @@ MODE is the mode to rig a global mode for."
    to investigate/add for each of these languages.
 *** C Family
 *** C#
+    Confession time: I started life as a .NET developer. I left for a reason but
+    I have to say, .NET Core is actually really cool, and the language has added
+    some great features in recent years. It's way more than a Java clone now.
+#+BEGIN_SRC emacs-lisp
+  (use-package csharp-mode
+    :init (add-hook 'csharp-mode-hook (lambda ()
+                                        (set (make-local-variable 'company-backends
+                                                                  '((company-omnisharp
+                                                                     company-capf
+                                                                     company-dabbrev-code
+                                                                     company-files))))
+                                        (setq indent-tabs-mode nil
+                                              c-syntactic-indentation t
+                                              c-basic-offset 4
+                                              truncate-lines t
+                                              tab-width 4
+                                              evil-shift-width 4
+                                              stupid-indent-level 4)
+                                        (company-quickhelp-local-mode +1)
+                                        (electric-pair-local-mode +1)
+                                        (c-set-style "c#")
+                                        (omnisharp-mode +1)
+                                        (flycheck-mode +1))))
+  (use-package omnisharp
+    :after (csharp-mode))
+#+END_SRC
 *** CSS
 *** Cucumber
 *** D
@@ -1027,6 +1053,11 @@ MODE is the mode to rig a global mode for."
 
   (add-hook 'java-mode-hook
             (lambda ()
+              (setq indent-tabs-mode nil
+                    c-basic-offset 4
+                    tab-width 4
+                    evil-shift-width 4
+                    stupid-indent-level 4)
               (meghanada-mode +1)
               (flycheck-mode +1)
               (electric-pair-local-mode +1)
