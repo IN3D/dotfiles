@@ -1143,6 +1143,15 @@ MODE is the mode to rig a global mode for."
 **** Racket
 **** Scheme
 *** Lua
+*** Markdown
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :config
+    (setq fill-column 80)
+    (if ejh/can-spellcheck-p
+        (flyspell-mode +1))
+    (auto-fill-mode +1))
+#+END_SRC
 *** Nim
     Haven't payed much attention to this. Has a sort of Python-y syntax if I
     remember correct. Kinda interesting. I might look at it more in the future.
