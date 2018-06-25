@@ -680,7 +680,8 @@ MODE is the mode to rig a global mode for."
     I honestly don't know why Emacs doesn't have number highlighting by default,
     here's a little package that puts it in.
 #+BEGIN_SRC emacs-lisp
-  (use-package highlight-numbers)
+  (use-package highlight-numbers
+    :config (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 #+END_SRC
 *** Hungry delete
     This becomes less necessary with =evil-mode= because =C-w= deletes
