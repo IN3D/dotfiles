@@ -981,10 +981,6 @@ MODE is the mode to rig a global mode for."
 #+BEGIN_SRC emacs-lisp
   (use-package csharp-mode
     :init (add-hook 'csharp-mode-hook (lambda ()
-                                        ;; company-backends '(company-omnisharp
-                                        ;;                    company-capf
-                                        ;;                    company-dabbrev-code
-                                        ;;                    company-files)
                                         (setq-local company-backends '(company-omnisharp
                                                                        company-capf
                                                                        company-files
@@ -993,6 +989,10 @@ MODE is the mode to rig a global mode for."
                                               c-syntactic-indentation t
                                               c-basic-offset 4
                                               truncate-lines t
+                                              ;; NOTE: the new version of `omnisharp' doesn't support
+                                              ;; this atm. I'm leaving it here for when it starts
+                                              ;; working again.
+                                              omnisharp-auto-complete-want-importable-types t
                                               tab-width 4
                                               evil-shift-width 4
                                               stupid-indent-level 4)
