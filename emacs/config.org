@@ -1244,6 +1244,9 @@ MODE is the mode to rig a global mode for."
     :diminish "[リ]" ; "Ri"
     :after (enh-ruby-mode)
     :commands (rinari-minor-mode))
+
+  (use-package rvm
+    :defer t)
 #+END_SRC
 *** Rust
     On my infinitely growing list of "Languages that look cool and I want to
