@@ -29,7 +29,7 @@
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
-  On the subject of whitespace, Emacs' default settings are not [[https://www.emacswiki.org/emacs/TabsAreEvil#toc3][...not good]]. So
+  On the subject of whitespace, Emacs' default settings are [[https://www.emacswiki.org/emacs/TabsAreEvil#toc3][...not good]]. So
   this will make sure that they're in a better default state.
 #+BEGIN_SRC emacs-lisp
   (setq tab-width 4
@@ -37,8 +37,12 @@
         cperl-indent-level 4)
 #+END_SRC
 
-  This will help Emacs load faster, basically give it more memory to do it's
-  thing.
+  This will help Emacs be snappier, and load faster. It adjusts the amount of
+  bytes allocated before it will start running garbage collection. It's default
+  setting is *really* low, so it will be constantly throwing information out of
+  cache. I have it set to 100MB, on a decently modern, high-power computer, I
+  don't notice any lag. Setting it too high *will* cause it to hang while GC
+  runs though.
 #+BEGIN_SRC emacs-lisp
 (defvar ejh/default-gc-cons-threshold gc-cons-threshold)
 (setq gc-cons-threshold 100000000)
