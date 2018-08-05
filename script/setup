@@ -17,7 +17,7 @@ function link_file() {
 
     fi
     echo "Linking $1"
-    ln -s $HOME/dotfiles/$2 $HOME/$1
+    ln -s $HOME/.dotfiles/$2 $HOME/$1
 }
 
 ### Linking things up
