@@ -909,9 +909,9 @@
         (ejh/globalize #'rainbow-delimiters-mode))
     #+END_SRC
 *** Company
-    Emacsers seem loves cutesy names that don't immediately tell you what the
-    package actually does. =company= is short for *Comp*-lete
-    *any*-thing. Basically, isn't my auto-completion.
+    Emacsers loves cutesy names that don't immediately tell you what the package
+    actually does. =company= is short for *Comp*-lete *any*-thing. Basically,
+    isn't my auto-completion.
     #+BEGIN_SRC emacs-lisp
       (use-package company
         :config
@@ -939,7 +939,38 @@
       (use-package stupid-indent-mode)
     #+END_SRC
 *** Yasnippets
-    Forthcoming: For some reason I haven't been using this for a while.
+    ~yasnippets~ is the standard for managing snippets.
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet
+        :config
+        (yas-global-mode)
+        ;; `company-yasnippet' is provided in `company' itself, but it has to be
+        ;; tacked on to the backend using a `:with'. This is all in service of that.
+        ;; I _think_ the origin of this code is Spacemacs, but I don't know for sure.
+        (defvar ejh/enable-company-yas t
+          "Enable yasnippet for all backends.")
+        (defun ejh/backend-with-yas (backend)
+          "Intended to be used in a map. Takes in each BACKEND from a list of
+      backends, either `company-backends' or similar. And takes BACKEND from
+      something like.
+
+      \(company-foo\)
+      To:
+      \(company-foo :with company-yasnippet\)"
+          (if (or (not ejh/enable-company-yas)
+                  (and (listp backend)
+                       (member 'company-yasnippet backend)))
+              backend
+            (append (if (consp backend)
+                        backend
+                      (list backend))
+                    '(:with company-yasnippet))))
+        (defun ejh/yasnippetify-backends (backends)
+          "Take a list of BACKENDS and append a `:with' to them for `yasnippet'."
+          (mapcar #'ejh/backend-with-yas backends))
+        (setq company-backends
+              (ejh/yasnippetify-backends company-backends)))
+    #+END_SRC
 *** Tags
     Emacs' tags situation is a lot wider than what's available in Vim; I'm not
     exactly sure that's a good thing though. It ends up feeling pretty confused
