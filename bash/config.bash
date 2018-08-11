@@ -76,8 +76,8 @@ alias tmux='tmux -2'
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
 
-if [ -f ~/.config/bash/local.bash ]; then
-  source ~/.config/bash/local.bash
+if [ -f ~/.dotfiles/bash/local.bash ]; then
+  source ~/.dotfiles/bash/local.bash
 fi
 # PATH=$PATH:~/bin
 # PATH=~/.linuxbrew/bin:$PATH
