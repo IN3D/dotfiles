@@ -801,7 +801,6 @@
          "pp" '(counsel-projectile-switch-project :which-key "switch project")
          "sga" '(counsel-projectile-ag :which-key "ag"))
         :config
-        (counsel-projectile-mode)
         ;; NOTE: This is a hack so that `counsel-projectile' will work after some
         ;; changes were made to the keymaps `projectile'. This shouldn't be necesary
         ;; for very long. Keep track of:
@@ -818,7 +817,8 @@
             (define-key map [remap projectile-ag] 'counsel-projectile-ag)
             (define-key map [remap projectile-switch-project] 'counsel-projectile-switch-project)
             map)
-          "Keymap for `counsel-projectile' mode."))
+          "Keymap for `counsel-projectile' mode.")
+        (counsel-projectile-mode))
 
       (use-package projectile-ripgrep
         :after (counsel projectile ripgrep)
