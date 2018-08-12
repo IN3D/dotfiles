@@ -16,6 +16,7 @@ emacs/abbrev_defs
 emacs/auto-save-list/
 emacs/network-security.data
 emacs/recentf
+emacs/projectile-bookmarks.eld
 # Temporary file buffers
 emacs/*~
 *.*~
