@@ -591,33 +591,22 @@
                   (setq bidi-paragraph-direction 'left-to-right)))
     #+END_SRC
 *** Keybindings / General
-    I have a history with RSI (ironically from before I even considered using
-    Emacs, it was from one of those terrible Apple keyboards and reaching for my
-    mouse too often) so I use =evil-mode=. Let's setup some leader key
-    information.
-    This will also make sure =general= is there, but not going to put any sort
-    of bindings on it directly. Now that it's available, other use package
-    statements can use =:general= to set up bindings.
+    This will make sure ~general~ is there, I'm only going to put a few built in
+    commands that wouldn't have anywhere else to go on it here. Now that it's
+    available, other ~use-package~ statements can use ~:general~ to set up
+    bindings.
     #+BEGIN_SRC emacs-lisp
-      ;; Set these for normal mode
-      (setq ejh/leader-key "SPC")
-      ;; This requires some explaining. On a normal keyboard, this would be insanity
-      ;; however for the RSI reasons mentioned above; I actually use an ErgoDox, so my
-      ;; Space and Backspace keys are right under my left thumb.
-      (setq ejh/local-leader-key
-            (if (getenv "ERGODOX")
-                "<backspace>"
-              ","))
-
-      ;; For non-normal modes (abnormal har har), fall back on good 'ol C-c
-      (setq ejh/abnormal-leader-key "C-c")
-      (setq ejh/abnormal-local-leader-key "C-,") ; should be good
+      ;; I took the idea (or name) of a `leader' and `local-leader' from my Vim days.
+      ;; These probably look like *INSANE* bindings, and they would be. Except that I
+      ;; use an ErgoDox keyboard. My control key is under my left pinky, and both my
+      ;; space and backspace keys are under my left thumb.
+      (setq ejh/leader-key "C-c C-SPC")
+      (setq ejh/local-leader-key "C-c <C-backspace>")
 
       (use-package general
         :config
         (general-define-key
          :prefix ejh/leader-key
-         :states 'normal
          "b" '(nil :which-key "buffers")
          "g" '(nil :which-key "git")
          "j" '(nil :which-key "jump")
@@ -673,8 +662,7 @@
       (ejh/create-align-x "fat-arrow" "=>")
 
       (general-define-key
-       :prefix ejh/abnormal-leader-key
-       :states '(emacs visual)
+       :prefix ejh/leader-key
        "xf=" '(ejh/align-repeat-equal :which-key "equal")
        "xf:" '(ejh/align-repeat-colon :which-key "colon")
        "xf-" '(ejh/align-repeat-arrow :which-key "arrow")
@@ -686,13 +674,15 @@
 *** Evil mode
     I used Vim for ~6 years, and over a period of a year or so, I transitioned
     over to Emacs.
-    For a while I was using the standard Emacs bindings, and so I don't really
-    have much of a configuration for =evil-mode=, I expect I'll start putting
-    more here now that I'm using it regularly.
+    I had originally tried to use ~evil-mode~, but ultimately felt that it
+    didn't mix all that well with Emacs. And, with a good keyboard I don't have
+    any issues with RSI.
+    I /may/ come back around to the idea of using ~evil-mode~, but for now I'm
+    just using regular Emacs.
     #+BEGIN_SRC emacs-lisp
-      (use-package evil
-        :commands (evil-mode))
-      (evil-mode)
+      ;; (use-package evil
+      ;;   :commands (evil-mode))
+      ;; (evil-mode)
     #+END_SRC
 *** Highlight numbers
     I honestly don't know why Emacs doesn't have number highlighting by default,
@@ -709,7 +699,6 @@
         :general
         ("H-<backspace>" 'hungry-delete-backward)
         (:prefix ejh/leader-key
-         :states 'normal
          "td" '(hungry-delete-mode :which-key "hungry delete")))
     #+END_SRC
 *** Google Translate
@@ -739,7 +728,6 @@
       (use-package magit
         :general
         (:prefix ejh/leader-key
-         :states 'normal
          "gb" '(magit-blame :which-key "blame")
          "gs" '(magit-status :which-key "status")
          "gm" '(magit-dispatch-popup :which-key "menu")))
@@ -766,28 +754,25 @@
               ivy-count-format "(%d/%d) ")
         :general
         (:prefix ejh/leader-key
-         :states 'normal
          "bb" '(ivy-switch-buffer :which-key "buffers")
          "bk" '(kill-buffer :which-key "kill")))
 
       (use-package counsel
         :general
         ("M-x" 'counsel-M-x)
+        ("C-h v" 'counsel-describe-variable)
+        ("C-h f" 'counsel-describe-function)
         (:prefix ejh/leader-key
-         :states 'normal
          "SPC" '(counsel-M-x :which-key "commands")
          "sa"  '(counsel-ag :which-key "ag")
          "sG"  '(counsel-grep :which-key "grep")
          "sr"  '(counsel-rg :which-key "rg")
+         "sp"  '(counsel-pt :which-key "pt")
          "tt"  '(counsel-load-theme :which-key "theme")))
 
       (use-package swiper
         :general
         (:prefix ejh/leader-key
-         :states 'normal
-         "ss" '(swiper :which-key "swiper"))
-        (:prefix ejh/abnormal-leader-key
-         :states '(insert emacs)
          "ss" '(swiper :which-key "swiper")))
     #+END_SRC
 *** Projectile
@@ -813,11 +798,11 @@
         :defer nil
         :general
         (:prefix ejh/leader-key
-         :states 'normal
          "pd" '(counsel-projectile-find-dir :which-key "find directory")
          "pf" '(counsel-projectile-find-file :which-key "find file")
          "pp" '(counsel-projectile-switch-project :which-key "switch project")
-         "sga" '(counsel-projectile-ag :which-key "ag"))
+         "sga" '(counsel-projectile-ag :which-key "ag")
+         "sgp" '((message "Write me!") :which-key "pt"))
         :config
         ;; NOTE: This is a hack so that `counsel-projectile' will work after some
         ;; changes were made to the keymaps `projectile'. This shouldn't be necesary
@@ -875,7 +860,6 @@
             (user-error "You're not in a project!")))
         :general
         (:prefix ejh/leader-key
-         :states 'normal
          "sgr" '(ejh/counsel-projectile-rg :which-key "rg")))
     #+END_SRC
 *** Avy
@@ -891,21 +875,11 @@
                    avy-goto-word-0)
         :general
         (:prefix ejh/leader-key
-         :states 'normal
          "jc" '(avy-goto-char :which-key "to character")
          "jC" '(avy-goto-char-2 :which-key "to character w/ input")
          "jl" '(avy-goto-line :which-key "to line")
-         "jj" '(avy-goto-line-below :which-key "to next line")
-         "jk" '(avy-goto-line-above :which-key "to previous line")
-         "jw" '(avy-goto-word-0 :which-key "to word")
-         "jW" '(avy-goto-word-1 :which-key "to word w/ input"))
-        (:prefix ejh/abnormal-leader-key ; There's probably a better way to do this...
-         :states '(emacs insert)
-         "jc" '(avy-goto-char :which-key "to character")
-         "jC" '(avy-goto-char-2 :which-key "to character w/ input")
-         "jl" '(avy-goto-line :which-key "to line")
-         "jj" '(avy-goto-line-below :which-key "to next line")
-         "jk" '(avy-goto-line-above :which-key "to previous line")
+         "jn" '(avy-goto-line-below :which-key "to next line")
+         "jp" '(avy-goto-line-above :which-key "to previous line")
          "jw" '(avy-goto-word-0 :which-key "to word")
          "jW" '(avy-goto-word-1 :which-key "to word w/ input")))
     #+END_SRC
@@ -946,7 +920,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package iedit
         :general
-        (:prefix ejh/abnormal-leader-key
+        (:prefix ejh/leader-key
                  ";" '(iedit-mode :which-key "iedit")))
     #+END_SRC
 *** Stupid indent
@@ -1225,12 +1199,7 @@
          :init (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
          :ensure nil ; necessary for a built-in
          :general
-         (:prefix ejh/leader-key
-          :states 'normal
-          "e" '(nil :which-key "evaluate")
-          "eb" '(eval-buffer :which-key "buffer"))
-         (:prefix ejh/abnormal-leader-key
-          :states '(visual emacs)
+         (:prefix ejh/local-leader-key
           "e" '(nil :which-key "evaluate")
           "eb" '(eval-buffer :which-key "buffer")
           "er" '(eval-region :which-key "region")))
