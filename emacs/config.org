@@ -6,166 +6,180 @@
   "Fundamental" in the sense that it's just about Emacs here, couldn't think of
   a better heading to be honest.
 
-  NOTE: This particular heading has gotten pretty long. Might be worth breaking
-  it up a bit?
+** Other files and directories
+   I have this directory for stuff that I didn't write. Let's make sure that it
+   gets loaded up
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path "~/.emacs.d/vendor/")
+   #+END_SRC
 
-  I have this directory for stuff that I didn't write. Let's make sure that it
-  gets loaded up
-  #+BEGIN_SRC emacs-lisp
-    (add-to-list 'load-path "~/.emacs.d/vendor/")
-  #+END_SRC
+   By default, Emacs will do something kind of annoying and palace a bunch of
+   stuff from ~customize~ at the bottom of [[file:init.el][init.el]].
+   Doing this will put it in it's own file.
+   #+BEGIN_SRC emacs-lisp
+     (setq custom-file "~/.dotfiles/emacs/custom.el")
+     (load custom-file)
+   #+END_SRC
 
-  By default Emacs tries to protect you from some of it's "weirder"
-  functionalities, which is honestly funny considering most uninitiated people
-  would consider the "weirder parts" all of Emacs. And besides, I know what I'm
-  doing. I'm pretty sure there are a few others, But I've never used them.
-  #+BEGIN_SRC emacs-lisp
-    (put 'narrow-to-region 'disabled nil)
-    (put 'downcase-region 'disabled nil)
-    (put 'upcase-region 'disabled nil)
-  #+END_SRC
+** Enable and customize features
+   By default Emacs tries to protect you from some of it's "weirder"
+   functionalities, which is honestly funny considering most uninitiated people
+   would consider the "weirder parts" all of Emacs. And besides, I know what I'm
+   doing. I'm pretty sure there are a few others, But I've never used them.
+   #+BEGIN_SRC emacs-lisp
+     (put 'narrow-to-region 'disabled nil)
+     (put 'downcase-region 'disabled nil)
+     (put 'upcase-region 'disabled nil)
+   #+END_SRC
 
-  Never use tab characters unless a mode calls for it.
-  #+BEGIN_SRC emacs-lisp
-    (setq-default indent-tabs-mode nil)
-  #+END_SRC
+   Emacs has two prompts "yes or no" or "y or n". There's no reason to have to
+   type out "yes" and "no" all the time. Just use "y" and "n".
+   #+BEGIN_SRC emacs-lisp
+     (fset 'ejh/default-yes-or-no-p 'yes-or-no-p)
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
 
-  On the subject of whitespace, Emacs' default settings are [[https://www.emacswiki.org/emacs/TabsAreEvil#toc3][...not good]]. So
-  this will make sure that they're in a better default state.
-  #+BEGIN_SRC emacs-lisp
-    (setq tab-width 4
-          c-basic-offset 4 ; not just for C, a lot of Emacs modes reference this
-          cperl-indent-level 4)
-  #+END_SRC
+   All the bells and stuff are just as annoying in Emacs as they are in Vim.
+   #+BEGIN_SRC emacs-lisp
+     (setq ring-bell-function 'ignore)
+   #+END_SRC
 
-  This will help Emacs be snappier, and load faster. It adjusts the amount of
-  bytes allocated before it will start running garbage collection. It's default
-  setting is *really* low, so it will be constantly throwing information out of
-  cache. I have it set to 100MB, on a decently modern, high-power computer, I
-  don't notice any lag. Setting it too high *will* cause it to hang while GC
-  runs though.
-  #+BEGIN_SRC emacs-lisp
-    (defvar ejh/default-gc-cons-threshold gc-cons-threshold)
-    (setq gc-cons-threshold 100000000)
-  #+END_SRC
+** Whitespace settings
+   Never use tab characters unless a mode calls for it.
+   #+BEGIN_SRC emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+END_SRC
 
-  A crappy function that I wrote for when a package, usually a minor-mode of
-  some kind that doesn't have a function to invoke it globally.
-  #+BEGIN_SRC emacs-lisp
-    (defun ejh/globalize (mode)
-      "Janky function to make global modes when one isn't provided.
-    MODE is the mode to rig a global mode for."
-      (add-hook 'prog-mode-hook mode))
-  #+END_SRC
+   On the subject of whitespace, Emacs' default settings are [[https://www.emacswiki.org/emacs/TabsAreEvil#toc3][...not good]]. So
+   this will make sure that they're in a better default state.
+   #+BEGIN_SRC emacs-lisp
+     (setq tab-width 4
+           c-basic-offset 4 ; not just for C, a lot of Emacs modes reference this
+           cperl-indent-level 4)
+   #+END_SRC
 
-  Frequently enough I have to do something /or/ skip something for a specific
-  operating system (looking at you Windows). However Emacs has some really
-  strange names for them For example Windows is =windows-nt= and BSD is
-  =berkeley-unix=. So I make some nice wrappers for them.
-  #+BEGIN_SRC emacs-lisp
-    (defmacro ejh/when-os-do (name os &optional upcase-p)
-        "Create a function with `NAME' that is run only when on `OS'.
-      If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
-        (let ((new-func (intern (format "ejh/when-%s-do" name)))
-              (doc-name (if upcase-p
-                            (upcase name)
-                          (capitalize name))))
-          `(defun ,new-func (thing)
-             ,(format "Does the `THING' if the device is %s." doc-name)
-             (when (string-equal system-type ,os) thing))))
+** Performance settings
+   This will help Emacs be snappier, and load faster. It adjusts the amount of
+   bytes allocated before it will start running garbage collection. It's default
+   setting is *really* low, so it will be constantly throwing information out of
+   cache. I have it set to 100MB, on a decently modern, high-power computer, I
+   don't notice any lag. Setting it too high *will* cause it to hang while GC
+   runs though.
+   #+BEGIN_SRC emacs-lisp
+     (defvar ejh/default-gc-cons-threshold gc-cons-threshold)
+     (setq gc-cons-threshold 100000000)
+   #+END_SRC
 
-      (defmacro ejh/unless-os-do (name os &optional upcase-p)
-        "Create a function with `NAME' that is not run when on `OS'.
-      If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
-        (let ((new-func (intern (format "ejh/unless-%s-do" name)))
-              (doc-name (if upcase-p
-                            (upcase name)
-                          (capitalize name))))
-          `(defun ,new-func (thing)
-             ,(format "Does `THING' unless the device is %s." doc-name)
-             (unless (string-equal system-type ,os) thing))))
+** Generic functions
+   A crappy function that I wrote for when a package, usually a minor-mode of
+   some kind that doesn't have a function to invoke it globally.
+   #+BEGIN_SRC emacs-lisp
+     (defun ejh/globalize (mode)
+       "Janky function to make global modes when one isn't provided.
+     MODE is the mode to rig a global mode for."
+       (add-hook 'prog-mode-hook mode))
+   #+END_SRC
 
-      (ejh/when-os-do "osx" "darwin" t)
-      (ejh/when-os-do "linux" "gnu/linux")
-      (ejh/when-os-do "windows" "windows-nt")
-      (ejh/when-os-do "bsd" "berkeley-unix" t)
-      (ejh/when-os-do "cygwin" "cygwin")
-      (ejh/when-os-do "gnu" "gnu" t)
+   Frequently enough I have to do something /or/ skip something for a specific
+   operating system (looking at you Windows). However Emacs has some really
+   strange names for them For example Windows is =windows-nt= and BSD is
+   =berkeley-unix=. So I make some nice wrappers for them.
+   #+BEGIN_SRC emacs-lisp
+     (defmacro ejh/when-os-do (name os &optional upcase-p)
+         "Create a function with `NAME' that is run only when on `OS'.
+       If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+         (let ((new-func (intern (format "ejh/when-%s-do" name)))
+               (doc-name (if upcase-p
+                             (upcase name)
+                           (capitalize name))))
+           `(defun ,new-func (thing)
+              ,(format "Does the `THING' if the device is %s." doc-name)
+              (when (string-equal system-type ,os) thing))))
 
-      (ejh/unless-os-do "osx" "darwin" t)
-      (ejh/unless-os-do "linux" "gnu/linux")
-      (ejh/unless-os-do "windows" "windows-nt")
-      (ejh/unless-os-do "bsd" "berkeley-unix" t)
-      (ejh/unless-os-do "cygwin" "cygwin")
-      (ejh/unless-os-do "gnu" "gnu" t)
-  #+END_SRC
+       (defmacro ejh/unless-os-do (name os &optional upcase-p)
+         "Create a function with `NAME' that is not run when on `OS'.
+       If `UPCASE-P' is not nil, `OS' will be upcase rather than capitalized in the doc string."
+         (let ((new-func (intern (format "ejh/unless-%s-do" name)))
+               (doc-name (if upcase-p
+                             (upcase name)
+                           (capitalize name))))
+           `(defun ,new-func (thing)
+              ,(format "Does `THING' unless the device is %s." doc-name)
+              (unless (string-equal system-type ,os) thing))))
 
-  All the bells and stuff are just as annoying in Emacs as they are in Vim.
-  #+BEGIN_SRC emacs-lisp
-    (setq ring-bell-function 'ignore)
-  #+END_SRC
+       (ejh/when-os-do "osx" "darwin" t)
+       (ejh/when-os-do "linux" "gnu/linux")
+       (ejh/when-os-do "windows" "windows-nt")
+       (ejh/when-os-do "bsd" "berkeley-unix" t)
+       (ejh/when-os-do "cygwin" "cygwin")
+       (ejh/when-os-do "gnu" "gnu" t)
 
-  Emacs has two prompts "yes or no" or "y or n". There's no reason to have to
-  type out "yes" and "no" all the time. Just use "y" and "n".
-  #+BEGIN_SRC emacs-lisp
-    (fset 'ejh/default-yes-or-no-p 'yes-or-no-p)
-    (fset 'yes-or-no-p 'y-or-n-p)
-  #+END_SRC
-* Setup packages
-  Configure where to get packages from, and what priority to give
-  them.
-  #+BEGIN_SRC emacs-lisp
-    (require 'package)
-    (setq package-enable-at-startup nil)
+       (ejh/unless-os-do "osx" "darwin" t)
+       (ejh/unless-os-do "linux" "gnu/linux")
+       (ejh/unless-os-do "windows" "windows-nt")
+       (ejh/unless-os-do "bsd" "berkeley-unix" t)
+       (ejh/unless-os-do "cygwin" "cygwin")
+       (ejh/unless-os-do "gnu" "gnu" t)
+   #+END_SRC
 
-    (setq package-archives
-          '(("elpa"         . "http://elpa.gnu.org/packages/")
-            ("melpa"        . "http://melpa.org/packages/")
-            ("melpa-stable" . "http://stable.melpa.org/packages/")
-            ("marmalade"    . "http://marmalade-repo.org/packages/"))
-          package-archive-priorities
-          '(("melpa"        . 10)  ; "I too, like to live dangerously"
-            ("melpa-stable" . 5)   ; The safe bet
-            ("elpa"         . 3)   ; The standard
-            ("marmalade"    . 0))) ; Probably a bad sign if it gets here
+** Setup packages
+   Configure where to get packages from, and what priority to give
+   them.
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (setq package-enable-at-startup nil)
 
-    (package-initialize)
-  #+END_SRC
+     (setq package-archives
+           '(("elpa"         . "http://elpa.gnu.org/packages/")
+             ("melpa"        . "http://melpa.org/packages/")
+             ("melpa-stable" . "http://stable.melpa.org/packages/")
+             ("marmalade"    . "http://marmalade-repo.org/packages/"))
+           package-archive-priorities
+           '(("melpa"        . 10)  ; "I too, like to live dangerously"
+             ("melpa-stable" . 5)   ; The safe bet
+             ("elpa"         . 3)   ; The standard
+             ("marmalade"    . 0))) ; Probably a bad sign if it gets here
 
-  Make sure that =use-package= is installed if it isn't already.
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
+     (package-initialize)
+   #+END_SRC
 
-    (require 'use-package)
-  #+END_SRC
-* Setup my personal info
-  Let's make sure my personal information is setup. This will effect inserts
-  into change logs, note taking, stuff like that.
-  #+BEGIN_SRC emacs-lisp
-    (setq user-full-name "Eric Hopkins"
-          user-mail-address "eric.on.tech@gmail.com"
-          calendar-latitude 42.33
-          calendar-logitude -83.04
-          calendar-location-name "Detroit, MI")
-  #+END_SRC
-* Spell checking
-  On startup, let's see if the underlying system is setup to do any
-  spellchecking.
-  #+BEGIN_SRC emacs-lisp
-    (setq ejh/can-spellcheck-p (if (or (executable-find "aspell")
-                                       (executable-find "ispell"))
-                                   t
-                                 nil))
-  #+END_SRC
+   Make sure that =use-package= is installed if it isn't already.
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'use-package)
+       (package-refresh-contents)
+       (package-install 'use-package))
 
-  If =aspell= exists on the system, it should be preferred over =ispell=.
-  #+BEGIN_SRC emacs-lisp
-    (if (executable-find "aspell")
-        (setq ispell-program-name "aspell"
-              ispell-list-command "--list"))
-  #+END_SRC
+     (require 'use-package)
+   #+END_SRC
+
+** Setup my personal info
+   Let's make sure my personal information is setup. This will effect inserts
+   into change logs, note taking, stuff like that.
+   #+BEGIN_SRC emacs-lisp
+     (setq user-full-name "Eric Hopkins"
+           user-mail-address "eric.on.tech@gmail.com"
+           calendar-latitude 42.33
+           calendar-logitude -83.04
+           calendar-location-name "Detroit, MI")
+   #+END_SRC
+
+** Spell checking
+   On startup, let's see if the underlying system is setup to do any
+   spellchecking.
+   #+BEGIN_SRC emacs-lisp
+     (setq ejh/can-spellcheck-p (if (or (executable-find "aspell")
+                                        (executable-find "ispell"))
+                                    t
+                                  nil))
+   #+END_SRC
+
+   If =aspell= exists on the system, it should be preferred over =ispell=.
+   #+BEGIN_SRC emacs-lisp
+     (if (executable-find "aspell")
+         (setq ispell-program-name "aspell"
+               ispell-list-command "--list"))
+   #+END_SRC
+
 * Visuals
 ** OS Tuning
    OSX (or macOS, whatever), being the bastard UNIX that it is, gets a lot of
@@ -174,6 +188,7 @@
      (ejh/when-osx-do
        (setq ns-use-srgb-colorspace nil))
    #+END_SRC
+
 ** GUI stuff
    Let's get rid of all this extra crap.
    #+BEGIN_SRC emacs-lisp
@@ -182,6 +197,7 @@
        (tool-bar-mode -1)
        (toggle-scroll-bar -1))
    #+END_SRC
+
 ** Fonts
    I tend to change this a lot, right now I'm partial to Google's new monospaced
    font "Noto Sans Mono" (not to be confused with "Noto Mono").
@@ -232,6 +248,7 @@
 
      (ejh/reset-font-size)
    #+END_SRC
+
 ** Pretty icons, Modeline, File explorer, and ~dired~
    This is where I make Emacs look a lot more modern. For starters, most of the
    cool new editors have icons for files, not only does this look good, but it's
@@ -541,6 +558,7 @@
            ati-right-inactive-separator))
        (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati)))))
    #+END_SRC
+
 * Package configuration
 ** ~use-package~ bootstrapping
    First things first! My config uses the great =use-package=. Among the many
