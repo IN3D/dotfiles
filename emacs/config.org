@@ -797,6 +797,7 @@
         :after (counsel projectile)
         :defer nil
         :general
+        (global-set-key (kbd "M-*") 'projectile-run-async-shell-command-in-root)
         (:prefix ejh/leader-key
          "pd" '(counsel-projectile-find-dir :which-key "find directory")
          "pf" '(counsel-projectile-find-file :which-key "find file")
