@@ -2,6 +2,17 @@
 #+AUTHOR: Eric Hopkins
 #+EMAIL: eric.on.tech@gmail.com
 
+* Preamble
+  Hi there! If you're reading this it's probably because I pointed you here
+  after showing some interest or just curiosity in Emacs. This file is written
+  in =org-mode=, a markdown-like format.
+
+  I've done a literate programming sort of thing here. There's lots of text
+  blocks surrounding code. There are notes to myself, explanations of cryptic
+  bits, calling out interesting parts for people who want to learn, etc.
+
+  If you're curious I hope you find my config file helpful!
+
 * Fundamental stuff
   "Fundamental" in the sense that it's just about Emacs here, couldn't think of
   a better heading to be honest.
@@ -1040,9 +1051,10 @@
    to investigate/add for each of these languages.
 *** C Family
 *** C#
-    Confession time: I started life as a .NET developer. I left for a reason but
-    I have to say, .NET Core is actually really cool, and the language has added
-    some great features in recent years. It's way more than a Java clone now.
+    I started my development career working as a .NET developer; on VB.NET no
+    less! I realize this is an unpopular opinion to have in certain circles, but
+    I actually *like* things about languages such as C# and Java. I'm
+    particularly impressed with LINQ and what has been done with .NET Core.
     #+BEGIN_SRC emacs-lisp
       (use-package csharp-mode
         :init (add-hook 'csharp-mode-hook
@@ -1074,6 +1086,10 @@
 *** CSS
 *** Cucumber
 *** D
+    I found ~D~ on a whim one time while practicing some TDD. The idea was to
+    try and get through a kata with a language that I'm unfamiliar with. I
+    actually walked away thinking it's a pretty cool little language. I'd like
+    to dedicate some more time to it eventually.
     #+BEGIN_SRC emacs-lisp
       (use-package d-mode
         :commands d-mode)
@@ -1081,9 +1097,8 @@
 
 *** Dart
 *** Docker
-    Docker has been on my "to learn" list for probably two years now. Between
-    places of work not having that much interest and it being a fast moving
-    target has made this hard. I'm finally getting serious about learning it.
+    I love Docker, I've actually contributed to the ~docker~ package in
+    here. It's good stuff.
     #+BEGIN_SRC emacs-lisp
       (use-package docker
         :config
@@ -1117,8 +1132,15 @@
     #+END_SRC
 
 *** Elm
-    I was writing a lot of Elm for a while but fell out of it. There's probably
-    been a new version or two since I've used it.
+    I found Elm around v0.16, right before v0.17 came out and I got really into
+    it around that time. I was mostly onboard with v0.18 when that dropped,
+    though I thought some changes were dogmatic. Life and work got in the way
+    and I drifted. As of writing this paragraph, v0.19 dropped and I'm not so
+    interested. It seems to be moving in a direction I don't want to follow.
+
+    I still think Elm is great, but in all honestly, I want to like it more than
+    I do. If I still want to do ML in the browser, I think I'm going to focus on
+    PureScript or Reason.
     #+BEGIN_SRC emacs-lisp
       (use-package elm-mode
         :mode "\\.elm\\'")
@@ -1130,12 +1152,19 @@
     #+END_SRC
 
 *** F#
+    While it's a bit unorthodox, ~F#~ seems like a really cool ML. It's outlook
+    seems to be "be less pure if it gets things done", mostly in a business-y
+    context. Less attractive to purists maybe, but it's an interesting approach
+    and I'd like to give some more time to it.
     #+BEGIN_SRC emacs-lisp
       (use-package fsharp-mode)
     #+END_SRC
 
 *** Go
-    This is real basic right now, I know that there's more I want to fill in here.
+    I had more written for my ~go~ configuration, but when I was merging about
+    three separate Emacs configs into this ~org-mode~ file, something got lost
+    in the move. I haven't had to do any ~go~ sense, so I've left it at the bare
+    minimum right now.
     #+BEGIN_SRC emacs-lisp
       (use-package go-mode)
     #+END_SRC
@@ -1158,7 +1187,10 @@
 *** Idris
 *** Java
     I'm pretty rusty with Java, this isn't much; but I want to set something up
-    for some practice.
+    for some practice. I could still integrate ~eclim~, which lets Emacs
+    interact with a headless version of Eclipse. There's also a plugin being
+    worked on that allows Emacs to talk to Intellij via LSP (Language Server
+    Protocol) and make use of all Intellij's features.
     #+BEGIN_SRC emacs-lisp
       (use-package meghanada
         :commands (meghanada-mode))
@@ -1176,6 +1208,8 @@
                             'meghanada-code-beautify-before-save)
                   ;; I don't think this should be neccessary,
                   ;; but it seems to help ¯\_(ツ)_/¯
+                  ;; Update: I think this was an `evil-mode' thing. Maybe it's
+                  ;; unecessary now?
                   (add-hook 'after-save-hook
                             'meghanada-import-all)
                   (ejh/when-windows-do (setq meghanada-java-path
@@ -1196,6 +1230,7 @@
         :commands (js2-mode))
 
       (use-package rjsx-mode
+        :after (js2-mode)
         :config
         (ejh/less-annoying-js2) ; `rjsx-mode' is based on `js2-mode'
         :commands (rjsx-mode))
@@ -1222,8 +1257,8 @@
         :diminish "[内]") ; "Inside"
     #+END_SRC
 **** Clojure / ClojureScript
-     I haven't done nearly as much Clojure as I would like to, so for now this
-     is just real simple.
+     While I've not had nearly enough time to work with it, I've *loved* what
+     I've seen of Clojure so far.
      #+BEGIN_SRC emacs-lisp
        (use-package clojure-mode
          :init
@@ -1268,6 +1303,10 @@
 **** Scheme
 *** Lua
 *** Markdown
+    I thought that this was really just a syntax package but ~markdown-mode~
+    adds a whole bunch of ~org-mode~ like features like folding headings and
+    such. I was sort of blown away by how much cool stuff is packed into this
+    mode.
     #+BEGIN_SRC emacs-lisp
       (use-package markdown-mode
         :config
@@ -1305,6 +1344,8 @@
 *** PHP
 *** Perl
 *** PureScript
+    Would love to give PureScript the time of day sometime, especially now that
+    Elm is going down a path I'm not as interested in.
     #+BEGIN_SRC emacs-lisp
       (use-package purescript-mode
         :init (add-hook 'purescript-mode 'turn-on-purescript-indentation))
@@ -1321,13 +1362,11 @@
 #+END_SRC
 
 *** Ruby
-    This is my day job, so naturally I've put more effort into this than
-    anything else at the moment. Hopefully some of these other languages will
-    start reaching parity soon.
-    Also, who doesn't love Ruby?
-    Most of these minor modes that are specific to Ruby come with a lot of key
-    bindings already set up, and I've been using them for a while, but I'll want
-    to start figuring out what to do for =evil=.
+    My day job was working on a pretty large Rails app for a few years. So
+    naturally this was one of the first sections that had a lot going on in
+    it. And this isn't even all of it, I know there were some other experimental
+    files that I haven't moved into here, or plugins I had installed but didn't
+    write down in this config.
     #+BEGIN_SRC emacs-lisp
       (use-package enh-ruby-mode
         :commands (enh-ruby-mode)
@@ -1387,7 +1426,8 @@
     #+END_SRC
 
 *** TypeScript
-    Haven't done much with Typescript, though I'd like to.
+    Started doing more with TypeScript, mostly through Angular, and I really
+    like it. Hoping to be able to do more with it in the future.
     #+BEGIN_SRC emacs-lisp
       (use-package typescript-mode
         :mode "\\.ts\\'"
