@@ -582,6 +582,7 @@
      (use-package use-package-ensure-system-package
        :after (system-packages))
    #+END_SRC
+
 ** Language independent
 *** Terminal settings
     This will help prevent *really* slow rendering in =term=.
@@ -590,6 +591,7 @@
                 (lambda ()
                   (setq bidi-paragraph-direction 'left-to-right)))
     #+END_SRC
+
 *** Keybindings / General
     This will make sure ~general~ is there, I'm only going to put a few built in
     commands that wouldn't have anywhere else to go on it here. Now that it's
@@ -671,6 +673,7 @@
        "xf," '(ejh/align-repeat-comma :which-key "comma")
        "xfr" '(align-regexp :which-key "regex"))
     #+END_SRC
+
 *** Evil mode
     I used Vim for ~6 years, and over a period of a year or so, I transitioned
     over to Emacs.
@@ -684,6 +687,7 @@
       ;;   :commands (evil-mode))
       ;; (evil-mode)
     #+END_SRC
+
 *** Highlight numbers
     I honestly don't know why Emacs doesn't have number highlighting by default,
     here's a little package that puts it in.
@@ -691,6 +695,7 @@
       (use-package highlight-numbers
         :config (add-hook 'prog-mode-hook 'highlight-numbers-mode))
     #+END_SRC
+
 *** Hungry delete
     This becomes less necessary with =evil-mode= because =C-w= deletes
     whitespace pretty well. But it's still a nice to have.
@@ -701,11 +706,13 @@
         (:prefix ejh/leader-key
          "td" '(hungry-delete-mode :which-key "hungry delete")))
     #+END_SRC
+
 *** Google Translate
     Translate blocks of text, right from inside Emacs!
     #+BEGIN_SRC emacs-lisp
       (use-package google-translate)
     #+END_SRC
+
 *** Fill column
     I've been souring on =fill-column-indicator= lately, it interferes with
     =company= quite a bit, among others. I think long term I want to replace it
@@ -713,6 +720,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package fill-column-indicator)
     #+END_SRC
+
 *** Which key
     This is a crazy helpful minor mode that basically shows completion for key
     chords.
@@ -720,6 +728,7 @@
       (use-package which-key
         :config (ejh/globalize #'which-key-mode))
     #+END_SRC
+
 *** Magit! & other Git stuff
     The only other complete Git porcelain aside from the Git CLI itself. I
     really have a surprisingly small configuration for it. For how much time I
@@ -738,6 +747,7 @@
         :config (global-git-gutter-mode))
 
     #+END_SRC
+
 *** Ivy / Counsel / Swiper
     This is what lets me search through all sorts of things in Emacs, with a
     fuzzy-finding sort of behavior. It's a lot like a "Command Pallet" in
@@ -775,6 +785,7 @@
         (:prefix ejh/leader-key
          "ss" '(swiper :which-key "swiper")))
     #+END_SRC
+
 *** Projectile
     =projectile= is what makes working with "projects" really nice. A project
     has a few definitions in Projectile's terminology, but the only one I really
@@ -863,6 +874,7 @@
         (:prefix ejh/leader-key
          "sgr" '(ejh/counsel-projectile-rg :which-key "rg")))
     #+END_SRC
+
 *** Avy
     In Vim there's a package called =EasyMotion=, and apparently it's creator
     switched to Emacs over the experience of trying to make that in =VimL=. Avy
@@ -884,6 +896,7 @@
          "jw" '(avy-goto-word-0 :which-key "to word")
          "jW" '(avy-goto-word-1 :which-key "to word w/ input")))
     #+END_SRC
+
 *** Multiple Cursors
     I've been meaning to do more with this, but I've never dedicated enough time
     to it. I mean, look at [[http://emacsrocks.com/e13.html][this]]!
@@ -891,6 +904,7 @@
       (use-package multiple-cursors
         :defer t) ; Not preferable, but not sure what else to defer on
     #+END_SRC
+
 *** Rainbow delimiters
     People mention =org-mode= and =magit= as killer packages that are reasons
     that someone might want to switch to Emacs. This is one of those little
@@ -901,6 +915,7 @@
         :config
         (ejh/globalize #'rainbow-delimiters-mode))
     #+END_SRC
+
 *** Company
     Emacsers loves cutesy names that don't immediately tell you what the package
     actually does. =company= is short for *Comp*-lete *any*-thing. Basically,
@@ -913,6 +928,7 @@
         ;; suggestions that come from buffer completion.
         (setq company-dabbrev-downcase nil))
     #+END_SRC
+
 *** iedit
     Another entry in the long Emacs tradition of "Names that don't convey what
     the package does", =iedit= allows for editing a bunch of like symbols at
@@ -924,6 +940,7 @@
         (:prefix ejh/leader-key
                  ";" '(iedit-mode :which-key "iedit")))
     #+END_SRC
+
 *** Stupid indent
     Most of the time, Emacs' smart indentation is great. But when it's wrong,
     *wow* is it wrong. =stupid-indent-mode= will make indentation behave more
@@ -931,6 +948,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package stupid-indent-mode)
     #+END_SRC
+
 *** Yasnippets
     ~yasnippets~ is the standard for managing snippets.
     #+BEGIN_SRC emacs-lisp
@@ -964,6 +982,7 @@
         (setq company-backends
               (ejh/yasnippetify-backends company-backends)))
     #+END_SRC
+
 *** Tags
     Emacs' tags situation is a lot wider than what's available in Vim; I'm not
     exactly sure that's a good thing though. It ends up feeling pretty confused
@@ -982,12 +1001,14 @@
                   (speedbar-add-supported-extension ".rhtml")
                   (speedbar-add-supported-extension ".rake")))
     #+END_SRC
+
 *** Flycheck
     Don't have much in mind for this yet. Just want to make sure that
     it's here.
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck)
     #+END_SRC
+
 *** Fun stuff
     Nothing in here exactly matters in the way that other parts of the
     configuration do. But they're pretty cool
@@ -1012,6 +1033,7 @@
            (interactive)
            (wttrin-query "Novi")))
      #+END_SRC
+
 ** Languages
    This is still *very* much a work in progress. I'm filling these out on an as
    needed basis. I have a file I'm working off of for the packages that I want
@@ -1047,6 +1069,7 @@
       (use-package omnisharp
         :after (csharp-mode))
     #+END_SRC
+
 *** CSS
 *** Cucumber
 *** D
@@ -1054,6 +1077,7 @@
       (use-package d-mode
         :commands d-mode)
     #+END_SRC
+
 *** Dart
 *** Docker
     Docker has been on my "to learn" list for probably two years now. Between
@@ -1082,6 +1106,7 @@
       (use-package dockerfile-mode)
       (use-package docker-compose-mode)
     #+END_SRC
+
 *** Elixir
     Nothing interesting here, The Ruby-ness of Elixir make me pretty interested
     in it. Hoping to get into it more in the future.
@@ -1089,6 +1114,7 @@
       (use-package elixir-mode
         :commands (elixir-mode))
     #+END_SRC
+
 *** Elm
     I was writing a lot of Elm for a while but fell out of it. There's probably
     been a new version or two since I've used it.
@@ -1096,24 +1122,29 @@
       (use-package elm-mode
         :mode "\\.elm\\'")
     #+END_SRC
+
 *** Erlang
     #+BEGIN_SRC emacs-lisp
       (use-package erlang)
     #+END_SRC
+
 *** F#
     #+BEGIN_SRC emacs-lisp
       (use-package fsharp-mode)
     #+END_SRC
+
 *** Go
     This is real basic right now, I know that there's more I want to fill in here.
     #+BEGIN_SRC emacs-lisp
       (use-package go-mode)
     #+END_SRC
+
 *** Groovy
     #+BEGIN_SRC emacs-lisp
         (use-package groovy-mode
           :defer t) ; My use-case for this is *very* rare
     #+END_SRC
+
 *** Haskell
     Everyone's favorite hobby language. There's so much more I could do with
     this that I haven't yet.
@@ -1121,6 +1152,7 @@
       (use-package haskell-mode
         :commands (haskell-mode))
     #+END_SRC
+
 *** Hy
 *** Idris
 *** Java
@@ -1149,6 +1181,7 @@
                                              (expand-file-name "bin/java.exe" (getenv "JAVA_HOME"))
                                              meghanada-maven-path "mvn.cmd"))))
     #+END_SRC
+
 *** JavaScript & friends
     #+BEGIN_SRC emacs-lisp
       (defun ejh/less-annoying-js2 ()
@@ -1172,6 +1205,7 @@
         (setq coffee-tab-width 2)
         :commands (coffee-mode))
     #+END_SRC
+
 *** Kotlin
 *** LaTeX
 *** Lisp Family
@@ -1210,6 +1244,7 @@
                cider-repl-history-file "~/.emacs.d/cider-history"
                cider-repl-wrap-history t))
      #+END_SRC
+
 **** Common Lisp
 **** Emacs Lisp
      It should come as no surprise that I write a fair amount of this
@@ -1223,6 +1258,7 @@
           "eb" '(eval-buffer :which-key "buffer")
           "er" '(eval-region :which-key "region")))
      #+END_SRC
+
 **** Racket
 **** Scheme
 *** Lua
@@ -1235,6 +1271,7 @@
             (flyspell-mode +1))
         (auto-fill-mode +1))
     #+END_SRC
+
 *** Nim
     Haven't payed much attention to this. Has a sort of Python-y syntax if I
     remember correct. Kinda interesting. I might look at it more in the future.
@@ -1243,6 +1280,7 @@
         :config
         (add-hook 'nim-mode-hook 'stupid-indent-mode))
     #+END_SRC
+
 *** Nix
 *** OCaml
 *** Org
@@ -1258,6 +1296,7 @@
                   (flycheck-mode +1)
                   (auto-fill-mode +1)))
     #+END_SRC
+
 *** PHP
 *** Perl
 *** PureScript
@@ -1265,6 +1304,7 @@
       (use-package purescript-mode
         :init (add-hook 'purescript-mode 'turn-on-purescript-indentation))
     #+END_SRC
+
 *** Python
 *** R
     There's actually a whole package called =ess= for "Emacs Speaks
@@ -1274,6 +1314,7 @@
   (use-package ess ; This contains `R-mode' among others
     :ensure t)
 #+END_SRC
+
 *** Ruby
     This is my day job, so naturally I've put more effort into this than
     anything else at the moment. Hopefully some of these other languages will
@@ -1308,6 +1349,7 @@
       (use-package rvm
         :defer t)
     #+END_SRC
+
 *** Rust
     On my infinitely growing list of "Languages that look cool and I want to
     learn". Maybe one day..
@@ -1315,6 +1357,7 @@
       (use-package rust-mode
         :commands (rust-mode))
     #+END_SRC
+
 *** Scala
     I like what I've seen of Scala so far. "Functional Programming in Scala" is
     really what made a lot of Functional Programming concepts click for me. I'd
@@ -1323,6 +1366,7 @@
       (use-package scala-mode
         :commands (scala-mode))
     #+END_SRC
+
 *** Standard ML
 *** Text
     ~text-mode~ is kind of a default for when you have to type something that
@@ -1332,6 +1376,7 @@
       (if ejh/can-spellcheck-p
           (add-hook 'text-mode-hook 'flyspell-mode))
     #+END_SRC
+
 *** TypeScript
     Haven't done much with Typescript, though I'd like to.
     #+BEGIN_SRC emacs-lisp
@@ -1343,6 +1388,7 @@
         :after (typescript-mode)
         :ensure t)
     #+END_SRC
+
 *** Vim Script
     This is honestly a little silly, but why leave Emacs?
     #+BEGIN_SRC emacs-lisp
@@ -1350,6 +1396,7 @@
         :mode "\\(?:\\.vimrc\\|.vim\\)\\'"
         :commands (vimrc-mode))
     #+END_SRC
+
 *** Vue
 *** Web
     This is a space for =web-mode=, or anything else generically web related.
@@ -1357,3 +1404,4 @@
       (use-package web-mode
         :commands (web-mode))
     #+END_SRC
+
