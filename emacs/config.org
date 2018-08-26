@@ -1047,10 +1047,11 @@
       (use-package csharp-mode
         :init (add-hook 'csharp-mode-hook
                         (lambda ()
-                          (setq-local company-backends '(company-omnisharp
-                                                         company-capf
-                                                         company-files
-                                                         company-dabbrev))
+                          (setq-local company-backends
+                                      (ejh/yasnippetify-backends '(company-omnisharp
+                                                                   company-capf
+                                                                   company-files
+                                                                   company-dabbrev)))
                           (setq indent-tabs-mode nil
                                 c-syntactic-indentation t
                                 c-basic-offset 4
@@ -1191,8 +1192,7 @@
               js2-strict-trailing-comma-warning nil
               js2-basic-offset 2))
       (use-package js2-mode
-        :config
-        (ejh/less-annoying-js2)
+        :config (ejh/less-annoying-js2)
         :commands (js2-mode))
 
       (use-package rjsx-mode
@@ -1201,9 +1201,14 @@
         :commands (rjsx-mode))
 
       (use-package coffee-mode
+        :commands (coffee-mode)
         :config
         (setq coffee-tab-width 2)
-        :commands (coffee-mode))
+        (let ((case-fold-search t))
+          (font-lock-add-keywords
+           'coffee-mode
+           ;; Class names
+           '(("\\(\s\\|\\.\\)\\([A-Z][a-zA-Z]*\\)" 2 dired-marked-face)))))
     #+END_SRC
 
 *** Kotlin
@@ -1325,13 +1330,17 @@
     to start figuring out what to do for =evil=.
     #+BEGIN_SRC emacs-lisp
       (use-package enh-ruby-mode
+        :commands (enh-ruby-mode)
         :config
         ;; NOTE: This could probably be turned into a `:mode' here in `use-package'.
         ;; However, I'm not positive this works that well right now. I think it's just
         ;; a copy-paste from Stack Overflow.
         (add-to-list 'auto-mode-alist
                      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|prodspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
-        :commands (enh-ruby-mode))
+        (let ((case-fold-search t))
+          (font-lock-add-keywords
+           'enh-ruby-mode
+           '(("\s\\(sidekiq_options\\)" 1 font-lock-builtin-face)))))
 
       (use-package robe
         :after (enh-ruby-mode)
@@ -1382,7 +1391,20 @@
     #+BEGIN_SRC emacs-lisp
       (use-package typescript-mode
         :mode "\\.ts\\'"
-        :commands (typescript-mode))
+        :commands (typescript-mode)
+        :config
+        (let ((case-fold-search t))
+          (font-lock-add-keywords
+           'typescript-mode
+           ;; decorators
+           '(("\s?\\(@[A-Za-z]*\\)"                1 font-lock-warning-face)
+             ;; class names
+             ("\\(\s\\|\\.\\)\\([A-Z][a-zA-Z]*\\)" 2 font-lock-type-face)
+             ;; keys in objects
+             ("\\(?:^\\s *\\|[[{(,]\\s *\\|\\sw\\s +\\)\\(\\(\\sw\\|_\\)+:\\)[^\\??:]"
+              1 (progn
+                  (forward-char -1)
+                  font-lock-constant-face))))))
 
       (use-package tide
         :after (typescript-mode)
