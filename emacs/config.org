@@ -655,9 +655,12 @@
       (use-package company
         :config
         (global-company-mode)
+        (global-set-key (kbd "C-S-SPC") 'company-complete)
         ;; This unsets a super weird default where `company' will downcase
         ;; suggestions that come from buffer completion.
-        (setq company-dabbrev-downcase nil))
+        (setq company-dabbrev-downcase nil)
+        ;; Have suggestions start after two characters have been typed, not three
+        (setq company-minimum-prefix-length 2))
     #+END_SRC
 
 *** iedit
