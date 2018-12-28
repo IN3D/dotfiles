@@ -1022,6 +1022,22 @@
 **** Racket
 **** Scheme
 *** Lua
+    #+BEGIN_SRC emacs-lisp
+      (use-package lua-mode
+        :init (add-hook 'lua-mode-hook
+                        (lambda ()
+                          (stupid-indent-mode +1) ; Emacs *really* struggles with Lua
+                          (smartparens-mode)
+                          (setq-local company-backends
+                                      (ejh/yasnippetify-backends '(company-lua
+                                                                   company-capf
+                                                                   company-files
+                                                                   company-dabbrev)))
+                          (setq-local stupid-indent-level 2))))
+
+      (use-package company-lua
+        :after (lua-mode))
+    #+END_SRC
 *** Markdown
     I thought that this was really just a syntax package but ~markdown-mode~
     adds a whole bunch of ~org-mode~ like features like folding headings and
