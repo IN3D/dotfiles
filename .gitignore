@@ -11,6 +11,7 @@ nvim/.init.vim-rplugin~
 nvim/plugins/mega_colors.vim
 
 ## Emacs stuff
+emacs/.mc-lists.el
 emacs/elpa
 emacs/abbrev_defs
 emacs/auto-save-list/
