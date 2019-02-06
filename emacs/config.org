@@ -683,6 +683,56 @@
       (use-package stupid-indent-mode)
     #+END_SRC
 
+*** Smartparens
+    This is one of the better plugins for handling automatic pair insertions
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package smartparens
+        :config
+        ;; By default, smartparens adds this sort of annoying background highlighting
+        ;; setting it to nil removes it.
+        (setq sp-highlight-pair-overlay nil)
+        (show-paren-mode)
+        (defun ejh/enter-and-indent-sexp (&rest _ignored)
+          "Insert an extra newline at point, and re-indent"
+          (newline)
+          (indent-according-to-mode)
+          (forward-line -1)
+          (indent-according-to-mode))
+
+        (defmacro ejh/smart-indent-sequence (sequence &optional name end-sequence)
+          "Creates functions to intelligently indent after a given `SEQUENCE'.
+      If `NAME' is provided, it will be used in place of `SEQUENCE' in the function name that's generated."
+          (let ((new-func (intern (format "ejh/smart-indent-%s" (if name
+                                                                    name
+                                                                  sequence)))))
+            `(defun ,new-func (modes)
+               ,(format "Intelligently indents after the character sequence of %s in `MODES'." sequence)
+               (dolist (mode modes)
+                 (sp-local-pair mode ,sequence (if ,end-sequence
+                                                   ,end-sequence
+                                                 nil) :post-handlers
+                                                 '((ejh/enter-and-indent-sexp "RET")
+                                                   (ejh/enter-and-indent-sexp "<return>")))))))
+        ;; Some good ides to use with this one, but should go in their respective
+        ;; language section:
+        ;; c++-mode
+        ;; c-mode
+        ;; css-mode
+        ;; java-mode
+        ;; js2-mode
+        ;; json-mode
+        ;; objc-mode
+        ;; python-mode
+        ;; sh-mode
+        ;; web-mode
+        (ejh/smart-indent-sequence "{" "curly")
+        (ejh/smart-indent-sequence "[" "bracket")
+        (ejh/smart-indent-sequence "(" "paren")
+        (ejh/smart-indent-sequence "\"\"\"" "triple-equals" "\"\"\""))
+
+    #+END_SRC
+
 *** Yasnippets
     ~yasnippets~ is the standard for managing snippets.
     #+BEGIN_SRC emacs-lisp
