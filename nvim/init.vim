@@ -9,6 +9,9 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-scripts/vibrantink'
+
 Plug 'vim-scripts/nginx.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -21,6 +24,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'leafgarland/typescript-vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
+Plug 'fatih/vim-go'
+Plug 'scrooloose/nerdtree'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -67,6 +78,10 @@ endif
 
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
+" }}}
+
+" === Plugin Config === {{{
+let g:deoplete#enable_at_startup = 1
 " }}}
 
 " === Mappings === {{{
