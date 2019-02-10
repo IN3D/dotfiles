@@ -839,11 +839,14 @@
      #+END_SRC
 
 ** Languages
+
    This is still *very* much a work in progress. I'm filling these out on an as
    needed basis. I have a file I'm working off of for the packages that I want
    to investigate/add for each of these languages.
+
 *** C Family
 *** C#
+
     I started my development career working as a .NET developer; on VB.NET no
     less! I realize this is an unpopular opinion to have in certain circles, but
     I actually *like* things about languages such as C# and Java. I'm
@@ -879,6 +882,7 @@
 *** CSS
 *** Cucumber
 *** D
+
     I found ~D~ on a whim one time while practicing some TDD. The idea was to
     try and get through a kata with a language that I'm unfamiliar with. I
     actually walked away thinking it's a pretty cool little language. I'd like
@@ -890,6 +894,7 @@
 
 *** Dart
 *** Docker
+
     I love Docker, I've actually contributed to the ~docker~ package in
     here. It's good stuff.
     #+BEGIN_SRC emacs-lisp
@@ -917,6 +922,7 @@
     #+END_SRC
 
 *** Elixir
+
     Nothing interesting here, The Ruby-ness of Elixir make me pretty interested
     in it. Hoping to get into it more in the future.
     #+BEGIN_SRC emacs-lisp
@@ -925,6 +931,7 @@
     #+END_SRC
 
 *** Elm
+
     I found Elm around v0.16, right before v0.17 came out and I got really into
     it around that time. I was mostly onboard with v0.18 when that dropped,
     though I thought some changes were dogmatic. Life and work got in the way
@@ -940,11 +947,13 @@
     #+END_SRC
 
 *** Erlang
+
     #+BEGIN_SRC emacs-lisp
       (use-package erlang)
     #+END_SRC
 
 *** F#
+
     While it's a bit unorthodox, ~F#~ seems like a really cool ML. It's outlook
     seems to be "be less pure if it gets things done", mostly in a business-y
     context. Less attractive to purists maybe, but it's an interesting approach
@@ -954,6 +963,7 @@
     #+END_SRC
 
 *** Go
+
     I had more written for my ~go~ configuration, but when I was merging about
     three separate Emacs configs into this ~org-mode~ file, something got lost
     in the move. I haven't had to do any ~go~ sense, so I've left it at the bare
@@ -963,12 +973,14 @@
     #+END_SRC
 
 *** Groovy
+
     #+BEGIN_SRC emacs-lisp
         (use-package groovy-mode
           :defer t) ; My use-case for this is *very* rare
     #+END_SRC
 
 *** Haskell
+
     Everyone's favorite hobby language. There's so much more I could do with
     this that I haven't yet.
     #+BEGIN_SRC emacs-lisp
@@ -979,6 +991,7 @@
 *** Hy
 *** Idris
 *** Java
+
     I'm pretty rusty with Java, this isn't much; but I want to set something up
     for some practice. I could still integrate ~eclim~, which lets Emacs
     interact with a headless version of Eclipse. There's also a plugin being
@@ -1011,6 +1024,7 @@
     #+END_SRC
 
 *** JavaScript & friends
+
     #+BEGIN_SRC emacs-lisp
       (defun ejh/less-annoying-js2 ()
         "`js2-mode' has some annoying defaults that really should be left to something
@@ -1042,6 +1056,7 @@
 *** Kotlin
 *** LaTeX
 *** Lisp Family
+
     Lisps tend to share quite a bit between them. =paredit= for example is
     something that all of them would want.
     #+BEGIN_SRC emacs-lisp
@@ -1049,7 +1064,9 @@
         :commands (paredit-mode)
         :diminish "[内]") ; "Inside"
     #+END_SRC
+
 **** Clojure / ClojureScript
+
      While I've not had nearly enough time to work with it, I've *loved* what
      I've seen of Clojure so far.
      #+BEGIN_SRC emacs-lisp
@@ -1080,6 +1097,7 @@
 
 **** Common Lisp
 **** Emacs Lisp
+
      It should come as no surprise that I write a fair amount of this
      #+BEGIN_SRC emacs-lisp
        (use-package elisp-mode
@@ -1095,6 +1113,7 @@
 **** Racket
 **** Scheme
 *** Lua
+
     #+BEGIN_SRC emacs-lisp
       (use-package lua-mode
         :init (add-hook 'lua-mode-hook
@@ -1111,7 +1130,9 @@
       (use-package company-lua
         :after (lua-mode))
     #+END_SRC
+
 *** Markdown
+
     I thought that this was really just a syntax package but ~markdown-mode~
     adds a whole bunch of ~org-mode~ like features like folding headings and
     such. I was sort of blown away by how much cool stuff is packed into this
@@ -1126,6 +1147,7 @@
     #+END_SRC
 
 *** Nim
+
     Haven't payed much attention to this. Has a sort of Python-y syntax if I
     remember correct. Kinda interesting. I might look at it more in the future.
     #+BEGIN_SRC emacs-lisp
@@ -1137,6 +1159,7 @@
 *** Nix
 *** OCaml
 *** Org
+
     Along with =magit=, =org-mode= is a huge selling point for Emacs. I'm
     obviously partial because this config is written in it.
     #+BEGIN_SRC emacs-lisp
@@ -1153,6 +1176,7 @@
 *** PHP
 *** Perl
 *** PureScript
+
     Would love to give PureScript the time of day sometime, especially now that
     Elm is going down a path I'm not as interested in.
     #+BEGIN_SRC emacs-lisp
@@ -1162,6 +1186,7 @@
 
 *** Python
 *** R
+
     There's actually a whole package called =ess= for "Emacs Speaks
     Statistics". I haven't had a chance too look too deeply at it, partially
     because I don't have a need to do statistics atm. But it looks so cool!
@@ -1171,6 +1196,7 @@
 #+END_SRC
 
 *** Ruby
+
     My day job was working on a pretty large Rails app for a few years. So
     naturally this was one of the first sections that had a lot going on in
     it. And this isn't even all of it, I know there were some other experimental
@@ -1208,6 +1234,7 @@
     #+END_SRC
 
 *** Rust
+
     On my infinitely growing list of "Languages that look cool and I want to
     learn". Maybe one day..
     #+BEGIN_SRC emacs-lisp
@@ -1216,6 +1243,7 @@
     #+END_SRC
 
 *** Scala
+
     I like what I've seen of Scala so far. "Functional Programming in Scala" is
     really what made a lot of Functional Programming concepts click for me. I'd
     like to get back to working with it.
@@ -1226,6 +1254,7 @@
 
 *** Standard ML
 *** Text
+
     ~text-mode~ is kind of a default for when you have to type something that
     isn't strictly related to a particular programming language. It handles
     typing commit messages in ~magit~ for example.
@@ -1235,6 +1264,7 @@
     #+END_SRC
 
 *** TypeScript
+
     Started doing more with TypeScript, mostly through Angular, and I really
     like it. Hoping to be able to do more with it in the future.
     #+BEGIN_SRC emacs-lisp
@@ -1261,6 +1291,7 @@
     #+END_SRC
 
 *** Vim Script
+
     This is honestly a little silly, but why leave Emacs?
     #+BEGIN_SRC emacs-lisp
       (use-package vimrc-mode
@@ -1270,6 +1301,7 @@
 
 *** Vue
 *** Web
+
     This is a space for =web-mode=, or anything else generically web related.
     #+BEGIN_SRC emacs-lisp
       (use-package web-mode
