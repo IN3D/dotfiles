@@ -548,8 +548,8 @@
          "sgp" '((message "Write me!") :which-key "pt"))
         :config
         ;; NOTE: This is a hack so that `counsel-projectile' will work after some
-        ;; changes were made to the keymaps `projectile'. This shouldn't be necesary
-        ;; for very long. Keep track of:
+        ;; changes were made to the keymaps of `projectile'. This shouldn't be
+        ;; necesary for very long. Keep track of:
         ;; https://github.com/ericdanan/counsel-projectile/pull/92
         (defvar counsel-projectile-mode-map
           (let ((map (make-sparse-keymap))
@@ -599,7 +599,7 @@
                 (counsel-rg nil
                             (projectile-project-root)
                             options
-                            (projectile-prepend-project-name "rg")))
+                            (projectile-prepend-project-name "rg: ")))
             (user-error "You're not in a project!")))
         :general
         (:prefix ejh/leader-key
@@ -650,7 +650,7 @@
 *** Company
     Emacsers loves cutesy names that don't immediately tell you what the package
     actually does. =company= is short for *Comp*-lete *any*-thing. Basically,
-    isn't my auto-completion.
+    it's my auto-completion.
     #+BEGIN_SRC emacs-lisp
       (use-package company
         :config
@@ -659,7 +659,8 @@
         ;; This unsets a super weird default where `company' will downcase
         ;; suggestions that come from buffer completion.
         (setq company-dabbrev-downcase nil)
-        ;; Have suggestions start after two characters have been typed, not three
+        ;; Have suggestions start after two characters have been typed, not the
+        ;; default of three
         (setq company-minimum-prefix-length 2))
     #+END_SRC
 
@@ -689,8 +690,8 @@
     #+BEGIN_SRC emacs-lisp
       (use-package smartparens
         :config
-        ;; By default, smartparens adds this sort of annoying background highlighting
-        ;; setting it to nil removes it.
+        ;; By default, smartparens adds this sort of annoying background
+        ;; highlighting. Setting it to nil removes it.
         (setq sp-highlight-pair-overlay nil)
         (show-paren-mode)
         (defun ejh/enter-and-indent-sexp (&rest _ignored)
@@ -714,23 +715,42 @@
                                                  nil) :post-handlers
                                                  '((ejh/enter-and-indent-sexp "RET")
                                                    (ejh/enter-and-indent-sexp "<return>")))))))
-        ;; Some good ides to use with this one, but should go in their respective
-        ;; language section:
-        ;; c++-mode
-        ;; c-mode
-        ;; css-mode
-        ;; java-mode
-        ;; js2-mode
-        ;; json-mode
-        ;; objc-mode
-        ;; python-mode
-        ;; sh-mode
-        ;; web-mode
-        (ejh/smart-indent-sequence "{" "curly")
-        (ejh/smart-indent-sequence "[" "bracket")
-        (ejh/smart-indent-sequence "(" "paren")
-        (ejh/smart-indent-sequence "\"\"\"" "triple-equals" "\"\"\""))
 
+        ;; NOTE: not sure how I feel about setting all these values in here, it may be
+        ;; better to set each of them in their respective langauge configuration areas
+        ;; that way there's not code running for a language that can't be found in
+        ;; it's designated area in the configuration file.
+        (setq ejh/default-language-list '(c-mode
+                                          c++-mode
+                                          css-mode
+                                          java-mode
+                                          js-mode
+                                          js2-mode
+                                          json-mode
+                                          objc-mode
+                                          python-mode
+                                          ruby-mode
+                                          rust-mode
+                                          sh-mode
+                                          web-mode))
+        (ejh/smart-indent-sequence "{" "curly")
+        (ejh/smart-indent-curly ejh/default-language-list)
+        (ejh/smart-indent-sequence "[" "bracket")
+        (ejh/smart-indent-bracket ejh/default-language-list)
+        (ejh/smart-indent-sequence "(" "paren")
+        (ejh/smart-indent-paren ejh/default-language-list)
+        (ejh/smart-indent-sequence "\"\"\"" "triple-equals" "\"\"\"")
+        (ejh/smart-indent-triple-equals '(python-mode)))
+    #+END_SRC
+
+*** Highlight Indentation
+    A helpful mode for dealing with whitespace sensitive languages, and
+    especially YAML files.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package highlight-indent-guides
+        :config
+        (setq highlight-indent-guides-method 'character))
     #+END_SRC
 
 *** Yasnippets
@@ -745,8 +765,8 @@
         (defvar ejh/enable-company-yas t
           "Enable yasnippet for all backends.")
         (defun ejh/backend-with-yas (backend)
-          "Intended to be used in a map. Takes in each BACKEND from a list of
-      backends, either `company-backends' or similar. And takes BACKEND from
+          "Intended to be used in a map. Takes in each `BACKEND' from a list of
+      backends, either `company-backends' or similar. And takes `BACKEND' from
       something like.
 
       \(company-foo\)
@@ -761,7 +781,7 @@
                       (list backend))
                     '(:with company-yasnippet))))
         (defun ejh/yasnippetify-backends (backends)
-          "Take a list of BACKENDS and append a `:with' to them for `yasnippet'."
+          "Take a list of `BACKENDS' and append a `:with' to them for `yasnippet'."
           (mapcar #'ejh/backend-with-yas backends))
         (setq company-backends
               (ejh/yasnippetify-backends company-backends)))
