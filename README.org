@@ -2,9 +2,7 @@
 
 Here be dragons!
 
-A fine assortment of my yak shaved files
-
-[[https://en.wiktionary.org/wiki/yak_shaving][http://www.globalnerdy.com/wordpress/wp-content/uploads/2012/09/yak-shaving.jpg]]
+[[https://en.wiktionary.org/wiki/yak_shaving][https://s3-eu-west-1.amazonaws.com/vam-blog/wp-content/uploads/244-3-resized_5c40d057d80e276f0aa1d5bdfd2f9336.jpg]]
 
 ** About
    From about 2010 to 2016 I used Vim, getting deeper into it as the years went
