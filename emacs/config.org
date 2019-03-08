@@ -486,7 +486,11 @@
         (:prefix ejh/leader-key
          "gb" '(magit-blame :which-key "blame")
          "gs" '(magit-status :which-key "status")
-         "gm" '(magit-dispatch-popup :which-key "menu")))
+         "gm" '(magit-dispatch-popup :which-key "menu"))
+        :config
+        ;; Magit now tries to hide less common things to cut down on potential
+        ;; confusion. There are 7 levels in total; I don't want any of it hidden
+        (setq transient-default-level 7))
 
       ;; This is the basic git-gutter. Maybe in the future I'll do something fancier
       ;; like the fringe git-gutter.
