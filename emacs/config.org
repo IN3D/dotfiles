@@ -752,6 +752,7 @@
                                           ruby-mode
                                           rust-mode
                                           sh-mode
+                                          typescript-mode
                                           web-mode))
         (ejh/smart-indent-sequence "{" "curly")
         (ejh/smart-indent-curly ejh/default-language-list)
@@ -1303,7 +1304,15 @@
              ("\\(?:^\\s *\\|[[{(,]\\s *\\|\\sw\\s +\\)\\(\\(\\sw\\|_\\)+:\\)[^\\??:]"
               1 (progn
                   (forward-char -1)
-                  font-lock-constant-face))))))
+                  font-lock-constant-face))))
+          (add-hook
+           'typescript-mode-hook
+           '(lambda ()
+              (tide-setup)
+              (smartparens-mode +1)
+              (flycheck-mode +1)
+              (eldoc-mode +1)
+              (tide-hl-identifier-mode +1)))))
 
       (use-package tide
         :after (typescript-mode)
