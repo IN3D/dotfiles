@@ -145,13 +145,13 @@
      (setq package-archives
            '(("elpa"         . "http://elpa.gnu.org/packages/")
              ("melpa"        . "http://melpa.org/packages/")
-             ("melpa-stable" . "http://stable.melpa.org/packages/")
-             ("marmalade"    . "http://marmalade-repo.org/packages/"))
+             ("melpa-stable" . "http://stable.melpa.org/packages/"))
+             ;; ("marmalade"    . "http://marmalade-repo.org/packages/")
            package-archive-priorities
            '(("melpa"        . 10)  ; "I too, like to live dangerously"
              ("melpa-stable" . 5)   ; The safe bet
-             ("elpa"         . 3)   ; The standard
-             ("marmalade"    . 0))) ; Probably a bad sign if it gets here
+             ("elpa"         . 3)))   ; The standard
+             ;; ("marmalade"    . 0) ; Probably a bad sign if it gets here
 
      (package-initialize)
    #+END_SRC
