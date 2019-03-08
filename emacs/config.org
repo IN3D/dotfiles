@@ -211,6 +211,20 @@
        (toggle-scroll-bar -1))
    #+END_SRC
 
+** Compile buffers
+   Back when Emacs was young, it would be strange for a compiler to produce
+   output that used escape sequences for color. Obviously that's not the case
+   now, so this will help make sure that Emacs can show color in a ~*compile*~
+   buffer rather than showing all the literal escape sequences.
+   #+BEGIN_SRC emacs-lisp
+     (require 'ansi-color)
+
+     (defun ejh/ansi-colorize-buffer ()
+       (let ((buffer-read-only nil))
+         (ansi-color-apply-on-region (point-min) (point-max))))
+     (add-hook 'compilation-filter-hook 'ejh/ansi-colorize-buffer)
+   #+END_SRC
+
 ** Fonts
    I tend to change this a lot, right now I'm partial to Google's new monospaced
    font "Noto Sans Mono" (not to be confused with "Noto Mono").
