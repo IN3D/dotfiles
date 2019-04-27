@@ -681,7 +681,11 @@
         (setq company-dabbrev-downcase nil)
         ;; Have suggestions start after two characters have been typed, not the
         ;; default of three
-        (setq company-minimum-prefix-length 2))
+        (setq company-minimum-prefix-length 2)
+        ;; With some languages, particularly statically typed ones, `company's
+        ;; suggestion pop-up can get extremely cramped and noisy. Setting this makes
+        ;; the formatting a lot cleaner
+        (setq company-tooltip-align-annotations t))
     #+END_SRC
 
 *** iedit
@@ -1260,7 +1264,32 @@
     learn". Maybe one day..
     #+BEGIN_SRC emacs-lisp
       (use-package rust-mode
-        :commands (rust-mode))
+        :commands (rust-mode)
+        :init
+        (add-hook 'rust-mode-hook
+                  (lambda ()
+                    (setq-local company-backends
+                                (ejh/yasnippetify-backends '(company-racer
+                                                             company-capf
+                                                             company-dabbrev
+                                                             company-files)))
+                    ;; Without calling this, There will be issues with the
+                    ;; `rust-cargo' checker.
+                    (flycheck-rust-setup)
+                    (smartparens-mode +1)
+                    (flycheck-mode +1)
+                    (racer-mode +1))))
+
+      (use-package racer
+        :after rust-mode
+        :config
+        (add-hook 'racer-mode-hook #'eldoc-mode))
+
+      (use-package company-racer
+        :after '(company racer rust-mode))
+
+      (use-package flycheck-rust
+        :after '(flycheck rust-mode))
     #+END_SRC
 
 *** Scala
