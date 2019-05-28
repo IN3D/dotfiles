@@ -1,0 +1,37 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:11-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=${PASSWD}
+    volumes:
+      - ~/Data/Postgres:/var/lib/postgresql/data
+      # - pg-data:/var/lib/postgresql/data
+      # - pg-data:~/Data/Postgres
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${PASSWD}
+    volumes:
+      - ~/Data/MySql:/var/lib/mysql
+      # mysql-data:/var/lib/mysql
+      # - mysql-data:~/Data/MySql
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - ~/Data/Redis:/data
+      # - redis-data:/data
+      # - redis-data:~/Data/Redis
+
+#volumes:
+#  - pg-data:
+#  - mysql-data:
+#  - redis-data:
