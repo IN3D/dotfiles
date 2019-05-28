@@ -8,8 +8,6 @@ services:
       - POSTGRES_PASSWORD=${PASSWD}
     volumes:
       - ~/Data/Postgres:/var/lib/postgresql/data
-      # - pg-data:/var/lib/postgresql/data
-      # - pg-data:~/Data/Postgres
   mysql:
     image: mysql:8
     ports:
@@ -18,8 +16,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${PASSWD}
     volumes:
       - ~/Data/MySql:/var/lib/mysql
-      # mysql-data:/var/lib/mysql
-      # - mysql-data:~/Data/MySql
   redis:
     image: redis:5-alpine
     ports:
@@ -28,10 +24,3 @@ services:
     hostname: redis
     volumes:
       - ~/Data/Redis:/data
-      # - redis-data:/data
-      # - redis-data:~/Data/Redis
-
-#volumes:
-#  - pg-data:
-#  - mysql-data:
-#  - redis-data:
