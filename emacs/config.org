@@ -1328,7 +1328,7 @@
            ;; decorators
            '(("\s?\\(@[A-Za-z]*\\)"                1 font-lock-warning-face)
              ;; class names
-             ("\\(\s\\|\\.\\)\\([A-Z][a-zA-Z]*\\)" 2 font-lock-type-face)
+             ("\\(\s\\|\\.\\)\\([A-Z_][a-zA-Z_]*\\)" 2 font-lock-type-face)
              ;; keys in objects
              ("\\(?:^\\s *\\|[[{(,]\\s *\\|\\sw\\s +\\)\\(\\(\\sw\\|_\\)+:\\)[^\\??:]"
               1 (progn
