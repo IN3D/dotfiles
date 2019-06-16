@@ -30,7 +30,7 @@
    #+BEGIN_SRC emacs-lisp
      (setq custom-file "~/.dotfiles/emacs/custom.el")
      ;; Emacs will throw an error if it tries to load a file that doesn't exists
-     (shell-command "touch %s" custom-file)
+     (shell-command (format "touch %s" custom-file))
      (load custom-file)
    #+END_SRC
 
