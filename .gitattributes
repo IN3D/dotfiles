@@ -4,4 +4,5 @@ xmonad/xmobarrc linguist-language=Haskell
 
 nvim/autoload/plug.vim linguist-vendored
 emacs/vendor linguist-vendored
-.archive/ linguist-vendored
+.archive/* linguist-vendored
+.archive/emacs/*.el linguist-vendored
