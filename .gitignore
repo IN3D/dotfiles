@@ -9,6 +9,7 @@ nvim/shada
 nvim/eclim
 nvim/.init.vim-rplugin~
 nvim/plugins/mega_colors.vim
+nvim/lazy-lock.json
 
 ## Emacs stuff
 emacs/.mc-lists.el

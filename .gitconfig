@@ -9,7 +9,6 @@
 	all = add .
 	b = branch
 	back = !sh -c \"git checkout master && git pull\"
-	beyonce = config user.name
 	bvv = branch -vv
 	ccis = commit -S -m
 	changes-in = diff-tree --pretty --no-commit-id --name-status -r

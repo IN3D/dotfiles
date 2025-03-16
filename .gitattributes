@@ -1,8 +1,7 @@
 *.csh linguist-language=Shell
 nvim/UltiSnips/*.snippets linguist-language=Vim
-emacs/snippets/* linguist-language=Emacs
-emacs/*.org linguist-language=Emacs
-xmobar/* linguist-language=Haskell
+xmonad/xmobarrc linguist-language=Haskell
 
 nvim/autoload/plug.vim linguist-vendored
 emacs/vendor linguist-vendored
+.archive/ linguist-vendored
