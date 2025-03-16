@@ -1,2 +1,0 @@
-#! /home/eric/.linuxbrew/bin/zsh
-scm -f $HOME/bin/print-power.scm $@
