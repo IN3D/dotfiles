@@ -1,0 +1,621 @@
+* Fundamental stuff
+** Absolute basics
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/vendor/")
+#+END_SRC
+
+No landing screen
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+#+END_SRC
+
+Stop creating backup files like =foo.txt~=
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-files nil)
+#+END_SRC
+
+Stop Emacs from tryping to append config to the bottom of ~init.el~
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el")
+  ;; prevent Emacs from throwing errors because the file is missing
+  (shell-command (format "touch %s" custom-file))
+  (load custom-file)
+#+END_SRC
+
+Enable "advanced" features
+#+BEGIN_SRC emacs-lisp
+  (put 'narrow-to-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'set-goal-column 'disabled nil)
+  (put 'narrow-to-page 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+#+END_SRC
+
+Emacs has two prompts, "yes or no" and "y or n"
+There's no reason to have both of these, Just use "y or n"
+#+BEGIN_SRC emacs-lisp
+  (fset 'ejh/default-yes-or-no-p 'yes-or-no-p) ; create backup
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Turn off bells and beeps
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function nil)
+#+END_SRC
+
+Never use tab characters unless a mode calls for it
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+Increase the garbage collection threshold to something more sensible for modern computers.
+#+BEGIN_SRC emacs-lisp
+  (defvar ejh/default-gc-cons-threshold gc-cons-threshold)
+  (setq gc-cons-threshold 100000000)
+#+END_SRC
+
+** Base level functions
+Super basic function that I wrote for when a package, usually a minor-mode
+doesn't have a function to invoke it globally
+#+BEGIN_SRC emacs-lisp
+  (defun ejh/globalize (mode)
+    "Janky function to make global modes when one isn't provided.
+  MODE is the mode to rig a global mode for."
+    (add-hook 'prog-mode-hook mode))
+#+END_SRC
+
+A function using the base Emacs =project.el= to determine where the
+root of the project is. Prefer =project.el= for portability.
+
+Second, define a generic macro for creating compile commands that can
+easily be run through =general= keybinds. Used later in language
+configuration.
+#+BEGIN_SRC emacs-lisp
+  (defun ejh/project-root ()
+    "Get the project root directory using project.el."
+    (when-let ((project (project-current)))
+      (project-root project)))
+
+  (defmacro ejh/create-compile-command (name command &optional default-target)
+    "Define a compilation command function named ejh/compile-command-NAME.
+  COMMAND is the base command to execute.
+  DEFAULT-TARGET is appended to COMMAND when no file/line is specified."
+    (let ((func-name (intern (concat "ejh/compile-command-" name))))
+      `(defun ,func-name (&optional file-p line-p prompt-p)
+         ,(format "Run %s compilation command.
+  If FILE-P is non-nil, run on current file.
+  IF LINE-P is non-nil, run on current line (implies FILE-P).
+  If PROMPT-P is non-nil, prompt for command confirmation." command)
+         (interactive)
+         (let* ((default-directory (or (ejh/project-root) default-directory))
+                (file-relative (when buffer-file-name
+                                 (file-relative-name buffer-file-name default-directory)))
+                (cmd-base ,command)
+                (cmd (cond
+                      ((and line-p file-relative)
+                       (format "%s %s:%d" cmd-base file-relative (line-number-at-pos)))
+                      ((and file-p file-relative)
+                       (format "%s %s" cmd-base file-relative))
+                      (t
+                       (format "%s %s" cmd-base (or ,default-target ""))))))
+           (if prompt-p
+               (compile (read-string "Command: " cmd) t)
+             (compile cmd t))))))
+#+END_SRC
+
+** Setup packages
+Configure where to get packages from, and what priority to give them
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+
+  (setq package-archives
+        '(("elpa" . "http://elpa.gnu.org/packages/")
+  	("melpa" . "http://melpa.org/packages/")
+  	("melpa-stable" . "http://stable.melpa.org/packages/"))
+        ;; Does marmalade still exist?
+        ;; ("marmalade" . "http://marmalade-repo.org/packages/")
+        package-archive-priorities
+        '(("melpa" . 10)
+  	("melpa-stable" . 5)
+  	("elpa" . 3)))
+          ;; ("marmalade" . 0)
+  (package-initialize)
+#+END_SRC
+
+Make sure that =use-package= is installed if it isn't already
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+#+END_SRC
+
+** Setup my personal info
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Eric Hopkins"
+        user-mail-address "eric.on.tech@gmail.com"
+        calendar-latitude 42.33
+        calendar-longitude -83.04
+        calendar-location-name "Detroit, MI")
+#+END_SRC
+
+** Spell checking
+On startup, check to see if the system is setup to do spellchecking. If =aspell= is installed, prefer it over =ispell=
+#+BEGIN_SRC emacs-lisp
+  (setq ejh/can-spellcheck-p (if (or (executable-find "aspell")
+  				   (executable-find "ispell"))
+  			       t
+  			     nil))
+
+  ;; prefer aspell if it's installed
+  (if (executable-find "aspell")
+      (setq ispell-program-name "aspell"
+  	  ispell-list-command "--list"
+            ;; NOTE: corfu has an error where it can't find the dictionary
+            ;; without this set
+            ispell-alternate-dictionary "/usr/lib/aspell-0.60/en.dat"))
+#+END_SRC
+
+** GUI stuff
+Keep things minimal, get rid of toolbars and such
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (when (display-graphic-p)
+    (tool-bar-mode -1)
+    (toggle-scroll-bar -1))
+#+END_SRC
+
+* Package configuration
+** bootstrapping
+#+BEGIN_SRC emacs-lisp
+  (setq use-package-always-ensure t)
+#+END_SRC
+
+** Language independent
+*** Term
+This prevents some instances of extremely slow text rendering in =term=
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'term-mode-hook
+  	  (lambda ()
+  	    (setq bidi-paragraph-direction 'left-to-right)))
+
+  (use-package eshell
+    :defer t
+    :init
+    (defun ejh/run-in-eshell (cmd)
+      "Runs the command `cmd' in eshell."
+      (with-current-buffer "*eshell*"
+        (end-of-buffer)
+        (eshell-kill-input)
+        (message (concat "Running in Eshell: " cmd))
+        (insert cmd)
+        (eshell-send-input)
+        (end-of-buffer)
+        (eshell-bol)
+        (yank)))
+    :config
+    (eval-after-load "esh-mode"
+      '(define-key eshell-mode-map (kbd "C-c C-<backspace>")
+                   (lambda ()
+                     (interactive)
+                     (ejh/run-in-eshell "clear 1")))))
+#+END_SRC
+
+*** ANSI color
+The solution to this used to be more complicated but this should be
+all that's needed now
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ansi-color
+              :hook (compilation-filter . ansi-color-compilation-filter))
+#+END_SRC
+
+*** Vertico
+#+BEGIN_SRC emacs-lisp
+  (use-package vertico
+    :init (vertico-mode))
+
+  ;; Persist history over Emacs restarts. Vertico sorts by history
+  ;; position
+  (use-package savehist
+    :init (savehist-mode))
+
+  (use-package emacs
+    :custom
+    (enable-recursive-minibuffers t)
+    (read-extended-command-predicate #'command-completion-default-include-p)
+    (minibuffer-prompt-properties
+     '(read-only t cursor-intangible t face minibuffer-prompt)))
+#+END_SRC
+
+*** Keybindings / Evil? / General
+#+BEGIN_SRC emacs-lisp
+  ; still trying to decide if I want to use evil
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq ejh/leader-key "C-c SPC")
+  ;; I don't really use my Ergodox anymore so this doesn't make
+  ;; a ton of sense anymore
+  ;; (setq ejh/local-leader-key "C-c <C-Backspace>")
+  (setq ejh/local-leader-key "C-c DEL")
+
+  (use-package general
+    :config
+    (general-define-key
+     :prefix ejh/leader-key
+     "b" '(nil :wk "buffers")
+     "g" '(nil :wk "git")
+     "j" '(nil :wk "jump")
+     "p" '(nil :wk "project")
+     "s" '(nil :wk "search")
+     "sg" '(nil :wk "git project")
+     "t" '(nil :wk "toggle")
+     "tt" '(consult-theme :wk "theme")
+     "tF" '(nil :wk "fill break")
+     "tn" '(display-line-numbers-mode :wk "line numbers")
+     "tN" '(global-display-line-numbers-mode :wk "global line numbers")
+     "x" '(nil :wk "text")))
+#+END_SRC
+
+These are some really helpful functions I've put together for aligning text,
+I took inspiration for them from Spacemacs, and the Emacs Wiki.
+#+BEGIN_SRC emacs-lisp
+  ;; Inspred by http://emacswiki.org/emacs/AlignCommands
+  (defun ejh/align-repeat (start end regexp &optional justify-right after)
+    "Repeated alignment with respect to the given regular expression.
+  START and END are where the selected region starts and ends, and are
+  provided to 'align-regexp'. REGEXP is the character, or expression t obe
+  aligned.  If JUSTIFY-RIGHT is non-nil justify to the right instead of the
+  left. If AFTER is non-nil, add whitespace to the left instead of the right."
+    (interactive "r\nsAlign regexp: ")
+    (let* ((ws-regexp (if (string-empty-p regexp)
+  			"\\(\\s-+\\)"
+  		      "\\(\\s-*\\)"))
+  	 (complete-regexp (if after
+  			      (concat regexp ws-regexp)
+  			    (concat ws-regexp regexp)))
+  	 (group (if justify-right -1 1)))
+      (message "%S" complete-regexp)
+      (align-regexp start end complete-regexp group 1 t)))
+
+  (defmacro ejh/create-align-x (name regexp &optional justify-right default-after)
+    "This will create a new function to align text.
+  NAME is the name that will be applied to the created function.  For example
+  \"colon\" will produce the function \"ejh/align-repeat-colon\". REGEXP is the
+  character or expression to be aligned.  If JUSTIFY-RIGHT is non-nil, justify to
+  the right instead of the left.  If DEFAULT-AFTER is non-nil, add whitespace to
+  the left instead of the right."
+    (let ((new-func (intern (concat "ejh/align-repeat-" name))))
+      `(defun ,new-func (start end switch)
+         (interactive "r\nP")
+         (let ((after (not (eq (if switch t nil) (if ,default-after t nil)))))
+  	 (ejh/align-repeat start end ,regexp ,justify-right after)))))
+
+  (ejh/create-align-x "colon" ":" nil t)
+  (ejh/create-align-x "comma" "," nil t)
+  (ejh/create-align-x "equal" "=")
+  (ejh/create-align-x "arrow" "->")
+  (ejh/create-align-x "back-arrow" "<-")
+  (ejh/create-align-x "fat-arrow" "=>")
+
+  (general-define-key
+   :prefix ejh/leader-key
+   "xf=" '(ejh/align-repeat-equal :wk "equal")
+   "xf:" '(ejh/align-repeat-colon :wk "colon")
+   "xf-" '(ejh/align-repeat-arrow :wk "arrow")
+   "xf>" '(ejh/align-repeat-back-arrow :wk "back arrow")
+   "xf," '(ejh/align-repeat-comma :wk "comma")
+   "xfr" '(align-regexp :wk "regex"))
+#+END_SRC
+
+*** Consult
+#+BEGIN_SRC emacs-lisp
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; This gives you the fuzzy searching you're used to
+    (setq completion-styles '(orderless basic)
+  	completion-category-defaults nil
+  	completion-category-overrides '((file (styles . (partial-completion))))))
+
+  (use-package consult
+    ;; replaces key bindings that may already be in use
+    :general
+    ;; NOTE: setting this was a bad idea, it made it impossible to jump
+    ;; forward in a line to a character quickly.
+    ;; ("C-s" 'consult-line) ; incremental search
+    ("M-g g" 'consult-goto-line)
+    ("M-y" 'consult-yank-from-kill-right)
+    (:prefix ejh/leader-key
+  	   "bb" '(consult-buffer :wk "switch buffer")
+  	   ;; "ss" '(consult-line :wk "search in buffer")
+  	   "sp" '(consult-ripgrep :wk "search project")
+  	   "sf" '(consult-find :wk "find files"))
+    :custom
+    ;; Make consult-line case-insensitive by default
+    (consult-line-start-from-top nil)
+    :config
+    ;; Narrow key for consult buffer
+    (setq consult-narrow-key "<")
+    ;; Use consult for searching in project
+    (setq xref-show-xrefs-function #'consult-xref
+  	xref-show-defintions-function #'consult-xref)
+    ;; Configure preview behavior
+    (setq consult-preview-key 'any)
+    ;; Configure the register formatting
+    (setq register-preview-delay 0.5
+  	register-preview-function #'consult-register-format)
+    ;; Configure consult for case-insensitive search
+    (setq completin-ignore-case t ; is this a typo??
+  	read-buffer-completion-ignore-case t
+  	read-file-name-completion-ignore-case t))
+
+  (use-package marginalia
+    :init (marginalia-mode))
+#+END_SRC
+
+*** Hungry delete
+#+BEGIN_SRC emacs-lisp
+  (use-package hungry-delete
+    :general
+    ("s-<backspace>" 'hungry-delete-backward)
+    (:prefix ejh/leader-key
+  	   "td" '(hungry-delete-mode :wk "hungry delete")))
+#+END_SRC
+
+*** Which key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :init (which-key-mode))
+#+END_SRC
+
+*** Magit, and Git stuff
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :general
+    (:prefix ejh/leader-key
+  	   "gb" '(magit-blame :wk "blame")
+  	   "gs" '(magit-status :wk "status")
+  	   "gm" '(magit-dispatch-popup :wk "menu")))
+
+  (use-package git-gutter
+    :config (global-git-gutter-mode))
+#+END_SRC
+
+*** Swiper
+This is basically replaced by =consult-line=, I should remove it eventually.
+I'm keeping it for now because of familiarity.
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :general
+    (:prefix ejh/leader-key
+  	   "ss" '(swiper :wk "swiper")))
+#+END_SRC
+
+*** Avy
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :commands (avy-goto-char
+  	     avy-goto-char-2
+  	     avy-goto-line
+  	     avy-goto-line-above
+  	     avy-goto-line-below
+  	     avy-goto-word-0
+  	     avy-goto-word-1)
+    :general
+    (:prefix ejh/leader-key
+  	   "jc" '(avy-goto-char :wk "to character")
+  	   "jC" '(avy-goto-char-2 :wk "to character w/ input")
+  	   "jl" '(avy-goto-line :wk "to line")
+  	   "jn" '(avy-goto-line-below :wk "to next line")
+  	   "jp" '(avy-goto-line-above :wk "to previous line")
+  	   "jw" '(avy-goto-word-0 :wk "to word")
+  	   "jW" '(avy-goto-word-1 :wk "to word w/ input")))
+#+END_SRC
+
+*** Smartparens
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :config
+    (setq sp-highlight-pair-overlay nil)
+    (show-paren-mode)
+    ;; Enable smartparens globally
+    (add-hook 'prog-mode-hook #'smartparens-strict-mode)
+    :general
+    (:prefix ejh/leader-key
+             "t(" '(smartparens-mode :wk "smartparens")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :general
+    (:prefix ejh/leader-key
+  	   "tR" '(rainbow-delimiters-mode :wk "rainbow delimiters")))
+#+END_SRC
+
+*** iedit
+#+BEGIN_SRC emacs-lisp
+  (use-package iedit
+    :general
+    (:prefix ejh/leader-key
+  	   ";" '(iedit-mode :wk "iedit")))
+#+END_SRC
+
+*** Stupid indent
+Emacs typically gets indentation right. But when it /doesn't/, it's
+fantastically wrong. This mode turns off all of Emacs' smart
+indenting functionality and just does basic tab to indent, shift-tab
+to un-indent.
+#+BEGIN_SRC emacs-lisp
+  (use-package stupid-indent-mode
+    :general
+    (:prefix ejh/leader-key
+  	   "tS" '(stupid-indent-mode :wk "stupid indent")))
+#+END_SRC
+
+*** Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck)
+#+END_SRC
+
+*** Language config
+#+BEGIN_SRC emacs-lisp
+  ;; Ensure we're using the built-in version of project.el This is for
+  ;; `eglot' because of running an older version of Emacs.
+  ;; Not /exactly/ sure which version of Emacs is the cut-off for issues
+  ;; with this, but on my Debian machine this is the version I have and
+  ;; specifically have to guard against.
+  (if (version<= emacs-version "28.2")
+      (use-package project
+        :ensure nil)) ; Don't try to install from MELPA, use-built-in
+
+  ;; TODO: figure out why this is still trying to load, even when `rbenv' isn't present
+  ;; on the system
+  ;;
+  ;; (let (rbenv-path (string-trim
+  ;;                   (shell-command-to-string "which rbenv 2>/dev/null")))
+  ;;   (unless (string-empty-p rbenv-path)
+  ;;     (use-package rbenv
+  ;;       :ensure t
+  ;;       :mode "\\.rb\\'"
+  ;;       :config
+  ;;       (global-rbenv-mode))))
+
+  (use-package
+    corfu
+    :custom
+    (corfu-auto t) ; enable auto completion
+    (corfu-separator ?\s) ; searator between completion candidates
+    (corfu-auto-delay 0.2) ; delay before showing completion popup
+    (corfu-auto-prefix 2) ; show completion after typing 2 characters
+    (corfu-popup-delay '(0.5 . 0.2)) ; Delay before showing docs
+    :init
+    (global-corfu-mode)
+    (corfu-popupinfo-mode)
+    :bind
+    (:map corfu-map
+  	("M-p" . corfu-popup-scroll-down)
+  	("M-n" . corfu-popup-scroll-up)
+  	("M-d" . corfu-popupinfo-toggle)))
+
+  ;; Add cape for better completion sources
+  (use-package cape
+    :after corfu
+    :init
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+
+  (use-package kind-icon
+    :ensure t
+    :after corfu
+    :custom
+    (kind-icon-default-face 'corfu-default)
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+  (use-package eglot
+    :ensure t
+    :hook (ruby-mode . eglot-ensure)
+    :config
+    ;; Function to get rbenv-managed solargraph path
+    (defun ejh/get-solargraph-path ()
+      "Get the full path to solargraph executable from rbenv."
+      (let ((default-directory (ejh/project-root))
+            (rbenv-path (string-trim
+                         (shell-command-to-string "rbenv which solargraph 2>/dev/null || bundle exec which solargraph 2>/dev/null"))))
+        (unless (string-empty-p rbenv-path)
+          rbenv-path)))
+    ;; Function to get sorbet path
+    (defun ejh/get-sorbet-path ()
+      "Get the full path to sorbet-ls executable from rbenv."
+      (let ((default-directory (ejh/project-root))
+            (rbenv-path (string-trim
+                         (shell-command-to-string "rbenv which srb 2>/dev/null || bundle exec which srb 2>/dev/null"))))
+        (unless (string-empty-p rbenv-path)
+          (concat (file-name-directory rbenv-path) "sorbet-ls"))))
+    ;; Set up the LSP servers for Ruby
+    (add-to-list 'eglot-server-programs
+                 `(ruby-mode . ,(lambda (_interactive)
+                                  (let ((solargraph-path (ejh/get-solargraph-path))
+                                        (sorbet-path (ejh/get-sorbet-path)))
+                                    (list
+                                     (or solargraph-path "solargraph")
+                                     "stdio"))))
+                 ;; Configure solargraph settings
+                 (setq-default eglot-workspace-configuration
+                               '((solargraph . ((diagnostics . t)
+                                                (completion . t)
+                                                (formatting . t)
+                                                (folding . t)
+                                                (logLevel . "warn"))))))
+    (general-define-key
+     :keymaps 'ruby-mode-map
+     :prefix ejh/local-leader-key
+     "=" '(eglot-format :wk "format buffer")
+     "a" '(eglot-code-actions :wk "code actions")
+     "r" '(eglot-rename :wk "rename")
+     "h" '(eldoc :wk "documentation")
+     "d" '(xref-find-definitions :wk "go to definition")
+     "R" '(xref-find-references :wk "find references")))
+
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              ;; Enable some helpful modes
+              (eldoc-mode 1)
+              (electric-pair-mode 1)
+              (subword-mode 1)
+              ;; Use rbenv managed Ruby
+              (let ((ruby-path (string-trim
+                                (shell-command-to-string "rbenv which ruby 2>/dev/null || which ruby 2>/dev/null"))))
+                (unless (string-empty-p ruby-path)
+                  (setq-local eglot-ruby-command ruby-path)))))
+#+END_SRC
+
+**** Ruby
+#+BEGIN_SRC emacs-lisp
+  (ejh/create-compile-command "rspec" "bundle exec rspec" "spec/*")
+
+  ;; custom pattern for RSpec error output
+  (with-eval-after-load 'compile
+    (add-to-list 'compilation-error-regexp-alist 'rspec-error)
+    (add-to-list 'compilation-error-regexp-alist-alist
+               '(rspec-error "# \\(\\./\\)?\\([^:]+\\):\\([0-9]+\\)" 2 3 nil nil 1)))
+
+  (defun ejh/compile-command-rspec-all ()
+    (interactive)
+    (ejh/compile-command-rspec nil nil nil))
+
+  (defun ejh/compile-command-rspec-file ()
+    (interactive)
+    (ejh/compile-command-rspec t nil nil))
+
+  (defun ejh/compile-command-rspec-line ()
+    (interactive)
+    (ejh/compile-command-rspec t t nil))
+
+  (defun ejh/compile-command-rspec-prompt ()
+    (interactive)
+    (ejh/compile-command-rspec nil nil t))
+
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              (general-define-key
+               :keymaps 'ruby-mode-map
+               :prefix ejh/local-leader-key
+               "t" '(nil :wk "tests")
+               "ta" '(ejh/compile-command-rspec-all :wk "run all")
+               "tf" '(ejh/compile-command-rspec-file :wk "file")
+               "tl" '(ejh/compile-command-rspec-line :wk "line")
+               "tp" '(ejh/compile-command-rspec-prompt :wk "prompt"))))
+#+END_SRC
+
+**** Lua
+#+BEGIN_SRC emacs-lisp
+  (use-package lua-mode
+    :mode "\\.lua\\'"
+    :commands (lua-mode))
+#+END_SRC

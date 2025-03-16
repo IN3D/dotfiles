@@ -1,0 +1,7 @@
+* Emacs config
+
+This is a reworked version of my old config. I was never able to fully move on
+from NeoVim; I've since gone back to it. So I haven't used Emacs consistently
+in a while.
+
+It's not impossible I get the itch and decide I want to try again.

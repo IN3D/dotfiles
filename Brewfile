@@ -2,11 +2,9 @@ cask_args appdir: "/Applications"
 
 tap "caskroom/versions"
 
-cask "emacs"
 cask "firefox"
 cask "firefoxdeveloperedition"
 cask "iterm2"
-cask "sip"
 cask "slack"
 
 brew "cowsay"
