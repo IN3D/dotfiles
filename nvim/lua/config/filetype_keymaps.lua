@@ -36,7 +36,6 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Run Rspec on the current line
     vim.keymap.set('n', '<localleader>tl', function()
       local line_num = vim.fn.line('.')
-      -- vim.cmd('Dispatch -compiler=rspec bundle exec rspec --format progress %:' .. line_num)
       vim.cmd(cmd .. ' %:' .. line_num)
     end, keymap_opts)
   end

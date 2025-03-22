@@ -28,11 +28,11 @@ opt.errorbells = false
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 
--- opt.listchars = {
---   tab = '',
---   eol = '',
---   trail = '',
---   extends = '',
---   precedes = ''
--- }
--- opt.showbreak = ''
+opt.listchars = {
+  tab = '▸ ',
+  eol = '¬',
+  trail = '⋅',
+  extends = '❯',
+  precedes = '❮'
+}
+opt.showbreak = '↪'
