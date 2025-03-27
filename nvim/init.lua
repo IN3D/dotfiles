@@ -10,6 +10,7 @@ require('config.keymaps')
 require('config.plugins')
 require('config.autocmds')
 require('config.lsp')
+require('config.treesitter')
 require('config.completion')
 require('config.filetype_keymaps')
 

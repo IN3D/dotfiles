@@ -58,7 +58,10 @@ require('lazy').setup({
   'tpope/vim-vinegar',
   -- Utility
   'jiangmiao/auto-pairs',
-  'nvim-treesitter/nvim-treesitter',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ":TSUpdate"
+  },
   -- Theme
   'morhetz/gruvbox'
 })
