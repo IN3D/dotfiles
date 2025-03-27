@@ -2,6 +2,29 @@ local create_language_augroup = function(name)
   return vim.api.nvim_create_augroup('LanguageKeymap_' .. name, { clear = true })
 end
 
+-- C++
+local cpp_group = create_language_augroup('cpp')
+vim.api.nvim_create_autocmd('FileType', {
+  group = cpp_group,
+  pattern = { 'cpp' },
+  callback = function(opts)
+    local buffer = opts.buf
+    local keymap_opts = { buffer = buffer, silent = true, noremap = true }
+
+    vim.keymap.set('n', '<localleader>m', ':Make<CR>', keymap_opts)
+    vim.keymap.set('n', '<localleader>r', function()
+      local current_file = vim.fn.expand('%:t:r') -- get filename, strip extension
+      local binary_path = string.format('./bin/%s', current_file)
+
+      if vim.fn.filereadable(binary_path) == 1 then
+        vim.cmd(string.format(':Dispatch %s', binary_path))
+      else
+        vim.notify(string.format('Bindary not found: %s', binary_path), vim.log.levels.WARN)
+      end
+    end, keymap_opts)
+  end
+})
+
 -- Ruby
 local ruby_group = create_language_augroup('ruby')
 vim.api.nvim_create_autocmd('FileType', {
