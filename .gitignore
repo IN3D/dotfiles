@@ -42,3 +42,8 @@ zsh/functions/_*.zsh
 
 # NOTE: What is this?
 **/local.*
+
+## Tmux
+tmux/vendor
+!tmux/vendor/.gitkeep
+!tmux/vendor/*.sh
