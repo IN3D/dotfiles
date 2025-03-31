@@ -40,7 +40,7 @@ zsh/functions/_*.zsh
 .setup/git-prompt.sh
 .setup/javarepl.jar
 
-# NOTE: What is this?
+# Any local shell config files
 **/local.*
 
 ## Tmux
