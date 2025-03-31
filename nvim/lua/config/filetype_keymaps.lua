@@ -34,6 +34,9 @@ vim.api.nvim_create_autocmd('FileType', {
     local buffer = opts.buf
     local keymap_opts = { buffer = buffer, silent = true, noremap = true }
 
+    -- Fixes an annoying issue with Treesitter where it dedents after typing `.`
+    vim.cmd([[autocmd FileType ruby setlocal indentkeys-=.]])
+
     ------------
     -- Basics --
     ------------
@@ -59,7 +62,8 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Run Rspec on the current line
     vim.keymap.set('n', '<localleader>tl', function()
       local line_num = vim.fn.line('.')
-      vim.cmd(cmd .. ' %:' .. line_num)
+      local file_path = vim.fn.expand('%')
+      vim.cmd(cmd .. ' ' .. file_path .. ':' .. line_num)
     end, keymap_opts)
   end
 })
