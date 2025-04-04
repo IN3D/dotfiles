@@ -1,3 +1,6 @@
+## Ignore Mac files
+.DS_Store
+
 ## Vim stuff
 nvim/bundle
 nvim/autoload/plug.vim.old

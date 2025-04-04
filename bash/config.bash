@@ -57,7 +57,7 @@ alias ff='find . -type f -name'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# npm
+# npm, node gobal list
 alias ngl='npm list -g --depth=0'
 
 # jobs list
@@ -75,6 +75,9 @@ alias tmux='tmux -2'
 # This loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
+
+# PS1
+PS1='\w $(if [ $? -eq 0 ]; then echo "\[\033[32m\]λ\[\033[0m\]"; else echo "\[\033[31m\]λ\[\033[0m\]"; fi) '
 
 if [ -f ~/.dotfiles/bash/local.bash ]; then
   source ~/.dotfiles/bash/local.bash

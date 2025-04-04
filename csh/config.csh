@@ -4,12 +4,9 @@ alias ls ls -G
 alias la ls -aF
 alias lf ls -FA
 alias ll ls -lAF
-alias vi nvim
-alias vim nvim
-alias ed nvim
 alias tmux tmux -2
 
-set EDITOR nvim
+set EDITOR vim
 
 set history = 1000
 set savehist = (1000 merge)
@@ -21,5 +18,4 @@ if ( $?tcsh ) then
   bindkey "^W" backward-delete-word
 endif
 
-alias __git_current_branch 'git rev-parse --abbrev-ref HEAD >& /dev/null && echo "(`git rev-parse --abbrev-ref HEAD`)"'
-alias precmd 'set prompt="%{\e[33m%}`whoami`%{\e[0m%} at %{\e[35m%}`hostname | cut -d . -f 1`%{\e[0m%} in %{\e[32m%}%/%{\e[0m%} `__git_current_branch`\n> "'
+alias precmd 'set prompt="%~ %{\e[`if ($status == 0) echo "32"; if ($status != 0) echo "31"`m%}λ%{\e[0m%} "'

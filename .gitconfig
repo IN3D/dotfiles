@@ -10,11 +10,11 @@
 	b = branch
 	back = !sh -c \"git checkout master && git pull\"
 	bvv = branch -vv
-	cb = branch --show-current
 	ccis = commit -S -m
 	changes-in = diff-tree --pretty --no-commit-id --name-status -r
 	ci = commit -m
 	co = checkout
+	cb = branch --show-current
 	cob = checkout -b
 	d = diff
 	deleteremote = push origin --delete
