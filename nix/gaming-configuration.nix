@@ -18,6 +18,13 @@
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
 
+  # Kernel and scheduling optimizations =======================================
+
+  # Swap the default Linux kernel for the Zen kernel. Is more performance
+  # focused than the regular, generalist kernel. Also tends to improve
+  # performance of applications in Proton/Wine
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   # Memory and storage optimizations ===========================================
 
   # File system optimization. Disables access time tracking on the root file

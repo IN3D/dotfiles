@@ -1,7 +1,5 @@
 # This file is for tweaking additional performance out of a Nvidia graphics card
-
 { config, pkgs, ... }:
-
 {
   # Enable OpenGL/graphics support
   # NOTE: `hardware.graphics` replaces `hardware.opengl`
@@ -18,8 +16,9 @@
     # Enable the settings menu
     nvidiaSettings = true;
 
-    # Select the appropriate driver version, prefer the stable version
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Select the appropriate driver version, prefer stable
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = pkgs.linuxPackages_zen.nvidiaPackages.stable; # swap to Zen kernel version
 
     # power management (usually for laptops, unnecessary on desktops)
     powerManagement.enable = false;
