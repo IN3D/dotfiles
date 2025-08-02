@@ -29,20 +29,32 @@
 
     # prime.offload.enableOffloadCmd = true; # for hybrid graphics
     forceFullCompositionPipeline = false; # Can interfere with Wayland
+
+    # "dGPU only mode" enabled in BIOS
+    # prime = {
+    #   offload = {
+    #     enable = true;
+    #     enableOffloadCmd = true;
+    #   };
+    #
+    #   amdgpuBusId = "PCI:10:0:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    # };
   };
 
   # Loads nvidia drivers for Wayland as well, not just xserver
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" "modeset" ];
 
   environment.systemPackages = with pkgs; [
     # provides utilities for interacting with OpenGL and Mesa
     mesa-demos
+    pciutils
   ];
 
   environment.sessionVariables = {
     # For Nvidia Wayland support
     GBM_BACKEND = "nvidia-drm";
-    # __NV_PRIME_RENDER_OFFLOAD = "0"; # disables prime offloading
+    __NV_PRIME_RENDER_OFFLOAD = "0"; # disables prime offloading
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
   };
