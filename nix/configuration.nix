@@ -1,19 +1,23 @@
+# vim: set foldmethod=marker:
 { config, pkgs, ... }:
 {
   imports =
     [
       ./hardware-configuration.nix
       ./graphical-tweaks.nix
+      ./dev.nix
       ./gaming-configuration.nix
     ];
+
+  # Foundational setup {{{
+  # This includes the bootloader, networking, sound, x11, etc
 
   # Setup the bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
-
   # Enable networking
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Detroit";
@@ -57,6 +61,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  # }}}
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.eric = {
@@ -66,51 +71,52 @@
     packages = with pkgs; [];
   };
 
+  # Programs {{{
   nixpkgs.config.allowUnfree = true;
 
   programs.firefox.enable = true;
 
-  programs.git = {
+  # Unlike Firefox. this is Policy only, still need to install one or more
+  # Chromium based browsers
+  programs.chromium = {
     enable = true;
-    lfs.enable = true;
+    # IDs are in the URL of the Chrome Web Store, last part of the path
+    extensions = [
+      "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password
+      "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+    ];
+    # Find options ("policies") here: https://chromeenterprise.google/policies/
+    extraOpts = {
+      "SyncDisabled" = true;
+      "PasswordManagerEnabled" = false;
+    };
   };
 
   environment.systemPackages = with pkgs; [
-    # ----------------------------------------------------------------------------
-    # Stuff that usually just exists on Linux systems
+    # --------------------------------------------------------------------------
+    # Stuff that usually just exists on Linux systems. Ensure this exists for
+    # the sake of compatibility
     gcc
     clang
     binutils
     perl
     python3
-    # ----------------------------------------------------------------------------
-    neovim
-    htop
-    btop
-    ghostty
-    thefuck
+    # --------------------------------------------------------------------------
     ispell
-    neofetch
-    fastfetch
-    ripgrep
-    fzf
-    tldr
-    chromium
     unzip
-    wget
-    tmux
-    stow
-    # ----------------------------------------------------------------------------
+    chromium
   ];
+
+  programs.direnv.enable = true;
+
+  programs.nix-ld.enable = true;
+  # }}}
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # For Electron apps on Wayland
     WLR_NO_HARDWARE_CURSORS = "1"; # Sometimes needed for Nvidia
   };
-
-  programs.direnv.enable = true;
-
-  programs.nix-ld.enable = true;
 
   services.openssh.enable = true;
 
