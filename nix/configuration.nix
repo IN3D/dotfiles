@@ -76,29 +76,31 @@
   };
 
   environment.systemPackages = with pkgs; [
-  # ----------------------------------------------------------------------------
-  # Stuff that usually just exists on Linux systems
-  gcc
-  clang
-  binutils
-  perl
-  python3
-  # ----------------------------------------------------------------------------
-  neovim
-  htop
-  btop
-  ghostty
-  thefuck
-  ispell
-  neofetch
-  fastfetch
-  ripgrep
-  fzf
-  tldr
-  chromium
-  unzip
-  wget
-  # ----------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------
+    # Stuff that usually just exists on Linux systems
+    gcc
+    clang
+    binutils
+    perl
+    python3
+    # ----------------------------------------------------------------------------
+    neovim
+    htop
+    btop
+    ghostty
+    thefuck
+    ispell
+    neofetch
+    fastfetch
+    ripgrep
+    fzf
+    tldr
+    chromium
+    unzip
+    wget
+    tmux
+    stow
+    # ----------------------------------------------------------------------------
   ];
 
   environment.sessionVariables = {
