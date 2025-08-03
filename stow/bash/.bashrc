@@ -22,14 +22,31 @@ if [ $osName = "Darwin" ] || [ $osName = "FreeBSD" ]; then
 else
   alias ls='ls --color' # ls color mode (Linux)
 fi
-alias l='ls -lh' # long list, directories with trailing slash, better sizes
-alias ll='ls -lh' # long list, trailing / on dirs
-alias la='ls -lAh' # list all (except ./ and ../)
-alias lt='ls -lth' # list by time
-alias lrt='ls -lrth' # list by time, reversed
-alias ldot='ls -ld .*' # list dot files
-alias lS='ls -1lSsh' # list with files sizes in 512 bytes, with total
-alias lart='ls -1cArt' # short, files from most to least recently modified
+
+# For older machines that may have exa available, but not eza
+if command -v exa &> /dev/null && ! command -v eza &> /dev/null; then
+  alias eza='exa'
+fi
+
+# Prefer eza over ls if it's available
+if command -v eza &> /dev/null; then
+  alias l='eza -lh'
+  alias ll='eza -lh'
+  alias la='eza -lah'
+  alias lt='eza -lh --sort=modified'
+  alias lrt='eza -lh --sort=modified --reverse'
+  alias ldot='eza -1 -lh --sort=size --reverse'
+  alias lart='eza -1 -lah --sort=modified'
+else
+  alias l='ls -lh' # long list, directories with trailing slash, better sizes
+  alias ll='ls -lh' # long list, trailing / on dirs
+  alias la='ls -lAh' # list all (except ./ and ../)
+  alias lt='ls -lth' # list by time
+  alias lrt='ls -lrth' # list by time, reversed
+  alias ldot='ls -ld .*' # list dot files
+  alias lS='ls -1lSsh' # list with files sizes in 512 bytes, with total
+  alias lart='ls -1cArt' # short, files from most to least recently modified
+fi
 
 alias grep='grep --color'
 # Super grep
