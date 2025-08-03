@@ -6,6 +6,8 @@
 # local to a work machine
 stow/zsh/.config/zsh/functions/_*.zsh
 
+stow/fish/.config/fish/fish_variables
+
 # Any local shell config files
 **/local.*
 
