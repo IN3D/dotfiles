@@ -1,3 +1,0 @@
-ret() {
-  cd "$OLDPWD"
-}

@@ -1,7 +1,7 @@
 # overwrites man with a colorized version
 man() {
-      env \
-          LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+  env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
     LESS_TERMCAP_md=$(printf "\e[1;31m") \
     LESS_TERMCAP_me=$(printf "\e[0m") \
     LESS_TERMCAP_se=$(printf "\e[0m") \
@@ -11,5 +11,5 @@ man() {
     PAGER=/usr/bin/less \
     _NROFF_U=1 \
     PATH=${HOME}/bin:${PATH} \
-             man "$@"
+    man "$@"
 }

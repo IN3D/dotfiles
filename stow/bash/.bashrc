@@ -7,14 +7,6 @@ export EDITOR=nvim
 export LSCOLORS=Exfxcxdxcxegedabagacdx
 export NVM_DIR=~/.nvm
 export TERM="xterm-256color"
-
-# junk environmental variables for testing
-export email_address='junk@junk.com'
-export PSQL_DEV='aLocalPassword'
-export gmail_username='junk@junk.com'
-export gmail_password='junkPassword'
-export DEV_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
-export PRD_KEY='abc12abc12abc12abc12abc12abc12abc12abc1233333333'
 # =============================================================================
 
 # Detect
@@ -30,14 +22,14 @@ if [ $osName = "Darwin" ] || [ $osName = "FreeBSD" ]; then
 else
   alias ls='ls --color' # ls color mode (Linux)
 fi
-alias l='ls -lFh' # long list, directories with trailing slash, better sizes
-alias ll='ls -lFh' # long list, trailing / on dirs
-alias la='ls -lAFh' # list all (except ./ and ../)
-alias lt='ls -ltFh' # list by time
-alias lrt='ls -lrtFh' # list by time, reversed
+alias l='ls -lh' # long list, directories with trailing slash, better sizes
+alias ll='ls -lh' # long list, trailing / on dirs
+alias la='ls -lAh' # list all (except ./ and ../)
+alias lt='ls -lth' # list by time
+alias lrt='ls -lrth' # list by time, reversed
 alias ldot='ls -ld .*' # list dot files
-alias lS='ls -1lFSsh' # list with files sizes in 512 bytes, with total
-alias lart='ls -1FcArt' # short, files from most to least recently modified
+alias lS='ls -1lSsh' # list with files sizes in 512 bytes, with total
+alias lart='ls -1cArt' # short, files from most to least recently modified
 
 alias grep='grep --color'
 # Super grep
@@ -65,6 +57,10 @@ alias jl='jobs -l'
 
 # tmux 256 mode
 alias tmux='tmux -2'
+
+# for stow
+alias stow-link="stow -d $HOME/.dotfiles/stow -t $HOME"
+alias stow-unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
 # =============================================================================
 
 # Version Managers
@@ -75,6 +71,9 @@ alias tmux='tmux -2'
 # This loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # =============================================================================
+
+# Check the window size after every command.
+shopt -s checkwinsize
 
 # PS1
 PS1='\w $(if [ $? -eq 0 ]; then echo "\[\033[32m\]λ\[\033[0m\]"; else echo "\[\033[31m\]λ\[\033[0m\]"; fi) '

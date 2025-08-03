@@ -1,52 +1,20 @@
 ## Ignore Mac files
 .DS_Store
 
-## Vim stuff
-nvim/bundle
-nvim/autoload/plug.vim.old
-nvim/local.vim
-nvim/prehook.vim
-nvim/plugin
-nvim/plugged
-nvim/shada
-nvim/eclim
-nvim/.init.vim-rplugin~
-nvim/plugins/mega_colors.vim
-nvim/lazy-lock.json
-
-## Emacs stuff
-emacs/.mc-lists.el
-emacs/elpa
-emacs/abbrev_defs
-emacs/auto-save-list/
-emacs/network-security.data
-emacs/recentf
-emacs/projectile-bookmarks.eld
-# Temporary file buffers
-emacs/*~
-*.*~
-
-## XMonad
-# results of compiling
-xmonad/xmonad-x86_64-linux
-xmonad/xmonad.errors
-xmonad/xmonad.hi
-xmonad/xmonad.o
-
 # Allow for private, local functions
 # sometimes a function would be very helpful, but should stay
 # local to a work machine
-bash/functions/_*.bash
-zsh/functions/_*.zsh
-
-.setup/get-pip.py
-.setup/git-prompt.sh
-.setup/javarepl.jar
+stow/zsh/.config/zsh/functions/_*.zsh
 
 # Any local shell config files
 **/local.*
 
+# Stow =========================================================================
+
+## Neovim
+stow/nvim/.config/nvim/lazy-lock.json
+
 ## Tmux
-tmux/vendor
-!tmux/vendor/.gitkeep
-!tmux/vendor/*.sh
+stow/tmux/.config/tmux/vendor
+!stow/tmux/.config/tmux/vendor/.gitkeep
+!stow/tmux/.config/tmux/vendor/*.sh
