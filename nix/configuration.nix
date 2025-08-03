@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./graphical-tweaks.nix
       ./dev.nix
+      ./virtualization.nix
       ./gaming-configuration.nix
     ];
 
