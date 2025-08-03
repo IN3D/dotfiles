@@ -1,0 +1,3 @@
+theme = GruvboxDark
+keybind = ctrl+shift+x=close_surface
+font-family = "Berkeley Mono"
