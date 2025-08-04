@@ -121,6 +121,11 @@
 
   services.openssh.enable = true;
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   services.flatpak.enable = true;
   # Enable the Flatpak portal for better desktop integration
   xdg.portal = {

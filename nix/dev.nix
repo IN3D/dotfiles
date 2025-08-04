@@ -13,6 +13,7 @@ let
   # Generally useful dev cli tools. I should probably think of better groups
   # for this stuff in the future
   generic = with pkgs; [
+    ansible
     universal-ctags
     stow
     tldr
