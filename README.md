@@ -21,6 +21,16 @@ My current desktop is running NixOS. The `nix/` directory contains its config
 files. There's also a simple script to copy the files into the default `/etc/nixos/`
 directory and trigger a rebuild.
 
+Before installing, this config is dependent on two other channels, the official
+`unstable` channel, as well as the NUR. This has to be run before an rebuild
+will succeed.
+
+```sh
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+nix-channel --add https://github.com/nix-community/NUR/archive/main.tar.gz nur
+nix-channel --update
+```
+
 ## Archive
 
 The `.archive/` directory is for configs I used at one point, but no longer do
