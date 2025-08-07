@@ -52,7 +52,6 @@ let
   # to run off the unstable channel to be as up-to-date as possible.
   ai_tools = with pkgs; [
     code-cursor
-    ollama
   ] ++ [
     unstable.zed-editor
     unstable.windsurf
@@ -91,6 +90,13 @@ in
   programs.git = {
     enable = true;
     lfs.enable = true;
+  };
+
+  services.open-webui.enable = true;
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
   };
 
   environment.systemPackages =
