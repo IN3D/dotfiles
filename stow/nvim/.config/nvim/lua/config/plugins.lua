@@ -47,6 +47,42 @@ require('lazy').setup({
   -- Git
   'tpope/vim-fugitive',
   'lewis6991/gitsigns.nvim',
+  -- AI
+  {
+    "nomnivore/ollama.nvim",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    -- All the user commands added by the plugin
+    cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
+    keys = {
+      {
+        "<leader>ap",
+        ":<c-u>lua require('ollama').prompt()<cr>",
+        desc = "ollama prompt",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>ag",
+        ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+        desc = "ollama Generate Code",
+        mode = { "n", "v" },
+      },
+    },
+    --@type Ollama.Config
+    opts = {
+      model = "qwen2.5-coder:1.5b",
+      url = "http://127.0.0.1:11434",
+      -- Skip this, handled by systemd
+      -- serve = {
+      --   on_start = false,
+      --   command = "ollama",
+      --   args = { "serve" },
+      --   stop_command = "pkill",
+      --   stop_args = { "-SIGTERM", "ollama" },
+      -- }
+    }
+  },
   -- TPope
   'tpope/vim-abolish',
   'tpope/vim-commentary',
