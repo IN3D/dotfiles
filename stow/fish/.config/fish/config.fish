@@ -1,30 +1,3 @@
-# Exports
-# =============================================================================
-set -x config_dir "$HOME/GitHub/dot_files/.config/fish"
-
-# A bunch of junk environmental variables for testing
-set -x email_address 'junk@junk.com'
-set -x PSQL_DEV 'aLocalPassword'
-set -x gmail_username 'junk@junk.com'
-set -x gmail_password 'junkPassword'
-set -x DEV_KEY = 'abc12abc12abc12abc12abc12abc12abc12abc1233333333'
-set -x PRD_KEY = 'abc12abc12abc12abc12abc12abc12abc12abc1233333333'
-# =============================================================================
-
-
-# PS1
-# =============================================================================
-set __fish_git_prompt_show_informative_status 1
-set __fish_git_prompt_color_untrackedfiles yellow
-set __fish_git_prompt_color_dirtystate red
-set __fish_git_prompt_color_branch cyan
-set __fish_git_prompt_color_cleanstate green
-set __fish_git_prompt_color_stagedstate white
-set __fish_git_prompt_color_upstream_ahead ffb90f
-set __fish_git_prompt_color_upstream_behind blue
-# =============================================================================
-
-
 # Aliases
 # =============================================================================
 alias ls 'ls -G'
@@ -49,12 +22,6 @@ alias T tail
 
 alias fd 'find . -type d -name'
 alias ff 'find . -type f -name'
-
-# directory shortcuts
-alias API '~/MekManager/mekmanager_api'
-alias CLIENT '~/MekManager/mekmanager_client'
-alias FISH_DIR '~/.config/fish'
-alias GITHUB '~/GitHub'
 
 # editors
 alias vi nvim
