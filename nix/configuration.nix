@@ -108,10 +108,13 @@
     aspell
     unzip
     chromium
+    cmus
   ];
 
   programs.direnv.enable = true;
 
+  # This enables support for traditional binaries, required for tools that
+  # download or otherwise manage binaries. (Mason.nvim is an example)
   programs.nix-ld.enable = true;
   # }}}
 
