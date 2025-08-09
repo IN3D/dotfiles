@@ -350,7 +350,7 @@ I took inspiration for them from Spacemacs, and the Emacs Wiki.
     (setq register-preview-delay 0.5
   	register-preview-function #'consult-register-format)
     ;; Configure consult for case-insensitive search
-    (setq completin-ignore-case t ; is this a typo??
+    (setq completion-ignore-case t ; is this a typo??
   	read-buffer-completion-ignore-case t
   	read-file-name-completion-ignore-case t))
 
