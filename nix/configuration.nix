@@ -109,6 +109,8 @@
     aspell
     unzip
     chromium
+    spotify
+    obsidian
     cmus
   ];
 
