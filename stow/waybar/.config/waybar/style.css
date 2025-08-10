@@ -1,0 +1,181 @@
+/* Gruvbox Waybar Theme */
+
+/* Base styling */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "monospace";
+  font-size: 13px;
+  min-height: 0;
+}
+
+/* Main bar */
+window#waybar {
+  background-color: #1d2021;
+  /* background-color: #282828; */
+  color: #ebdbb2;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+/* Workspaces */
+#workspaces {
+  margin: 0 4px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #928374;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+#workspaces button:hover {
+  background: #3c3836;
+  color: #ebdbb2;
+}
+
+#workspaces button.active {
+  background-color: #427b58;
+  color: #1d2021;
+  border-bottom: 2px solid #b8bb26;
+  /* border-bottom: 2px solid #689d6a; */
+}
+
+/* Window title */
+#window {
+  margin: 0 4px;
+  padding: 0 8px;
+  color: #ebdbb2;
+}
+
+/* Clock */
+#clock {
+  background-color: #1d2021;
+  color: #427b58;
+  padding: 0 16px;
+  font-weight: bold;
+  border-bottom: 2px solid #427b58;
+}
+
+
+/* CPU */
+#cpu {
+  background-color: #1d2021;
+  /* color: #af3a03;
+  border-bottom: 2px solid #af3a03; */
+  padding: 0 12px;
+  color: #a89984;
+  border-bottom: 2px solid #a89984;
+}
+#cpu.low {
+  color: #076678;
+  border-bottom: 2px solid #076678;
+}
+#cpu.normal {
+  color: #79740e;
+  border-bottom: 2px solid #79740e;
+}
+#cpu.moderate {
+  color: #b57614;
+  border-bottom: 2px solid #b57614;
+}
+/* for high and critical, swap background and foreground */
+#cpu.high {
+  background-color: #af3a03;
+  color: #1d2021;
+  border-bottom: unset;
+}
+#cpu.critical {
+  color: #1d2021;
+  background-color: #cc241d;
+  border-bottom: unset;
+}
+
+/* Memory */
+#memory {
+  background-color: #1d2021;
+  /* color: #b57614;
+  border-bottom: 2px solid #b57614; */
+  color: #a89984;
+  border-bottom: 2px solid #a89984;
+  padding: 0 12px;
+}
+#memory.low {
+  color: #076678;
+  border-bottom: 2px solid #076678;
+}
+#memory.normal {
+  color: #79740e;
+  border-bottom: 2px solid #79740e;
+}
+#memory.moderate {
+  color: #b57614;
+  border-bottom: 2px solid #b57614;
+}
+/* for high and critical, swap background and foreground */
+#memory.high {
+  background-color: #af3a03;
+  color: #1d2021;
+  border-bottom: unset;
+}
+#memory.critical {
+  color: #1d2021;
+  background-color: #cc241d;
+  border-bottom: unset;
+}
+
+/* System tray */
+#tray {
+  background-color: #3c3836;
+  padding: 0 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #cc241d;
+}
+
+/* Audio */
+#pulseaudio {
+  background-color: #1d2021;
+  color: #427b58;
+  min-width: 90px;
+  border-bottom: 2px solid #427b58;
+  padding: 0 12px;
+}
+
+#pulseaudio.muted {
+  /* background-color: #928374; */
+  color: #928374;
+  border-bottom: 2px solid #928374;
+}
+
+/* Network */
+#network {
+  background-color: #1d2021;
+  color: #b16286;
+  padding: 0 12px;
+  min-width: 220px;
+  border-bottom: 2px solid #b16286;
+}
+
+#network.disconnected {
+  color: #cc241d;
+}
+
+@keyframes blink {
+  to {
+    background-color: #1d2021;
+  }
+}
+
+/* Module spacing */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}

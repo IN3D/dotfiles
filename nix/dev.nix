@@ -24,10 +24,12 @@ let
     thefuck
     eza
     tokei
-    miller # CSV/JSON/etc CLI processor
-    jq # CLI JSON processor
-    yq # CLI YAML processor
-    fd # modern find replacement
+    miller     # CSV/JSON/etc CLI processor
+    jq         # CLI JSON processor
+    yq         # CLI YAML processor
+    xmlstarlet # CLI XML processor
+    fd         # modern find replacement
+    zoxide     # smart cd replacement with frecency
   ];
 
   # Programs that are just for fun, ricing, etc

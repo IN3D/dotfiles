@@ -1,0 +1,90 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 4,
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["tray", "cpu", "memory", "pulseaudio", "network"],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "1",
+      "2": "2", 
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "0"
+    }
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50,
+    "separate-outputs": true
+  },
+  "clock": {
+    "timezone": "America/Detroit",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%a %b %d  %I:%M %p}"
+  },
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": true,
+    "interval": 2,
+    "states": {
+      "critical": 81,
+      "high": 61,
+      "moderate": 41,
+      "normal": 21,
+      "low": 0
+    }
+  },
+  "memory": {
+    "format": "RAM: {percentage}%",
+    "tooltip": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
+    "interval": 2,
+    "states": {
+      "critical": 81,
+      "high": 61,
+      "moderate": 41,
+      "normal": 21,
+      "low": 0
+    }
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "pulseaudio": {
+    "format": "Audio: {volume}%",
+    "format-bluetooth": "Audio: {volume}%",
+    "format-bluetooth-muted": "Audio: / ",
+    "format-muted": "Audio: / ",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol"
+  },
+  "network": {
+    "format-wifi": "Net: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "format-ethernet": "Net: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} via {gwaddr}\nESSID: {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr} via {gwaddr}",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": "⚠ Disconnected",
+    "interval": 2,
+    "on-click": "nm-connection-editor"
+  }
+} 

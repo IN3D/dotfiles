@@ -8,6 +8,7 @@
       ./dev.nix
       ./virtualization.nix
       ./gaming-configuration.nix
+      ./hyprland.nix
     ];
 
   # Foundational setup {{{
