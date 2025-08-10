@@ -25,6 +25,7 @@
     hypridle        # idle daemon
     hyprpicker      # color picker
     hyprshot        # screenshot tool
+    uwsm            # session manager
 
     # Wayland utilities
     waybar          # status bar
