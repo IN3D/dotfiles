@@ -1,0 +1,17 @@
+anchor=top-right
+
+width=400
+
+# Default timeout for notifications (4 seconds)
+default-timeout=4000
+
+# Gruvbox color scheme
+background-color=#282828
+border-color=#458588
+text-color=#ebdbb2 
+
+
+[urgency=high]
+border-color=#cc241d
+# never timeout urgent notifications
+default-timeout=0
