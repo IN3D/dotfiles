@@ -1,8 +1,9 @@
+-- vim: set foldmethod=marker:
 local create_language_augroup = function(name)
   return vim.api.nvim_create_augroup('LanguageKeymap_' .. name, { clear = true })
 end
 
--- C++
+-- C++ {{{
 local cpp_group = create_language_augroup('cpp')
 vim.api.nvim_create_autocmd('FileType', {
   group = cpp_group,
@@ -24,8 +25,9 @@ vim.api.nvim_create_autocmd('FileType', {
     end, keymap_opts)
   end
 })
+-- }}}
 
--- Ruby
+-- Ruby {{{
 local ruby_group = create_language_augroup('ruby')
 vim.api.nvim_create_autocmd('FileType', {
   group = ruby_group,
@@ -67,4 +69,5 @@ vim.api.nvim_create_autocmd('FileType', {
     end, keymap_opts)
   end
 })
+-- }}}
 
