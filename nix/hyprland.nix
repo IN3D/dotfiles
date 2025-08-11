@@ -31,7 +31,6 @@
     waybar          # status bar
     mako            # notification daemon
     tofi            # program launcher
-    swaybg          # wallpaper setter
     swayosd         # OSD notifications
     wl-clipboard    # Wayland clipboard utilities
     wl-clip-persist
