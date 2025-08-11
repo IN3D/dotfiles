@@ -2,12 +2,7 @@ local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({
-  PATH='prepend',
-  env = {
-    -- Add rbenv shims to Mason's PATH
-    -- NOTE: how will this behave if the directory doesn't exist?
-    PATH = vim.fn.expand("$HOME/.rbenv/shims:") .. vim.env.PATH,
-  },
+  PATH='prepend'
 })
 require('mason-lspconfig').setup({
   ensure_installed = {
