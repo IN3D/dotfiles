@@ -1,8 +1,10 @@
-# Hops' dot files
+# Hops dotfiles
 
-![Medieval Dragon](https://github.com/user-attachments/assets/a5178471-8c6d-4b50-a6a2-6796e88fcee7 "Medieval Dragon")
+## Here be dragons
 
-Here be dragons
+![My desktop](https://github.com/in3d/dotfiles/blob/master/attachments/desktop.png)
+
+Inspiration is encouraged, but unknown how well it will work for anyone else.
 
 ## Setup
 
