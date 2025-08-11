@@ -9,7 +9,6 @@
 	aliases = config --get-regex alias
 	all = add .
 	b = branch
-	back = !sh -c \"git checkout master && git pull\"
 	bvv = branch -vv
 	ccis = commit -S -m
 	changes-in = diff-tree --pretty --no-commit-id --name-status -r
@@ -18,49 +17,45 @@
 	cb = branch --show-current
 	cob = checkout -b
 	d = diff
-	deleteremote = push origin --delete
 	down = push origin --delete
 	emails = log --oneline --pretty=format:'%ae'
 	graph = log --pretty --graph
-	greenfield = !sh -c \"git back && git upnup $@\"
 	hist = log --oneline
 	histv = log --oneline --pretty=format:'%C(yellow)%h%Creset %Cred%cn%Creset %s'
-	live-dangerously = push --force
 	m = merge
 	mnff = merge --no-ff
-	oops = commit --amend -C HEAD
-	p = push
 	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
 	poh = push origin HEAD
 	r = rebase
 	ri = rebase -i
 	s = status -s
-	sq = !sh -c \"git rebase -i HEAD~$@\"
-	squash = !sh -c \"git rebase -i HEAD~$@\"
-	shame = blame
+	squash = rebase -i HEAD~$@
 	st = status
-	stage = add
-	toremote = push -u origin
-	tracking = branch -vv
-	u = add -u
 	unci = reset --soft HEAD~1
 	uncommit = reset --soft HEAD~1
 	unstage = reset
-	unstash = stash apply
 	untrack = rm --cache
 	up = push --set-upstream origin
-	upcb = !sh -c \"git up $(git cb)\"
-	upnup = !sh -c \"git cob $1 && git up $1\"
+	upcb = !git up $(git cb)
+	upnup = !git checkout -b $1 && git up $1
 	whoami = config user.email
 	who-wrote-this = log --oneline --pretty=format:'%an %ae'
 
+[init]
+	defaultBranch = master
+
 [push]
 	default = simple
+
 [github]
 	user = IN3D
+
 [core]
 	editor = nvim
+
 [commit]
 	gpgsign = true
+
 [tag]
 	gpgSign = true
+
