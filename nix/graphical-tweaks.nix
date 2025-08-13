@@ -17,8 +17,10 @@
     nvidiaSettings = true;
 
     # Select the appropriate driver version, prefer stable
+    # Ensure drivers for the current kernel are selected (generic, Zen, Xanmod)
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
-    package = pkgs.linuxPackages_zen.nvidiaPackages.stable; # swap to Zen kernel version
+    # package = pkgs.linuxPackages_zen.nvidiaPackages.stable;
+    package = pkgs.linuxPackages_xanmod.nvidiaPackages.stable;
 
     # power management (usually for laptops, unnecessary on desktops)
     powerManagement.enable = false;

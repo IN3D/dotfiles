@@ -23,7 +23,11 @@
   # Swap the default Linux kernel for the Zen kernel. Is more performance
   # focused than the regular, generalist kernel. Also tends to improve
   # performance of applications in Proton/Wine
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  #
+  # NOTE: Zen kernel seems to be having issues right now, specifically with
+  # Nvidia drivers. Giving xanmod a try now
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   # Memory and storage optimizations ===========================================
 
