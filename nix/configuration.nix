@@ -111,6 +111,7 @@
     chromium
     spotify
     obsidian
+    vlc
     cmus
   ];
 
