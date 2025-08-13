@@ -116,3 +116,29 @@ boot.kernelParams = [
   "split_lock_detect=off"
 ];
 ```
+
+## Font optimizations
+
+These _could_ be good to look at if rendering issues persist.
+
+```nix
+# Fontconfig for better font rendering
+fonts.fontconfig = {
+  enable = true;
+  antialias = true;
+  hinting = {
+    enable = true;
+    style = "slight";
+  };
+  subpixel = {
+    rgba = "rgb";
+    lcdfilter = "default";
+  };
+  defaultFonts = {
+    monospace = [ "Source Code Pro" "Noto Sans Mono" ];
+    sansSerif = [ "Noto Sans" "DejaVu Sans" ];
+    serif = [ "Noto Serif" "DejaVu Serif" ];
+    emoji = [ "Noto Color Emoji" ];
+  };
+};
+```
