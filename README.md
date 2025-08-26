@@ -10,7 +10,7 @@ Inspiration is encouraged, but unknown how well it will work for anyone else.
 
 My setup uses GNU stow for dotfile management.
 
-Bash has aliases of `stow-link` and `stow-unlink`, otherwise run:
+`bash` and `fish` have aliases of `stow-link` and `stow-unlink`, otherwise run:
 ```sh
 stow -d ~/.dotfiles/stow -t ~ x y z
 ```
