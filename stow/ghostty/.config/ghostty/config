@@ -3,6 +3,6 @@
 theme = GruvboxDark
 keybind = ctrl+shift+x=close_surface
 font-feature = -dlig
-font-size = 16
+font-size = 14
 background-opacity = 0.85
 font-family = "Berkeley Mono"
