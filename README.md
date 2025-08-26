@@ -2,7 +2,7 @@
 
 ## Here be dragons
 
-![My desktop](https://github.com/in3d/dotfiles/blob/master/attachments/desktop.png)
+![My desktop](attachments/desktop.png "Desktop screenshot")
 
 Inspiration is encouraged, but unknown how well it will work for anyone else.
 
