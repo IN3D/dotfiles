@@ -1,3 +1,11 @@
+# System support
+#
+# Source global defaults and definitions if the distro provides them
+# =============================================================================
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
 # Exports
 # =============================================================================
 export config_dir="$HOME/.config/bash"
@@ -82,6 +90,10 @@ alias stow-unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
 
 # Version Managers
 # =============================================================================
+
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Load RVM into a shell session *as a function*
 # Note: RVM needs to load first
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -104,3 +116,6 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# opencode
+export PATH=/home/eric/.opencode/bin:$PATH

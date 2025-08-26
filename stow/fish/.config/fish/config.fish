@@ -1,14 +1,33 @@
-# Aliases
-# =============================================================================
-alias ls 'ls -G'
-alias l 'ls -lFh'
-alias ll 'ls -lFh'
-alias la 'ls -lAFh'
-alias lt 'ls -ltFh'
-alias lrt 'ls -lrtFh'
-alias ldot 'ls -ld .*'
-alias lS 'ls -1lFSsh'
-alias lart 'ls -1FcArt'
+# vim: set foldmethod=marker:
+
+# Aliases {{{
+# ==============================================================================
+
+# For older machines that may have exa available, but not eza
+if command -v exa > /dev/null 2>&1; and not command -v eza > /dev/null 2>&1
+  alias eza='exa'
+end
+
+# Prefer eza over ls if it's available
+if command -v eza > /dev/null 2>&1
+  alias l='eza -lh'
+  alias ll='eza -lh'
+  alias la='eza -lah'
+  alias lt='eza -lh --sort=modified'
+  alias lrt='eza -lh --sort=modified --reverse'
+  alias ldot='eza -1 -lh --sort=size --reverse'
+  alias lart='eza -1 -lah --sort=modified'
+else
+  alias ls 'ls -G'
+  alias l 'ls -lFh'
+  alias ll 'ls -lFh'
+  alias la 'ls -lAFh'
+  alias lt 'ls -ltFh'
+  alias lrt 'ls -lrtFh'
+  alias ldot 'ls -ld .*'
+  alias lS 'ls -1lFSsh'
+  alias lart 'ls -1FcArt'
+end
 
 # alias grep 'grep --color'
 # Super grep
@@ -20,10 +39,22 @@ alias t 'tail -f'
 alias L less
 alias T tail
 
-alias fd 'find . -type d -name'
-alias ff 'find . -type f -name'
-
 # editors
 alias vi nvim
-alias vim nvim
-# =============================================================================
+
+# jobs list
+alias jl='jobs -l'
+
+# for stow
+alias stow-link="stow -d $HOME/.dotfiles/stow -t $HOME"
+alias stow-unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
+# ========================================================================== }}}
+
+# Tools
+# ==============================================================================
+
+# Enable fzf bindings and fuzzy completion
+fzf --fish | source
+
+# Use ctrl-t for command history correctly
+export FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
