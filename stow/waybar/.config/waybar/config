@@ -1,26 +1,23 @@
 {
+  "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
-  "height": 32,
-  "spacing": 4,
+  "height": 20,
+  "spacing": 1,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["tray", "cpu", "memory", "pulseaudio", "network"],
+  "modules-center": ["mpris"],
+  "modules-right": ["cpu", "memory", "network", "clock"],
   "hyprland/workspaces": {
+    "persistent-workspaces": {
+      "*": 10
+    },
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{icon}",
+    "format": "<small>{icon}</small>{id}",
     "format-icons": {
-      "1": "1",
-      "2": "2", 
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "0"
+      "active": "▪",
+      "default": "▫",
+      "empty": " "
     }
   },
   "hyprland/window": {
@@ -34,37 +31,42 @@
     "format": "{:%a %b %d  %I:%M %p}"
   },
   "cpu": {
-    "format": "CPU: {usage}%",
+    "format": "C: {usage}%",
     "tooltip": true,
-    "interval": 2,
+    "interval": 10,
     "states": {
       "critical": 81,
-      "high": 61,
-      "moderate": 41,
-      "normal": 21,
-      "low": 0
+      "high": 61
     }
   },
   "memory": {
-    "format": "RAM: {percentage}%",
+    "format": "R: {percentage}%",
     "tooltip": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
-    "interval": 2,
+    "interval": 10,
     "states": {
       "critical": 81,
-      "high": 61,
-      "moderate": 41,
-      "normal": 21,
-      "low": 0
+      "high": 61
     }
   },
   "tray": {
+    "icon-size": 20,
     "spacing": 10
   },
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "player-icons": {
+      "default": "▶"
+    },
+    "status-icons": {
+      "paused": "⏸"
+    }
+  },
   "pulseaudio": {
-    "format": "Audio: {volume}%",
-    "format-bluetooth": "Audio: {volume}%",
-    "format-bluetooth-muted": "Audio: / ",
-    "format-muted": "Audio: / ",
+    "format": "A: {volume}%",
+    "format-muted": "A: / ",
+    "format-bluetooth": "A: {volume}%",
+    "format-bluetooth-muted": "A: / ",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -78,13 +80,13 @@
     "on-click-right": "pavucontrol"
   },
   "network": {
-    "format-wifi": "Net: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-    "format-ethernet": "Net: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "interval": 5,
+    "format-wifi": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "format-ethernet": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
     "tooltip-format": "{ifname}: {ipaddr}/{cidr} via {gwaddr}\nESSID: {essid} ({signalStrength}%)",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr} via {gwaddr}",
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": "⚠ Disconnected",
-    "interval": 2,
     "on-click": "nm-connection-editor"
   }
 } 
