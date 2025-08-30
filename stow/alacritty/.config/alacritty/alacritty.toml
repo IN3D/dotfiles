@@ -1,0 +1,40 @@
+[general]
+import = [
+  "~/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"
+]
+live_config_reload = true
+
+[window]
+dynamic_title = false
+
+[scrolling]
+history = 1000
+
+[font]
+normal = { family = "Berkeley Mono", style = "Regular" }
+size = 12
+
+[bell]
+duration = 0
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+unfocused_hollow = true
+
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+  { key = "Home", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "End", mods = "Control|Shift", action = "DecreaseFontSize" },
+  { key = "PageUp", mods = "Control|Shift", action = "ScrollToTop" },
+  { key = "PageDown", mods = "Control|Shift", action = "ScrollToBottom" },
+  { key = "K", mods = "Control|Shift", action = "ClearHistory" },
+  { key = "/", mods = "Control|Shift", action = "SearchForward" },
+  { key = "?", mods = "Control|Shift", action = "SearchBackward" }
+]
+

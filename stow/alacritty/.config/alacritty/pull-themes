@@ -1,0 +1,16 @@
+#!/usr/sbin/sh
+
+if ! command -v git &> /dev/null; then
+  echo "ERROR: Git isn't installed, impossible to retrieve themes"
+  exit 1
+fi
+
+if [ -d "./alacritty-theme" ]; then
+  echo "Themes already present; updating repo..."
+  cd ./alacritty-theme && git pull
+else
+  echo "Themes haven't been pulled yet; pulling now..."
+  git clone https://github.com/alacritty/alacritty-theme.git
+fi
+
+echo "Done"
