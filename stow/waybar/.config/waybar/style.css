@@ -67,24 +67,21 @@ window#waybar {
   padding: 0 8px;
   color: #7c6f64;
 }
-#cpu.low {
+#cpu.low { /* currently unused */
   color: #076678;
   border-bottom: 2px solid #076678;
 }
-#cpu.normal {
+#cpu.normal { /* currently unused */
   color: #79740e;
 }
 #cpu.moderate {
+  color: #79740e;
+}
+#cpu.high {
   color: #b57614;
 }
-/* for high and critical, swap background and foreground */
-#cpu.high {
-  background-color: #af3a03;
-  color: #1d2021;
-}
 #cpu.critical {
-  color: #1d2021;
-  background-color: #cc241d;
+  color: #cc241d;
 }
 
 /* Memory */
@@ -94,26 +91,20 @@ window#waybar {
   /* color: #a89984; */
   padding: 0 8px;
 }
-#memory.low {
+#memory.low { /* currently unused */
   color: #076678;
-  border-bottom: 2px solid #076678;
 }
-#memory.normal {
+#memory.normal { /* currently unused */
   color: #79740e;
-  border-bottom: 2px solid #79740e;
 }
 #memory.moderate {
-  color: #b57614;
-  border-bottom: 2px solid #b57614;
+  color: #79740e;
 }
-/* for high and critical, swap background and foreground */
 #memory.high {
-  background-color: #af3a03;
-  color: #1d2021;
+  color: #b57614;
 }
 #memory.critical {
-  color: #1d2021;
-  background-color: #cc241d;
+  color: #cc241d;
 }
 
 /* System tray */

@@ -36,7 +36,8 @@
     "interval": 10,
     "states": {
       "critical": 81,
-      "high": 61
+      "high": 61,
+      "moderate": 51
     }
   },
   "memory": {
@@ -45,7 +46,8 @@
     "interval": 10,
     "states": {
       "critical": 81,
-      "high": 61
+      "high": 61,
+      "moderate": 51
     }
   },
   "tray": {
