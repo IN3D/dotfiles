@@ -79,4 +79,5 @@ if not contains $_asdf_shims $PATH
 end
 set --erase _asdf_shims
 
+direnv hook fish | source
 zoxide init fish | source
