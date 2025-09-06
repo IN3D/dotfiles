@@ -9,13 +9,19 @@ require('mason-lspconfig').setup({
     'lua_ls',
   },
   automatic_installation = {
-    exclude = { 'solargraph' } -- handled by rbenv
+    exclude = { 'solargraph' } -- see below
   }
 })
 
--- Function to determine the best solargraph command
 local function get_solargraph_cmd()
-  -- Check if we can use bundle exec (preferred method)
+  -- 1: check if it's on the path. Ideally it's been put on $PATH by direnv
+  -- or similar
+  local path_solargraph = vim.fn.exepath('solargraph')
+  if path_solargraph ~= '' then
+    return { path_solargraph, "stdio" }
+  end
+
+  -- 2: fallback on trying to call it directly with bundle
   local handle = io.popen('bundle exec which solargraph 2>/dev/null')
   if handle then
     local bundle_result = handle:read('*a'):gsub('%s+$', '')
@@ -26,21 +32,6 @@ local function get_solargraph_cmd()
       return { 'bundle', 'exec', 'solargraph', 'stdio' }
     end
   end
-
-  -- Fallback 1: Try rbenv shims
-  local rbenv_path = vim.fn.expand("$HOME/.rbenv/shims/solargraph")
-  if vim.fn.executable(rbenv_path) == 1 then
-    return { rbenv_path, "stdio" }
-  end
-
-  -- Fallback 2: Try system PATH
-  local path_solargraph = vim.fn.exepath('solargraph')
-  if path_solargraph ~= '' then
-    return { path_solargraph, "stdio" }
-  end
-
-  -- Return nil if not found anywhere
-  return nil
 end
 
 -- Get the appropriate solargraph command
