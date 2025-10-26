@@ -1,6 +1,6 @@
 # vim: set ft=conf:
 
-theme = GruvboxDark
+theme = Gruvbox Dark
 keybind = ctrl+shift+x=close_surface
 font-feature = -dlig
 font-size = 14
