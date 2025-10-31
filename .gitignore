@@ -20,3 +20,6 @@ stow/nvim/.config/nvim/lazy-lock.json
 stow/tmux/.config/tmux/vendor
 !stow/tmux/.config/tmux/vendor/.gitkeep
 !stow/tmux/.config/tmux/vendor/*.sh
+
+## Waybar
+stow/waybar/.config/waybar/nohup.out
