@@ -35,6 +35,13 @@ end
 alias sugrep 'grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
 alias t 'tail -f'
 
+# TODO: need to track down why this keeps happening
+# No clear cause as to why, but waybar will crash on occasion. Causing the bar
+# to disappear. This ensures that anything associate with the process is fully
+# terminated. Then starts it in a way that it isn't tied to the terminal session
+# that runs the command
+alias restart-waybar="killall waybar; nohup waybar &"
+
 # for piping
 alias L less
 alias T tail
@@ -81,3 +88,8 @@ set --erase _asdf_shims
 
 direnv hook fish | source
 zoxide init fish | source
+thefuck --alias | source
+
+if command -v zoxide > /dev/null 2>&1
+  alias cd 'z'
+end

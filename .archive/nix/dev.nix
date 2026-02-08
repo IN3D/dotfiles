@@ -29,7 +29,7 @@ let
     yq         # CLI YAML processor
     xmlstarlet # CLI XML processor
     fd         # modern find replacement
-    zoxide     # smart cd replacement with frecency
+    zoxide     # smart cd replacement
   ];
 
   # Programs that are just for fun, ricing, etc
