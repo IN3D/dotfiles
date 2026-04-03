@@ -26,6 +26,7 @@
 	mnff = merge --no-ff
 	plog = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev --date=relative
 	poh = push origin HEAD
+	pushall = "!git push origin && git push mirror"
 	r = rebase
 	ri = rebase -i
 	s = status -s
