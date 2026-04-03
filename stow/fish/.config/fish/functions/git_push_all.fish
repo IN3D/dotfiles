@@ -1,4 +1,4 @@
-function git-push-all --description "Push current branch to all git remotes"
+function git_push_all --description "Push current branch to all git remotes"
     if not git rev-parse --is-inside-work-tree &>/dev/null
         echo "Not a git directory"
         return 1

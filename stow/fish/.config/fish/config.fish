@@ -4,12 +4,12 @@
 # ==============================================================================
 
 # For older machines that may have exa available, but not eza
-if command -v exa > /dev/null 2>&1; and not command -v eza > /dev/null 2>&1
+if command_exists exa; and not command_exists eza
   alias eza='exa'
 end
 
 # Prefer eza over ls if it's available
-if command -v eza > /dev/null 2>&1
+if command_exists eza
   alias l='eza -lh'
   alias ll='eza -lh'
   alias la='eza -lah'
@@ -29,10 +29,17 @@ else
   alias lart 'ls -1FcArt'
 end
 
-# alias grep 'grep --color'
-# Super grep
-# Recursive: shows line numbers and headers, with 5 lines of context
-alias sugrep 'grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+# Super grep: ripgrep when installed, else grep -R (same idea: -n -H -C 5, skip VCS dirs)
+if command_exists rg
+  function sugrep
+    rg -C 5 -H --hidden \
+      --glob '!**/.git/**' --glob '!**/.svn/**' --glob '!**/CVS/**' \
+      $argv
+  end
+else
+  alias sugrep 'grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+end
+
 alias t 'tail -f'
 
 # TODO: need to track down why this keeps happening
@@ -60,17 +67,21 @@ alias stow-unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
 # Tools
 # ==============================================================================
 
-# Enable fzf bindings and fuzzy completion
-fzf --fish | source
-
-# Use ctrl-t for command history correctly
-export FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-
+# Add local binaries to path
 export PATH="$HOME/.local/bin:$PATH"
 
-# pager coloring
-export PAGER="most"
-export MANROFFOPT=-c
+# Source machine-specific config if available
+if test -f $HOME/.config/fish/local.fish
+  source $HOME/.config/fish/local.fish
+end
+
+# Enable fzf bindings and fuzzy completion
+if command_exists fzf
+  fzf --fish | source
+
+  # Use ctrl-t for command history correctly
+  export FZF_DEFAULT_COMMAND="command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+end
 
 # setup asdf
 if test -z $ASDF_DATA_DIR
@@ -80,16 +91,25 @@ else
 end
 
 # Do not use fish_add_path because it
-# potentiallly changes the order of items in PATH
+# potentially changes the order of items in PATH
 if not contains $_asdf_shims $PATH
   set -gx --prepend PATH $_asdf_shims
 end
 set --erase _asdf_shims
 
-direnv hook fish | source
-zoxide init fish | source
-thefuck --alias | source
+if command_exists direnv
+  direnv hook fish | source
+end
 
-if command -v zoxide > /dev/null 2>&1
+if command_exists zoxide
+  zoxide init fish | source
   alias cd 'z'
+end
+
+if command_exists thefuck
+  thefuck --alias | source
+end
+
+if test -d "$HOME/.opencode/bin"
+  fish_add_path "$HOME/.opencode/bin"
 end

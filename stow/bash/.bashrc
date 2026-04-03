@@ -84,8 +84,8 @@ alias jl='jobs -l'
 alias tmux='tmux -2'
 
 # for stow
-alias stow-link="stow -d $HOME/.dotfiles/stow -t $HOME"
-alias stow-unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
+alias stow_link="stow -d $HOME/.dotfiles/stow -t $HOME"
+alias stow_unlink="stow -d $HOME/.dotfiles/stow -t $HOME -D"
 # =============================================================================
 
 # Version Managers
@@ -120,3 +120,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # opencode
 export PATH=/home/eric/.opencode/bin:$PATH
+
+# Rust
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
