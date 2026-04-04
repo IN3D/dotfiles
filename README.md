@@ -17,6 +17,14 @@ stow -d ~/.dotfiles/stow -t ~ x y z
 
 Where x, y, and z are any of the names of any of the `stow/` subdirectories.
 
+### Note on Hyprland
+
+There are two hyprland configs. `hypr` is for stability focused package repos.
+I use this on Fedora.
+
+The other, `hypr-edge` is for rolling release distros. I use this on my Gentoo
+laptop.
+
 ## Nix
 
 My current desktop is running NixOS. The `nix/` directory contains its config

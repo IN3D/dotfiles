@@ -23,3 +23,6 @@ stow/tmux/.config/tmux/vendor
 
 ## Waybar
 stow/waybar/.config/waybar/nohup.out
+
+## Hyprland
+stow/hypr-edge/.config/hypr/machine.conf
