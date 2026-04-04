@@ -96,7 +96,10 @@ require('lazy').setup({
   'jiangmiao/auto-pairs',
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    config = function()
+      require('config.treesitter')
+    end,
   },
   -- Theme
   'morhetz/gruvbox'

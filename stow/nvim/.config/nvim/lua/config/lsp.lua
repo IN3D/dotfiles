@@ -34,12 +34,10 @@ local function get_solargraph_cmd()
   end
 end
 
--- Get the appropriate solargraph command
-local solargraph_cmd = get_solargraph_cmd()
+-- Only attempt Solargraph setup if Ruby is installed
+local solargraph_cmd = vim.fn.exepath('ruby') ~= '' and get_solargraph_cmd() or nil
 
--- Only setup solargraph if we found a valid command
 if solargraph_cmd then
-  vim.notify("Solargraph LSP found", vim.log.levels.INFO)
   lspconfig.solargraph.setup({
     cmd = solargraph_cmd,
     capabilities = capabilities,
@@ -93,8 +91,5 @@ if solargraph_cmd then
       vim.keymap.set('n', '<leader>el', vim.diagnostic.setloclist, opts)
     end
   })
-else
-  -- Log a warning if solargraph wasn't found
-  vim.notify("Solargraph LSP not found - Ruby LSP features disabled", vim.log.levels.WARN)
 end
 
