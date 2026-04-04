@@ -22,7 +22,7 @@
   },
   "hyprland/window": {
     "format": "{}",
-    "max-length": 50,
+    "max-length": 35,
     "separate-outputs": true
   },
   "clock": {
@@ -56,6 +56,7 @@
   },
   "mpris": {
     "format": "{player_icon} {title} - {artist}",
+    "max-length": 70,
     "format-paused": "{status_icon} {title} - {artist}",
     "player-icons": {
       "default": "▶"

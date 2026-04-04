@@ -155,6 +155,7 @@ window#waybar {
 #upower {
   background-color: #1d2021;
   color: #427b58; /* green — good charge */
+  min-width: 60px;
   padding: 0 8px;
 }
 
