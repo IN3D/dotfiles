@@ -6,7 +6,7 @@
   "spacing": 1,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["mpris"],
-  "modules-right": ["cpu", "memory", "network", "clock"],
+  "modules-right": ["cpu", "memory", "network", "upower", "clock"],
   "hyprland/workspaces": {
     "persistent-workspaces": {
       "*": 10
@@ -90,5 +90,15 @@
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": "⚠ Disconnected",
     "on-click": "nm-connection-editor"
+  },
+  "upower": {
+    "hide-if-empty": true,
+    "show-icon": false,
+    "format": "B: {percentage}",
+    "tooltip": true,
+    "states": {
+      "warning": 60,
+      "critical": 30
+    }
   }
 } 
