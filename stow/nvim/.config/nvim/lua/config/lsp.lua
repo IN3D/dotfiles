@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({
@@ -8,9 +7,9 @@ require('mason-lspconfig').setup({
   ensure_installed = {
     'lua_ls',
   },
-  automatic_installation = {
-    exclude = { 'solargraph' } -- see below
-  }
+  automatic_enable = {
+    exclude = { 'solargraph' }, -- custom cmd/on_attach below
+  },
 })
 
 local function get_solargraph_cmd()
@@ -38,7 +37,7 @@ end
 local solargraph_cmd = vim.fn.exepath('ruby') ~= '' and get_solargraph_cmd() or nil
 
 if solargraph_cmd then
-  lspconfig.solargraph.setup({
+  vim.lsp.config('solargraph', {
     cmd = solargraph_cmd,
     capabilities = capabilities,
     settings = {
@@ -91,5 +90,6 @@ if solargraph_cmd then
       vim.keymap.set('n', '<leader>el', vim.diagnostic.setloclist, opts)
     end
   })
+  vim.lsp.enable('solargraph')
 end
 
