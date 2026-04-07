@@ -2,3 +2,4 @@
 # is this neccessary
 .archive/emacs/*.el linguist-vendored
 stow/tmux/.config/tmux/vendor linguist-vendored
+stow/delta/.config/delta linguist-vendored

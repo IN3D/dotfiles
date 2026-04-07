@@ -1,4 +1,7 @@
 # vim: ts=2:sts=2:sw=2:noet
+[include]
+	path = ~/.config/delta/themes.gitconfig
+
 [user]
 	name = Eric Hopkins
 	email = eric.on.tech@gmail.com
@@ -45,14 +48,34 @@
 [init]
 	defaultBranch = master
 
+[diff]
+	algorithm = histogram
+
 [push]
 	default = simple
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+# Remember conflict resolutions; great during rebases
+# Same conflict appears on commits 3, 6, 9? Resolve once
+[rerere]
+  enabled = true
 
 [github]
 	user = IN3D
 
 [core]
 	editor = nvim
+	pager = command -v delta >/dev/null 2>&1 && delta || less -FRX
+
+[delta]
+	features = gruvmax-fang
+	hyperlinks = true
+	navigate = true
+	side-by-side = true
+	line-numbers = true
 
 [commit]
 	gpgsign = true
