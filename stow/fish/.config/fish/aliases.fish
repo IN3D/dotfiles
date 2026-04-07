@@ -3,6 +3,10 @@ if command_exists exa; and not command_exists eza
   alias eza='exa'
 end
 
+if command_exists fastfetch
+  alias ff=fastfetch
+end
+
 # Prefer eza over ls if it's available
 if command_exists eza
   alias l='eza -lh'
