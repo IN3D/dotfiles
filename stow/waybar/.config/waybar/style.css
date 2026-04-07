@@ -154,7 +154,9 @@ window#waybar {
 /* Battery (upower) */
 #upower {
   background-color: #1d2021;
-  color: #427b58; /* green — good charge */
+  color: #7c6f64;
+  padding: 0 12px;
+  /*color: #427b58; */ /* green — good charge */
   min-width: 60px;
   padding: 0 8px;
 }
@@ -168,14 +170,6 @@ window#waybar {
   padding: 0;
   margin: 0;
   opacity: 0;
-}
-
-#upower.warning {
-  color: #b57614; /* yellow — 31-60% */
-}
-
-#upower.critical {
-  color: #cc241d; /* red — 0-30% */
 }
 
 @keyframes blink {

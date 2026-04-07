@@ -96,10 +96,6 @@
     "hide-if-empty": true,
     "show-icon": false,
     "format": "B: {percentage}",
-    "tooltip": true,
-    "states": {
-      "warning": 60,
-      "critical": 30
-    }
+    "tooltip": true
   }
 } 
