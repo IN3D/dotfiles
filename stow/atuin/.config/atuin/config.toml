@@ -1,0 +1,6 @@
+[keys]
+scroll_exits = true
+
+[search]
+filter_mode = "global"
+filter_mode_shell_up_key = "session"
