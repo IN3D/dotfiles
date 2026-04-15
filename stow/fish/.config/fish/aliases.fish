@@ -7,6 +7,11 @@ if command_exists fastfetch
   alias ff=fastfetch
 end
 
+if command_exists nvim
+  alias vim=nvim
+  alias vi=nvim
+end
+
 # Prefer eza over ls if it's available
 if command_exists eza
   alias l='eza -lh'
