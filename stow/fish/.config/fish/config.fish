@@ -2,7 +2,7 @@
 source $HOME/.config/fish/aliases.fish
 
 # Add local binaries to path
-set -gx PATH="$HOME/.local/bin:$PATH"
+set -gx PATH "$HOME/.local/bin:$PATH"
 
 if command_exists nvim
   set -gx EDITOR nvim
