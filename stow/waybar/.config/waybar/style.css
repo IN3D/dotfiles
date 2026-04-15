@@ -20,6 +20,12 @@ window#waybar {
   margin: 0 4px;
 }
 
+#submap {
+  background-color: #d79921;
+  color: #282828;
+  /* padding: 0 6px; */
+}
+
 #workspaces button {
   padding: 0 6px;
   background-color: #282828;

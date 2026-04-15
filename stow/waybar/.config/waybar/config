@@ -4,9 +4,9 @@
   "position": "top",
   "height": 20,
   "spacing": 1,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-left": ["hyprland/workspaces",  "hyprland/submap", "hyprland/window"],
   "modules-center": ["mpris"],
-  "modules-right": ["cpu", "memory", "network", "upower", "clock"],
+  "modules-right": ["cpu", "memory", "network", "clock"],
   "hyprland/workspaces": {
     "persistent-workspaces": {
       "*": 10
@@ -24,6 +24,11 @@
     "format": "{}",
     "max-length": 35,
     "separate-outputs": true
+  },
+  "hyprland/submap": {
+    "format": "[{}]",
+    "max-length": 20,
+    "tooltip": false
   },
   "clock": {
     "timezone": "America/Detroit",
