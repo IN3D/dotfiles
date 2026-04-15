@@ -1,9 +1,14 @@
 # vim: set ft=conf:
 
-theme = Gruvbox Dark
-keybind = ctrl+shift+x=close_surface
-font-feature = -dlig
-font-size = 14
 background-opacity = 0.9
-font-family = "Berkeley Mono"
+
+# font-family = "Berkeley Mono"
+# font-feature = -dlig
+font-family = "Lilex"
+font-feature = +cv14, +ss01, +ss02, +cv08
+font-size = 14.0
+
+keybind = ctrl+shift+x=close_surface
 keybind = shift+enter=text:\n
+
+theme = Gruvbox Dark
