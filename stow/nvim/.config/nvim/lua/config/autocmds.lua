@@ -12,3 +12,11 @@ autocmd('FileType', {
   end
 })
 
+autocmd('FileType', {
+  group = general,
+  pattern = 'zig',
+  callback = function()
+    vim.opt_local.makeprg = 'zig build'
+  end
+})
+
