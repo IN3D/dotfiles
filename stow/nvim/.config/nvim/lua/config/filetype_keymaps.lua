@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd('FileType', {
       if vim.fn.filereadable(binary_path) == 1 then
         vim.cmd(string.format(':Dispatch %s', binary_path))
       else
-        vim.notify(string.format('Bindary not found: %s', binary_path), vim.log.levels.WARN)
+        vim.notify(string.format('Binary not found: %s', binary_path), vim.log.levels.WARN)
       end
     end, keymap_opts)
   end
