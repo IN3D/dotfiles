@@ -69,6 +69,7 @@
 [core]
 	editor = nvim
 	pager = command -v delta >/dev/null 2>&1 && delta || less -FRX
+	excludefile = ~/.gitignore_global
 
 [delta]
 	features = gruvmax-fang
