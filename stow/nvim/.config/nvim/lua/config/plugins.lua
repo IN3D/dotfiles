@@ -96,6 +96,7 @@ require('lazy').setup({
   'jiangmiao/auto-pairs',
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
     build = ":TSUpdate",
     config = function()
       require('config.treesitter')

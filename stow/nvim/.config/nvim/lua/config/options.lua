@@ -37,3 +37,8 @@ opt.listchars = {
   precedes = '❮'
 }
 opt.showbreak = '↪'
+
+-- allow sourcing of `.nvimrc` or `.exrc` files
+opt.exrc = true
+-- don't blindly trust their contents tho..
+opt.secure = true
