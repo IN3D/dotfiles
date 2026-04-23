@@ -4,7 +4,6 @@
 local opt = vim.opt
 
 -- General Settings
-opt.shell = 'bash'
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = 'yes'
