@@ -9,11 +9,6 @@ vim.g.maplocalleader = ','
 keymap('n', 'vy', 'ggVG', opts)
 -- Disable F1 and suspect
 keymap({'i', 'n', 'v'}, '<F1>', '<nop>', opts)
--- Jump around larger amounts
-keymap('n', '<C-j>', '15gjzz', opts)
-keymap('n', '<C-k>', '15gkzz', opts)
-keymap('v', '<C-j>', '15gjzz', opts)
-keymap('v', '<C-k>', '15gkzz', opts)
 -- Terminal escape
 keymap('t', '<ESC>', '<C-\\><C-n>', opts)
 keymap('t', '<C-[>', '<C-\\><C-n>', opts)
