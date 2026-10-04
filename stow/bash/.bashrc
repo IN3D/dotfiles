@@ -107,8 +107,8 @@ shopt -s checkwinsize
 # PS1
 PS1='\w $(if [ $? -eq 0 ]; then echo "\[\033[32m\]λ\[\033[0m\]"; else echo "\[\033[31m\]λ\[\033[0m\]"; fi) '
 
-if [ -f ~/.dotfiles/bash/local.bash ]; then
-  source ~/.dotfiles/bash/local.bash
+if [ -f ~/.dotfiles/stow/bash/local.bash ]; then
+  source ~/.dotfiles/stow/bash/local.bash
 fi
 # PATH=$PATH:~/bin
 # PATH=~/.linuxbrew/bin:$PATH
@@ -123,3 +123,4 @@ export PATH=/home/eric/.opencode/bin:$PATH
 
 # Rust
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
