@@ -135,8 +135,9 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 # =============================================================================
 
-if [ -f ~/.config/zsh/local.zsh ]; then
-  source ~/.config/zsh/local.zsh
+if [ -f ~/.dotfiles/stow/zsh/local.zsh ]; then
+  source ~/.dotfiles/stow/zsh/local.zsh
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
